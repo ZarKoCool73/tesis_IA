@@ -1,0 +1,31 @@
+.form{
+  border-radius: 30px;
+}
+.border-radius-50{
+  border-radius: 50%;
+}
+.photo{
+  width: 150px;
+  height: 150px;
+  overflow: hidden;
+}
+/* Estilos para el contenedor del progress bar */
+.progress-container {
+  width: 100px;
+  height: 100px;
+  position: relative;
+}
+
+/* Estilos para el progress bar circular */
+.progress-circle {
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  border: 15px solid #3498db; /* Cambia el color de la barra de progreso */
+  border-right: 15px solid transparent;
+  border-radius: 50%;
+}
+
+.w-400{
+  width: 400px;
+}

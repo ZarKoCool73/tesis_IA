@@ -6,6 +6,7 @@ import {ExpressionComponent} from "./expression/expression.component";
 import {ComunicationComponent} from "./comunication/comunication.component";
 import {ComprehensionComponent} from "./comprehension/comprehension.component";
 import {CommonModule} from "@angular/common";
+import {FrameboardModule} from "../../Components/frameboard/frameboard.module";
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {CommonModule} from "@angular/common";
   ],
   imports: [
     CommonModule,
-    ModulesRoutingModule
+    ModulesRoutingModule,
+    FrameboardModule
   ],
   exports: [
     ExpressionComponent,
