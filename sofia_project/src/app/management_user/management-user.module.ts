@@ -7,6 +7,7 @@ import {ProfileComponent} from "./profile/profile.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {CommonModule} from "@angular/common";
+import {FrameboardModule} from "../../Components/frameboard/frameboard.module";
 
 @NgModule({
   declarations: [
@@ -15,10 +16,11 @@ import {CommonModule} from "@angular/common";
     SignInComponent,
     SignUpComponent
   ],
-  imports: [
-    CommonModule,
-    ManagementUserRoutingModule
-  ],
+    imports: [
+        CommonModule,
+        ManagementUserRoutingModule,
+        FrameboardModule
+    ],
   exports: [
     PasswordRecoveryComponent,
     ProfileComponent,

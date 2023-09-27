@@ -3,16 +3,17 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import {FrameboardComponent} from "./frameboard.component";
 import {CommonModule} from "@angular/common";
-import {RouterOutlet} from "@angular/router";
+import {RouterLinkWithHref, RouterOutlet} from "@angular/router";
 
 @NgModule({
   declarations: [
     FrameboardComponent
   ],
-  imports: [
-    CommonModule,
-    RouterOutlet,
-  ],
+    imports: [
+        CommonModule,
+        RouterOutlet,
+        RouterLinkWithHref,
+    ],
   exports: [
     FrameboardComponent
   ],

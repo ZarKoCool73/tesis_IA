@@ -10,24 +10,27 @@
     <div class="circle mr-2"></div>
   </div>
 </section>
-<div class="d-flex">
-  <nav class="menu d-flex flex-column justify-content-between p-4 " id="navbar">
+<div class="d-flex" id="main">
+  <nav class="menu d-flex flex-column justify-content-between " id="navbar">
     <div class="content">
-      <h1 class="font-Inter-SemiBold very-big-font-size d-flex justify-content-center">Mi aprendizaje</h1>
+      <h1 class="font-Inter-SemiBold very-big-font-size d-flex justify-content-center p-4 text-center">Mi aprendizaje</h1>
       <ul class="list-unstyled">
-        <li class="mt-4"><a class="cursor-pointer">Comprensión</a></li>
-        <li class="mt-4"><a class="cursor-pointer">Expresión</a></li>
-        <li class="mt-4"><a class="cursor-pointer">Comunicación</a></li>
-        <li class="mt-4"><a class="cursor-pointer">Recursos adicionales</a></li>
+        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comprehension']" class="text-decoration-none cursor-pointer w-100 justify-content-center">Comprensión</a></li>
+        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/expression']" class="text-decoration-none cursor-pointer w-100 justify-content-center">Expresión</a></li>
+        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comunication']" class="text-decoration-none cursor-pointer w-100 justify-content-center">Comunicación</a></li>
+        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/resources']" class="text-decoration-none cursor-pointer w-100 justify-content-center">Recursos adicionales</a></li>
       </ul>
     </div>
 
-    <div class="camera mt-5">
+    <div class="camera  d-flex justify-content-center">
       <img src="assets/imgs/camera.png" class="cursor-pointer" width="150">
     </div>
   </nav>
-  <div class="w-100" id="content">
+  <div class="w-100" id="content" style="overflow:auto;"  *ngIf="!hasSon">
     <router-outlet></router-outlet>
+  </div>
+  <div class="w-100" id="contentSon"  style="overflow:auto;" *ngIf="hasSon">
+    <ng-content></ng-content>
   </div>
 </div>
 
