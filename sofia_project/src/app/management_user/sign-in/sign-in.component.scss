@@ -6,4 +6,18 @@
 .form{
   border-radius: 30px;
 }
-
+.filter-background {
+  height: 100vh;
+  margin-left: -1px;
+  margin-top: -1px;
+  filter: brightness(0.4);
+}
+.img-background{
+  h1{
+    top: 0;
+    width: 75%;
+  }
+}
+.title-system{
+  width: 400px!important;
+}
