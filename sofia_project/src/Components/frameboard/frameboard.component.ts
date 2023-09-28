@@ -8,7 +8,9 @@ import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/co
 export class FrameboardComponent implements OnInit, AfterViewInit {
   name = 'World';
   @Input() hasSon: boolean = false
-  constructor() { }
+
+  constructor() {
+  }
 
   @HostListener('window:resize', ['$event'])
   changeNavHeight() {
@@ -23,7 +25,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       content.style.height = window.innerHeight - header.offsetHeight - 21 + 'px'
     }
     if (header && contentSon) {
-      contentSon.style.height = window.innerHeight - header.offsetHeight  + 'px'
+      contentSon.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
   }
 
@@ -36,16 +38,22 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     const content = document.getElementById('content')
     const contentSon = document.getElementById('contentSon')
     if (header && navbar) {
-      navbar.style.height = window.innerHeight - header.offsetHeight -11 + 'px'
+      navbar.style.height = window.innerHeight - header.offsetHeight - 11 + 'px'
     }
     if (header && content) {
-      const height =  window.innerHeight - header.offsetHeight - 11
+      const height = window.innerHeight - header.offsetHeight - 11
       content.style.height = height + 'px'
     }
     if (header && contentSon) {
-      const height =  window.innerHeight - header.offsetHeight  -11
+      const height = window.innerHeight - header.offsetHeight - 11
       contentSon.style.height = height + 'px'
     }
   }
 
+  obtenerVideo() {
+    window.location.href = 'http://localhost:5000/api/video_feed';
+    if(window.location.href!='api/video_feed'){
+
+    }
+  }
 }
