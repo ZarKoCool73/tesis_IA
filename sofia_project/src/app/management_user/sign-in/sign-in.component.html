@@ -1,14 +1,29 @@
 <div class="d-flex">
-  <div class="d-flex align-items-center w-100 justify-content-start position-absolute z-0 img-background vh-100">
-    <div class="w-100 d-flex justify-content-center align-items-center">
-      <img src="assets/imgs/schools.jpg" class="filter-background">
-      <h1 class="title-system d-flex text-center justify-content-center mt-5 big-font-size position-absolute font-Inter-SemiBold text-white">
-        Bienvenido al Sistema de Orientación para el
-        Fomento e Integración del Aprendizaje en Señas (SOFIA)
-      </h1>
+  <div
+    class="d-flex align-items-center w-100 justify-content-start position-absolute z-0 img-background vh-100 background-container">
+    <div class="position-relative">
+      <img src="assets/imgs/classroom.jpg" class="filter-background">
+      <div class="text-overlay">
+        <h1 class="title-system font-weight-bold custom-font-size text-white text-center mt-3">
+          Bienvenido al Sistema de Orientación para el Fomento e Integración del Aprendizaje en Señas (SOFIA)
+        </h1>
+      </div>
     </div>
-    <main class="d-flex w-100 h-100 justify-content-center align-items-center">
-      <form action="" class=" d-flex w-100 flex-column align-items-center justify-content-center p-4 ">
+    <main class="d-flex w-100 h-100 justify-content-center align-items-center background-container">
+      <form action="" class="d-flex w-100 flex-column align-items-center justify-content-center p-4">
+        <div class="mb-4">
+          <h2
+            class="d-flex justify-content-start title-system big-font-size font-weight-bold text-center custom-size-title ubication">
+            Hola!
+          </h2>
+          <h2
+            class="d-flex justify-content-start title-system big-font-size font-weight-bold text-center custom-size-title">
+            {{msg}}
+          </h2>
+        </div>
+        <h2 class="title-system big-font-size font-weight-bold text-center mb-3 custom-size-title">
+          Iniciar sesión
+        </h2>
         <div class="form-group">
           <label for="user" class="font-Inter-SemiBold">Usuario</label>
           <input type="text" name="" class="form-control" id="user" autocomplete="off">
@@ -17,14 +32,18 @@
           <label for="password" class="font-Inter-SemiBold">Contraseña</label>
           <input type="password" name="" class="form-control" id="password" autocomplete="off">
         </div>
-        <div class="d-flex justify-content-between pb-3">
-          <span class="small-font-size cursor-pointer" [routerLink]="['/account/sign-up']">Crear una cuenta</span>
-          <span class="small-font-size cursor-pointer" [routerLink]="['/account/password-recovery']">¿Olvidé mi contraseña?</span>
+        <div class="d-flex justify-content-end custom-size-recover-password mb-3 font-weight-bold">
+          <div class="ml-auto">
+            <span class="small-font-size cursor-pointer" [routerLink]="['/account/password-recovery']">¿Olvidé mi contraseña?</span>
+          </div>
         </div>
         <div class="d-flex justify-content-center">
           <button class="btn btn-primary text-uppercase">
             Ingresar
           </button>
+        </div>
+        <div class="d-flex justify-content-between pb-3 mt-4 custom-size-create-user font-weight-bold">
+          <span class="small-font-size cursor-pointer" [routerLink]="['/account/sign-up']">Crear cuenta</span>
         </div>
       </form>
     </main>

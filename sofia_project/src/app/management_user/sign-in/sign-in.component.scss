@@ -3,21 +3,66 @@
 .login-form {
   width: 500px;
 }
-.form{
+
+.form {
   border-radius: 30px;
 }
+
 .filter-background {
   height: 100vh;
+  width: 120vh;
   margin-left: -1px;
   margin-top: -1px;
-  filter: brightness(0.4);
+  filter: brightness(0.5);
 }
-.img-background{
-  h1{
+
+.img-background {
+  h1 {
     top: 0;
     width: 75%;
   }
 }
-.title-system{
-  width: 400px!important;
+
+.title-system {
+  width: 400px !important;
+}
+
+.position-relative {
+  position: relative;
+}
+
+.text-overlay {
+  position: absolute;
+  top: 0; /* Coloca el texto en la parte superior */
+  left: 0;
+  width: 100%;
+  margin-left: 160px;
+  padding: 20px;
+  text-align: center;
+  //background-color: rgba(0, 0, 0, 0.5); /* Opcional: agregar un fondo semi-transparente */
+}
+
+.custom-font-size {
+  font-size: 19px; /* Ajusta el tamaño de fuente según tus preferencias */
+}
+
+.custom-size-recover-password {
+  width: 250px;
+  margin-top: -15px;
+  color: #3498db;
+  text-decoration: underline;
+}
+
+.custom-size-create-user {
+  color: #3498db;
+}
+.custom-size-title {
+  font-size: 24px;
+  color: #3498db;
+}
+.background-container {
+  background-color: #f5f5f5; /* Color de fondo gris claro */
+}
+.ubication{
+  margin-top: -120px;
 }
