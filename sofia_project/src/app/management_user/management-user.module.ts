@@ -8,6 +8,7 @@ import {SignInComponent} from "./sign-in/sign-in.component";
 import {SignUpComponent} from "./sign-up/sign-up.component";
 import {CommonModule} from "@angular/common";
 import {FrameboardModule} from "../../Components/frameboard/frameboard.module";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {FrameboardModule} from "../../Components/frameboard/frameboard.module";
     imports: [
         CommonModule,
         ManagementUserRoutingModule,
-        FrameboardModule
+        FrameboardModule,
+        HttpClientModule
     ],
   exports: [
     PasswordRecoveryComponent,
