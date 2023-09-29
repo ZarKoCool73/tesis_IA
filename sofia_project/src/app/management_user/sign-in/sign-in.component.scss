@@ -9,14 +9,21 @@
 }
 
 .filter-background {
-  height: 100vh;
-  width: 120vh;
+  height: 100.2%;
+  width: 100%;
   margin-left: -1px;
   margin-top: -1px;
   filter: brightness(0.5);
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  background: linear-gradient(180deg,
+    rgba(26, 229, 190, 0.4) 0%,
+    rgba(0, 0, 0, 0) 40.63%,
+    rgba(32, 65, 192, 0.87) 100%);
 }
 
 .img-background {
+
   h1 {
     top: 0;
     width: 75%;
@@ -36,7 +43,15 @@
   top: 0; /* Coloca el texto en la parte superior */
   left: 0;
   width: 100%;
-  margin-left: 160px;
+  padding: 20px;
+  text-align: center;
+  //background-color: rgba(0, 0, 0, 0.5); /* Opcional: agregar un fondo semi-transparente */
+}
+.text-overlay-bottom {
+  position: absolute;
+  bottom: 0; /* Coloca el texto en la parte superior */
+  left: 0;
+  width: 100%;
   padding: 20px;
   text-align: center;
   //background-color: rgba(0, 0, 0, 0.5); /* Opcional: agregar un fondo semi-transparente */
@@ -50,19 +65,64 @@
   width: 250px;
   margin-top: -15px;
   color: #3498db;
-  text-decoration: underline;
 }
 
 .custom-size-create-user {
   color: #3498db;
 }
+
 .custom-size-title {
   font-size: 24px;
   color: #3498db;
 }
+
 .background-container {
   background-color: #f5f5f5; /* Color de fondo gris claro */
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
 }
-.ubication{
+
+.ubication {
   margin-top: -120px;
+}
+
+.content {
+  width: 95%;
+  height: 90%;
+  box-shadow: 0 4px 8px rgb(69 3 3 / 78%)
+}
+
+.btn-primary:hover {
+  background-color: $dark-red-color;
+}
+
+.btn-primary {
+  border: none;
+}
+
+.contenedor-imagen {
+  position: relative;
+  display: inline-block;
+}
+
+.contenedor-imagen::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(180deg, rgb(183 22 13 / 12%) 0%, rgb(115 18 11 / 16%) 50%, rgb(168 49 41 / 33%) 100%);
+  z-index: 1;
+}
+
+.contenedor-imagen img {
+  display: block;
+  width: 100%;
+  height: auto;
+  z-index: 2;
+}
+
+.custom-background {
+  background: linear-gradient(180deg, rgb(183 22 13 / 85%) 0%, rgb(115 18 11 / 89%) 50%, rgb(168 49 41) 100%)
 }
