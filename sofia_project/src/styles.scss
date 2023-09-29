@@ -1,3 +1,4 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
 @import "assets/css/variables";
 *{
   font-family: Inter-Regular;
@@ -124,4 +125,7 @@
 }
 .border-radius-30{
   border-radius: 30px;
+}
+.mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-icon{
+  background-color: $red-color;
 }

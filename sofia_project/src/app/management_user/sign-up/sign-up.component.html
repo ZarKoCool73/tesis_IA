@@ -20,67 +20,80 @@
       </div>
     </div>
     <main class="d-flex w-25 m-5 h-100 justify-content-center align-items-center form-content background-container">
-      <mat-horizontal-stepper  #stepper>
+      <mat-horizontal-stepper  linear #stepper labelPosition="bottom">
         <mat-step [stepControl]="firstFormGroup">
-          <form [formGroup]="firstFormGroup">
-            <ng-template matStepLabel>Fill out your name</ng-template>
+          <form [formGroup]="firstFormGroup" class="d-flex flex-column align-items-center">
+            <mat-form-field class="example-full-width">
+              <input type="text"
+                     placeholder="Cod. Estudiante"
+                     aria-label="Number"
+                     matInput
+                     formControlName="code"
+                     [matAutocomplete]="auto">
+              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                  {{option}}
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
             <mat-form-field>
-              <mat-label>Name</mat-label>
-              <input matInput placeholder="Last name, First name" formControlName="firstCtrl" required>
+              <mat-label>Nombres</mat-label>
+              <input matInput formControlName="names"  required>
+            </mat-form-field>
+            <mat-form-field>
+              <mat-label>Apellidos</mat-label>
+              <input matInput formControlName="lastname" required>
             </mat-form-field>
             <div>
-              <button mat-button matStepperNext>Next</button>
+              <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white" mat-button matStepperNext>Siguiente</button>
             </div>
           </form>
         </mat-step>
-        <mat-step [stepControl]="secondFormGroup" label="Fill out your address">
-          <form [formGroup]="secondFormGroup">
+        <mat-step [stepControl]="secondFormGroup" >
+          <form [formGroup]="secondFormGroup" class="d-flex flex-column align-items-center">
             <mat-form-field>
-              <mat-label>Address</mat-label>
-              <input matInput formControlName="secondCtrl" placeholder="Ex. 1 Main St, New York, NY"
-                     required>
+              <mat-label>Correo</mat-label>
+              <input matInput formControlName="email"  required>
             </mat-form-field>
-            <div>
-              <button mat-button matStepperPrevious>Back</button>
-              <button mat-button matStepperNext>Next</button>
+            <mat-form-field>
+              <mat-label>Contraseña</mat-label>
+              <input type="password" matInput formControlName="password">
+            </mat-form-field>
+            <mat-form-field class="mb-0">
+              <mat-label>Confirmación de contraseña</mat-label>
+              <input type="password" class="mb-0" matInput formControlName="repeated_password">
+            </mat-form-field>
+            <mat-error *ngIf="secondFormGroup.invalid && !secondFormGroup.get('repeated_password')?.pristine">
+              <span class="font-Inter-Light small-font-size">Las contraseñas no coinciden</span>
+            </mat-error>
+            <div class="mt-3">
+              <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white mr-4" mat-button matStepperPrevious>Atrás</button>
+              <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white" mat-button matStepperNext>Siguiente</button>
             </div>
           </form>
         </mat-step>
-        <mat-step>
-          <ng-template matStepLabel>Done</ng-template>
-          <p>You are now done.</p>
-          <div>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button >Reset</button>
-          </div>
+        <mat-step [stepControl]="thirdFormGroup">
+          <form [formGroup]="thirdFormGroup" class="d-flex w-100 flex-column align-items-center">
+            <mat-form-field style="width: 250px">
+              <mat-label>¿Cuál es tu comida favorita?</mat-label>
+              <input matInput formControlName="fquestion"   required>
+            </mat-form-field>
+            <mat-form-field style="width: 250px">
+              <mat-label>¿En qué ciudad naciste?</mat-label>
+              <input matInput formControlName="squestion"   required>
+            </mat-form-field>
+            <mat-form-field style="width: 250px">
+              <mat-label>¿Cuál es el nombre de tu abuelo paterno?</mat-label>
+              <input matInput formControlName="tquestion"   required>
+            </mat-form-field>
+            <div class="mt-3">
+              <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white mr-4" mat-button matStepperPrevious>Atrás</button>
+              <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white" mat-button>Guardar</button>
+            </div>
+          </form>
+
         </mat-step>
       </mat-horizontal-stepper>
-      <form action="" class="d-flex w-100 flex-column align-items-center justify-content-center p-4">
-        <h2 class="big-font-size font-weight-bold text-center very-big-font-size mb-3 main-color-text">
-          Iniciar sesión
-        </h2>
-        <div class="form-group">
-          <label for="user" class="font-Inter-SemiBold text-black">Usuario</label>
-          <input type="text" name="" class="form-control" id="user" autocomplete="off">
-        </div>
-        <div class="form-group">
-          <label for="password" class="font-Inter-SemiBold text-black">Contraseña</label>
-          <input type="password" name="" class="form-control" id="password" autocomplete="off">
-        </div>
-        <div class="d-flex justify-content-end custom-size-recover-password mb-3 font-weight-bold">
-          <div class="ml-auto">
-            <span class="small-font-size cursor-pointer main-color-text" [routerLink]="['/account/password-recovery']">¿Olvidé mi contraseña?</span>
-          </div>
-        </div>
-        <div class="d-flex justify-content-center">
-          <button class="btn btn-primary text-uppercase main-background font-Inter-Black">
-            Ingresar
-          </button>
-        </div>
-        <div class="d-flex justify-content-between pb-3 mt-4 custom-size-create-user font-weight-bold">
-          <span class="small-font-size cursor-pointer main-color-text" [routerLink]="['/account/sign-up']">Crear cuenta</span>
-        </div>
-      </form>
     </main>
   </div>
 

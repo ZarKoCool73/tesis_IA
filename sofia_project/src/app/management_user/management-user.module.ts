@@ -13,6 +13,7 @@ import {MatInputModule} from "@angular/material/input";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import {ReactiveFormsModule} from "@angular/forms";
     MatInputModule,
     ReactiveFormsModule,
     MatStepperModule,
+    MatAutocompleteModule,
   ],
   exports: [
     PasswordRecoveryComponent,
