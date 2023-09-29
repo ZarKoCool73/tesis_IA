@@ -9,6 +9,10 @@ import {SignUpComponent} from "./sign-up/sign-up.component";
 import {CommonModule} from "@angular/common";
 import {FrameboardModule} from "../../Components/frameboard/frameboard.module";
 import {HttpClientModule} from "@angular/common/http";
+import {MatInputModule} from "@angular/material/input";
+import {MatStepperModule} from "@angular/material/stepper";
+import {MatButtonModule} from "@angular/material/button";
+import {ReactiveFormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -17,12 +21,16 @@ import {HttpClientModule} from "@angular/common/http";
     SignInComponent,
     SignUpComponent
   ],
-    imports: [
-        CommonModule,
-        ManagementUserRoutingModule,
-        FrameboardModule,
-        HttpClientModule
-    ],
+  imports: [
+    CommonModule,
+    ManagementUserRoutingModule,
+    FrameboardModule,
+    HttpClientModule,
+    MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatStepperModule,
+  ],
   exports: [
     PasswordRecoveryComponent,
     ProfileComponent,
