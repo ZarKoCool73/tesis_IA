@@ -12,6 +12,7 @@ export class SignUpComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    console.log('h')
   }
 
 }
