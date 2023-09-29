@@ -1,59 +1,82 @@
-import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {LearningServiceService} from "../../services/learning-service.service";
 
 @Component({
-  selector: 'app-frameboard',
-  templateUrl: './frameboard.component.html',
-  styleUrls: ['./frameboard.component.scss']
+    selector: 'app-frameboard',
+    templateUrl: './frameboard.component.html',
+    styleUrls: ['./frameboard.component.scss']
 })
 export class FrameboardComponent implements OnInit, AfterViewInit {
-  name = 'World';
-  @Input() hasSon: boolean = false
+    name = 'World';
+    @Input() hasSon: boolean = false
 
-  constructor() {
-  }
 
-  @HostListener('window:resize', ['$event'])
-  changeNavHeight() {
-    const header = document.getElementById('header')
-    const navbar = document.getElementById('navbar')
-    const content = document.getElementById('content')
-    const contentSon = document.getElementById('contentSon')
-    if (header && navbar) {
-      navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
+    constructor(private http: HttpClient, private elementRef: ElementRef, private learningServices: LearningServiceService) {
     }
-    if (header && content) {
-      content.style.height = window.innerHeight - header.offsetHeight - 21 + 'px'
-    }
-    if (header && contentSon) {
-      contentSon.style.height = window.innerHeight - header.offsetHeight + 'px'
-    }
-  }
 
-  ngOnInit(): void {
-  }
+    @HostListener('window:resize', ['$event'])
+    changeNavHeight() {
+        const header = document.getElementById('header')
+        const navbar = document.getElementById('navbar')
+        const content = document.getElementById('content')
+        const contentSon = document.getElementById('contentSon')
+        if (header && navbar) {
+            navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
+        }
+        if (header && content) {
+            content.style.height = window.innerHeight - header.offsetHeight - 21 + 'px'
+        }
+        if (header && contentSon) {
+            contentSon.style.height = window.innerHeight - header.offsetHeight + 'px'
+        }
+    }
 
-  ngAfterViewInit(): void {
-    const header = document.getElementById('header')
-    const navbar = document.getElementById('navbar')
-    const content = document.getElementById('content')
-    const contentSon = document.getElementById('contentSon')
-    if (header && navbar) {
-      navbar.style.height = window.innerHeight - header.offsetHeight - 11 + 'px'
-    }
-    if (header && content) {
-      const height = window.innerHeight - header.offsetHeight - 11
-      content.style.height = height + 'px'
-    }
-    if (header && contentSon) {
-      const height = window.innerHeight - header.offsetHeight - 11
-      contentSon.style.height = height + 'px'
-    }
-  }
-
-  obtenerVideo() {
-    window.location.href = 'http://localhost:5000/api/video_feed';
-    if(window.location.href!='api/video_feed'){
+    ngOnInit(): void {
 
     }
-  }
+
+    obtenerData() {
+        this.learningServices.isVentanaEmergenteAbierta().subscribe((ventanaAbierta: boolean) => {
+            if (ventanaAbierta) {
+                // Hacer algo cuando la ventana se abre
+                console.log('La ventana emergente está abierta.');
+            } else {
+                // Hacer algo cuando la ventana se cierra
+                console.log('La ventana emergente está cerrada.');
+            }
+        });
+    }
+
+    obtenerVideo(): void {
+        this.learningServices.abrirVentanaEmergente();
+        this.learningServices.obtenerFlujoVideo().subscribe(
+            (data: ArrayBuffer) => {
+                console.log('data')
+                // Haz algo con el flujo de video, si es necesario
+            },
+            error => {
+                console.error('Error al obtener el flujo de video:', error);
+            }
+        );
+    }
+
+    ngAfterViewInit(): void {
+        const header = document.getElementById('header')
+        const navbar = document.getElementById('navbar')
+        const content = document.getElementById('content')
+        const contentSon = document.getElementById('contentSon')
+        if (header && navbar) {
+            navbar.style.height = window.innerHeight - header.offsetHeight - 11 + 'px'
+        }
+        if (header && content) {
+            const height = window.innerHeight - header.offsetHeight - 11
+            content.style.height = height + 'px'
+        }
+        if (header && contentSon) {
+            const height = window.innerHeight - header.offsetHeight - 11
+            contentSon.style.height = height + 'px'
+        }
+        this.obtenerData()
+    }
 }
