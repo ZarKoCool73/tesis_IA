@@ -1,6 +1,7 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {LearningServiceService} from "../../services/learning-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-frameboard',
@@ -12,7 +13,11 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   @Input() hasSon: boolean = false
 
 
-  constructor(private http: HttpClient, private elementRef: ElementRef, private learningServices: LearningServiceService) {
+  constructor(private http: HttpClient,
+              private _router: Router,
+              private _activatedRoute: ActivatedRoute,
+              private elementRef: ElementRef,
+              private learningServices: LearningServiceService) {
   }
 
   @HostListener('window:resize', ['$event'])
@@ -33,7 +38,9 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+   /* this._activatedRoute.params.subscribe((link) => {
 
+    })*/
   }
 
   obtenerData() {
@@ -67,5 +74,9 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       contentSon.style.height = height + 'px'
     }
     this.obtenerData()
+  }
+
+  getNavBar(module: string) {
+    return document.location.href.includes(module)
   }
 }

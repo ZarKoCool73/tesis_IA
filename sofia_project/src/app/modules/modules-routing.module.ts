@@ -6,9 +6,9 @@ import {ComprehensionComponent} from "./comprehension/comprehension.component";
 import {ComunicationComponent} from "./comunication/comunication.component";
 
 const routes: Routes = [
-  {path : 'expression', component: ExpressionComponent},
-  {path : 'comprehension', component: ComprehensionComponent},
-  {path : 'comunication', component: ComunicationComponent},
+  {path : 'expression/:type', component: ExpressionComponent},
+  {path : 'comprehension/:type', component: ComprehensionComponent},
+  {path : 'comunication/:type', component: ComunicationComponent},
 ];
 
 @NgModule({

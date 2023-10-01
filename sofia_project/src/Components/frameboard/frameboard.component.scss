@@ -24,6 +24,8 @@
 }
 nav{
   text-decoration: none;
+  box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.2);
+  position: relative;
 }
 .text-decoration-none{
   text-decoration: none;
@@ -31,4 +33,9 @@ nav{
 }
 .br-rd-btm-left-30-px{
   border-bottom-left-radius: 30px;
+}
+.camera{
+  img{
+    width: 80px;
+  }
 }

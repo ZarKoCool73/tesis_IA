@@ -66,6 +66,12 @@
 .red-background{
   background-color: $red-color;
 }
+.dark-red-background{
+  background-color: $dark-red-color;
+}
+.sky-blue-background{
+  background-color: $sky-blue-color;
+}
 .main-background{
   background-color: $primary-color;
 }
@@ -89,6 +95,9 @@
 }
 .very-big-font-size {
   font-size: $very-big-font-size;
+}
+.too-big-font-size {
+  font-size: $too-big-font-size;
 }
 .vh-100{
   height: 100vh;

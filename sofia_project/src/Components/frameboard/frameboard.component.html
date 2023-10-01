@@ -1,9 +1,6 @@
 <section class="d-flex justify-content-between header" id="header">
   <div class="logo d-flex align-items-center">
-    <div class="d-flex align-items-center mx-3 w-auto h-25">
-      <img src="assets/imgs/icon-menu.svg" alt="">
-    </div>
-    <div class="d-flex logo w-50 align-items-center">
+    <div class="d-flex logo w-50 align-items-center ml-3">
       <img src="assets/imgs/logo.jpg" width="70">
       <span class="ml-3 font-Inter-Black medium-font-size main-color-text">MARISCAL RAMÓN CASTILLA</span>
     </div>
@@ -19,7 +16,7 @@
 </section>
 <div class="d-flex" id="main">
   <nav class="menu d-flex flex-column justify-content-between " id="navbar">
-    <div class="content">
+    <!--<div class="content">
       <h1 class="font-Inter-SemiBold very-big-font-size d-flex justify-content-center p-4 text-center">Mi
         aprendizaje</h1>
       <ul class="list-unstyled">
@@ -36,8 +33,11 @@
                                                    class="text-decoration-none cursor-pointer w-100 justify-content-center">Recursos
           adicionales</a></li>
       </ul>
-    </div>
-
+    </div>-->
+    <app-comprehension *ngIf="getNavBar('comprehension')"></app-comprehension>
+    <app-expression *ngIf="getNavBar('expression')"></app-expression>
+    <app-comunication *ngIf="getNavBar('comunication')"></app-comunication>
+    <app-resources *ngIf="getNavBar('resources')"></app-resources>
     <div class="camera  d-flex justify-content-center">
       <img src="assets/imgs/camera.png" class="cursor-pointer" width="150" (click)="obtenerVideo()">
     </div>
