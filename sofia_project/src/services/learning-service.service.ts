@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
+import {HttpClient} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ export class LearningServiceService {
   private apiUrl = 'http://localhost:5000/api/video';
   private ventanaEmergenteAbiertaSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(private http: HttpClient) {
   }
 
   abrirVentanaEmergente(): void {
@@ -48,6 +49,12 @@ export class LearningServiceService {
     } else {
       console.error('No se pudo abrir la ventana emergente. Asegúrate de que los bloqueadores de ventanas emergentes estén desactivados.');
     }
+  }
+
+  detenerServicioDeVideo(): void {
+    this.http.get('http://localhost:5000/api/stop_video').subscribe(response => {
+      console.log(response); // Esto imprimirá "Servicio de video detenido."
+    });
   }
 
   isVentanaEmergenteAbierta(): Observable<boolean> {
