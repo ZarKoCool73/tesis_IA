@@ -82,7 +82,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     this.learningServices.abrirVentanaEmergente();
   }
 
-
   ngAfterViewInit(): void {
     const header = document.getElementById('header')
     const navbar = document.getElementById('navbar')
