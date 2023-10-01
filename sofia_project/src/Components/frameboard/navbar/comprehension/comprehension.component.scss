@@ -1,3 +1,5 @@
+@import "../../../../assets/css/variables";
+
 .nav-bar{
   li{
     padding: 12px;
@@ -8,5 +10,16 @@
   a{
     height: max-content;
     font-family: Inter-SemiBold;
+  }
+}
+.nav-bar{
+  li {
+    border: 5px solid white;
+  }
+  li:hover{
+    border-left: 5px solid $primary-color;
+  }
+  .active{
+    border-left: 5px solid $primary-color;
   }
 }

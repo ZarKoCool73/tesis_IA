@@ -1,19 +1,14 @@
-<div class="content">
-  <h1 class="font-Inter-SemiBold very-big-font-size d-flex justify-content-center p-4 text-center">Mi
-    Comunicación
-  </h1>
-  <ul class="list-unstyled">
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comprehension']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Comprensión</a>
+<div class="content mt-4">
+  <ul class="list-unstyled nav-bar">
+    <li ngbTooltip="Adverbios" placement="end"
+        [ngClass]="{active: getUrl('adverb')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-adverb.svg" [routerLink]="['/modules/comunication', 'adverb']" class="cursor-pointer" alt="">
     </li>
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/expression']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Expresión</a>
+    <li ngbTooltip="Preposiciones" placement="end"
+        [ngClass]="{active: getUrl('preposition')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-preposition.svg" [routerLink]="['/modules/comunication', 'preposition']" class="cursor-pointer" alt="">
     </li>
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comunication']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Comunicación</a>
-    </li>
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/resources']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Recursos
-      adicionales</a></li>
   </ul>
 </div>

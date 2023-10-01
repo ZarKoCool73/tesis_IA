@@ -11,5 +11,7 @@ export class ComunicationComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  getUrl(url: string) {
+    return document.location.href.includes(url)
+  }
 }

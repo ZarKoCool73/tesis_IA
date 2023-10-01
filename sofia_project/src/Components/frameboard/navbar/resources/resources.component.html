@@ -1,13 +1,14 @@
-<div class="content">
-  <h1 class="font-Inter-SemiBold very-big-font-size d-flex justify-content-center p-4 text-center">Mi
-    Recursos adicionales
-  </h1>
-  <ul class="list-unstyled">
-    <li class="mt-2 p-2 d-flex text-center">
-      <span [routerLink]="['/modules/comprehension']" class="text-decoration-none cursor-pointer w-100 justify-content-center">Preguntas</span>
+<div class="content mt-4">
+  <ul class="list-unstyled nav-bar">
+    <li ngbTooltip="Libros" placement="end"
+        [ngClass]="{active: getUrl('books')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-books.svg" [routerLink]="['/resources', 'books']" class="cursor-pointer" alt="">
     </li>
-    <li class="mt-2 p-2 d-flex text-center">
-      <span [routerLink]="['/modules/comprehension']" class="text-decoration-none cursor-pointer w-100 justify-content-center">Preguntas</span>
+    <li ngbTooltip="Páginas web" placement="end"
+        [ngClass]="{active: getUrl('web')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-web.svg" [routerLink]="['/resources', 'web']" class="cursor-pointer" alt="">
     </li>
   </ul>
 </div>

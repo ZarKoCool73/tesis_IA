@@ -9,31 +9,31 @@
     <div class="d-flex flex-column user-info pl-4 ">
       <span class="font-Inter-semibold medium-font-size text-white flex-wrap mr-3">Nelson David Cueva Jaimes</span>
     </div>
-    <div class="circle d-flex align-items-end justify-content-center mr-2 bg-white">
+    <div class="circle d-flex align-items-end justify-content-center mr-2 bg-white"
+         [ngbPopover]="popContent"
+         triggers="manual"
+         placement="bottom-right"
+         #p1="ngbPopover"
+         (click)="toggleWithGreeting(p1, 'Bonjour', 'French')">
       <img src="assets/imgs/icon-user.svg" style="border-radius: 30%">
     </div>
   </div>
 </section>
+<ng-template #popContent let-greeting="greeting">
+  <ul class="list-unstyled mb-0 login-module">
+    <li [routerLink]="['/modules/comprehension', 'question']"
+      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comprensión</li>
+    <li [routerLink]="['/modules/expression', 'abc']"
+      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de expresión</li>
+    <li [routerLink]="['/modules/comunication', 'adverb']"
+      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comunicación</li>
+    <li [routerLink]="['/resources', 'books']"
+      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de recursos adicionales</li>
+  </ul>
+</ng-template>
+
 <div class="d-flex" id="main">
   <nav class="menu d-flex flex-column justify-content-between " id="navbar">
-    <!--<div class="content">
-      <h1 class="font-Inter-SemiBold very-big-font-size d-flex justify-content-center p-4 text-center">Mi
-        aprendizaje</h1>
-      <ul class="list-unstyled">
-        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comprehension']"
-                                                   class="text-decoration-none cursor-pointer w-100 justify-content-center">Comprensión</a>
-        </li>
-        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/expression']"
-                                                   class="text-decoration-none cursor-pointer w-100 justify-content-center">Expresión</a>
-        </li>
-        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comunication']"
-                                                   class="text-decoration-none cursor-pointer w-100 justify-content-center">Comunicación</a>
-        </li>
-        <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/resources']"
-                                                   class="text-decoration-none cursor-pointer w-100 justify-content-center">Recursos
-          adicionales</a></li>
-      </ul>
-    </div>-->
     <app-comprehension *ngIf="getNavBar('comprehension')"></app-comprehension>
     <app-expression *ngIf="getNavBar('expression')"></app-expression>
     <app-comunication *ngIf="getNavBar('comunication')"></app-comunication>

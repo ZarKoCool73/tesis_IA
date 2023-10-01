@@ -1,18 +1,25 @@
-<div class="content">
-  <h1 class="font-Inter-SemiBold very-big-font-size d-flex justify-content-center p-4 text-center">Mi
-    Expresión</h1>
-  <ul class="list-unstyled">
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comprehension']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Comprensión</a>
+<div class="content mt-4">
+  <ul class="list-unstyled nav-bar">
+    <li ngbTooltip="Abecedario" placement="end"
+        [ngClass]="{active: getUrl('abc')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-abc.svg" [routerLink]="['/modules/expression', 'abc']" class="cursor-pointer" alt="">
     </li>
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/expression']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Expresión</a>
+    <li ngbTooltip="Expresiones comunes" placement="end"
+        [ngClass]="{active: getUrl('common-expressions')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-common-expressions.svg" [routerLink]="['/modules/expression', 'common-expressions']" class="cursor-pointer" alt="">
     </li>
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/modules/comunication']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Comunicación</a>
+    <li ngbTooltip="Numeros" placement="end"
+        [ngClass]="{active: getUrl('numbers')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-numbers.svg" [routerLink]="['/modules/expression', 'numbers']" class="cursor-pointer" alt="">
     </li>
-    <li class="mt-2 p-2 d-flex text-center"><a [routerLink]="['/resources']"
-                                               class="text-decoration-none cursor-pointer w-100 justify-content-center">Recursos
-      adicionales</a></li>
+    <li ngbTooltip="Colores" placement="end"
+        [ngClass]="{active: getUrl('colors')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-colors.svg" [routerLink]="['/modules/expression', 'colors']" class="cursor-pointer" alt="">
+    </li>
+
   </ul>
 </div>

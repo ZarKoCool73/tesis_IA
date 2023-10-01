@@ -4,7 +4,7 @@ import {AuthGuard} from "../guard/auth.guard";
 import {ResourcesComponent} from "./resources.component";
 
 const routes: Routes = [
-  {path : '', component: ResourcesComponent},
+  {path : ':type', component: ResourcesComponent},
 ];
 
 @NgModule({

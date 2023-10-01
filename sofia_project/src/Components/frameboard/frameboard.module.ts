@@ -9,6 +9,7 @@ import { ComprehensionComponent } from './navbar/comprehension/comprehension.com
 import { ExpressionComponent } from './navbar/expression/expression.component';
 import { ResourcesComponent } from './navbar/resources/resources.component';
 import { ComunicationComponent } from './navbar/comunication/comunication.component';
+import {NgbPopoverModule, NgbTooltip} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -21,9 +22,11 @@ import { ComunicationComponent } from './navbar/comunication/comunication.compon
   imports: [
     CommonModule,
     RouterOutlet,
+    NgbPopoverModule,
     RouterLinkWithHref,
     HttpClientModule,
-    RouterLink
+    RouterLink,
+    NgbTooltip
   ],
   exports: [
     FrameboardComponent

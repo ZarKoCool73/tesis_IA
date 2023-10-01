@@ -39,3 +39,9 @@ nav{
     width: 80px;
   }
 }
+.login-module{
+  li:hover{
+    color: $primary-color;
+    font-weight: 500;
+  }
+}

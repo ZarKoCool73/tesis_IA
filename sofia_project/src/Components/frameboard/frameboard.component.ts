@@ -64,7 +64,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     const content = document.getElementById('content')
     const contentSon = document.getElementById('contentSon')
     if (header && navbar) {
-      navbar.style.height = window.innerHeight - header.offsetHeight - 11 + 'px'
+      navbar.style.height = window.innerHeight - header.offsetHeight  + 'px'
     }
     if (header && content) {
       const height = window.innerHeight - header.offsetHeight - 11
@@ -79,5 +79,14 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
 
   getNavBar(module: string) {
     return document.location.href.includes(module)
+  }
+
+
+  toggleWithGreeting(popover: any, greeting: string, language: string) {
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      popover.open({ greeting, language });
+    }
   }
 }
