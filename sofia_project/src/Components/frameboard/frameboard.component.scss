@@ -26,6 +26,7 @@ nav{
   text-decoration: none;
   box-shadow: 3px 0px 3px rgba(0, 0, 0, 0.2);
   position: relative;
+  min-height: 88vh;
 }
 .text-decoration-none{
   text-decoration: none;
@@ -44,4 +45,8 @@ nav{
     color: $primary-color;
     font-weight: 500;
   }
+}
+.title-login:hover{
+  color: $primary-color;
+  font-weight: 500;
 }

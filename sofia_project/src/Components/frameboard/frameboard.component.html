@@ -11,6 +11,7 @@
     </div>
     <div class="circle d-flex align-items-end justify-content-center mr-2 bg-white"
          [ngbPopover]="popContent"
+         [popoverTitle]="popTitle"
          triggers="manual"
          placement="bottom-right"
          #p1="ngbPopover"
@@ -19,6 +20,10 @@
     </div>
   </div>
 </section>
+<ng-template #popTitle let-language="language">
+  <span class="medium-font-size font-Inter-Medium cursor-pointer title-login"
+        [routerLink]="['/account/profile']">Mi perfil</span>
+</ng-template>
 <ng-template #popContent let-greeting="greeting">
   <ul class="list-unstyled mb-0 login-module">
     <li [routerLink]="['/modules/comprehension', 'question']"
@@ -29,11 +34,13 @@
       class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comunicación</li>
     <li [routerLink]="['/resources', 'books']"
       class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de recursos adicionales</li>
+    <li [routerLink]="['/account']"
+      class="p-2 medium-font-size main-color-text font-Inter-Medium cursor-pointer">Cerrar sesión</li>
   </ul>
 </ng-template>
 
 <div class="d-flex" id="main">
-  <nav class="menu d-flex flex-column justify-content-between " id="navbar">
+  <nav *ngIf="!getNavBar('profile')" class="menu d-flex flex-column justify-content-between " id="navbar">
     <app-comprehension *ngIf="getNavBar('comprehension')"></app-comprehension>
     <app-expression *ngIf="getNavBar('expression')"></app-expression>
     <app-comunication *ngIf="getNavBar('comunication')"></app-comunication>
