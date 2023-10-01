@@ -38,9 +38,9 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
 
   obtenerData() {
     this.learningServices.isVentanaEmergenteAbierta().subscribe((ventanaAbierta) => {
-      if (ventanaAbierta) {
-        // Hacer algo cuando la ventana se abre
-        console.log('La ventana emergente está abierta.');
+      if (!ventanaAbierta) {
+        // La ventana emergente se ha cerrado, realiza las acciones que necesites
+        console.log('La ventana emergente se ha cerrado.');
       }
     });
   }
