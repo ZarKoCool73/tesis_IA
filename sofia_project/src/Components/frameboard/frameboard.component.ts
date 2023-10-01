@@ -47,7 +47,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
 
   obtenerVideo(): void {
     this.learningServices.abrirVentanaEmergente();
-    console.log("buenas")
   }
 
 
