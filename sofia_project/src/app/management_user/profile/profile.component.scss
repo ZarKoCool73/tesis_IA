@@ -67,3 +67,6 @@ main{
   right: 0; /* Coloca la imagen en la derecha */
   bottom: 0; /* Coloca la imagen en la parte inferior */
 }
+.secondary-title{
+  border-bottom: 2px solid $primary-color;
+}
