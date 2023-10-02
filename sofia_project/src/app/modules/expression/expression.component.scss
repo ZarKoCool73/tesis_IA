@@ -1,3 +1,16 @@
-.border-radius-30{
-  border-radius: 30px;
+.card-title{
+  border-bottom: 3px solid ;
+  font-weight: 900;
+}
+.book-content{
+  width: 170px;
+  span{
+    word-break: break-all;
+  }
+}
+main{
+  height: max-content;
+}
+.h-auto{
+  min-height: 100%;
 }
