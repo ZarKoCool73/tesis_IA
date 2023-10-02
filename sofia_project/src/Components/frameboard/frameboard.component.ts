@@ -67,11 +67,11 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       navbar.style.height = window.innerHeight - header.offsetHeight  + 'px'
     }
     if (header && content) {
-      const height = window.innerHeight - header.offsetHeight - 11
+      const height = window.innerHeight - header.offsetHeight
       content.style.height = height + 'px'
     }
     if (header && contentSon) {
-      const height = window.innerHeight - header.offsetHeight - 11
+      const height = window.innerHeight - header.offsetHeight
       contentSon.style.height = height + 'px'
     }
     this.obtenerData()

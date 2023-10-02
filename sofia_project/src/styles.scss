@@ -66,6 +66,12 @@
 .red-background{
   background-color: $red-color;
 }
+.gray-background{
+  background-color: $gray-color;
+}
+.light-gray-background{
+  background-color: $light-gray-color;
+}
 .dark-red-background{
   background-color: $dark-red-color;
 }
@@ -135,9 +141,15 @@
 .border-radius-30{
   border-radius: 30px;
 }
+.border-radius-15{
+  border-radius: 15px;
+}
 .mat-stepper-label-position-bottom .mat-horizontal-stepper-header .mat-step-icon{
   background-color: $red-color;
 }
 .tooltip-inner {
   background-color: $primary-color;
+}
+.fw-900{
+  font-weight: 900;
 }
