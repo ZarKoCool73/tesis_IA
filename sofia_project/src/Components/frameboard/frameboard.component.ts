@@ -1,7 +1,9 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {LearningServiceService} from "../../services/learning-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
+import {UserServiceService} from "../../services/user-service.service";
+import Swal from "sweetalert2";
 
 @Component({
   selector: 'app-frameboard',
@@ -11,12 +13,13 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class FrameboardComponent implements OnInit, AfterViewInit {
   name = 'World';
   @Input() hasSon: boolean = false
-
+  userProfile: any;
 
   constructor(private http: HttpClient,
               private _router: Router,
               private _activatedRoute: ActivatedRoute,
               private elementRef: ElementRef,
+              private _userService: UserServiceService,
               private learningServices: LearningServiceService) {
   }
 
@@ -38,9 +41,11 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-   /* this._activatedRoute.params.subscribe((link) => {
+    /* this._activatedRoute.params.subscribe((link) => {
 
-    })*/
+     })*/
+    const userId = localStorage.getItem('userId');
+    this.loadDetail(userId)
   }
 
   obtenerData() {
@@ -64,7 +69,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     const content = document.getElementById('content')
     const contentSon = document.getElementById('contentSon')
     if (header && navbar) {
-      navbar.style.height = window.innerHeight - header.offsetHeight  + 'px'
+      navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
     if (header && content) {
       const height = window.innerHeight - header.offsetHeight
@@ -86,7 +91,25 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     if (popover.isOpen()) {
       popover.close();
     } else {
-      popover.open({ greeting, language });
+      popover.open({greeting, language});
     }
+  }
+
+  loadDetail(id: any) {
+    this._userService.getUser(id).subscribe((res: any) => {
+      if (res.state == 1) {
+        this.userProfile = res.user
+      }
+    }, (error: HttpErrorResponse) => {
+      Swal.close();
+      if (error.error.state == 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.error.message,
+          confirmButtonColor: '#ff3600',
+        });
+      }
+    })
   }
 }

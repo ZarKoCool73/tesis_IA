@@ -48,6 +48,8 @@ export class SignInComponent implements OnInit {
     this._userService.login(body).subscribe((res: any) => {
       if (res.state == 1) {
         Swal.close();
+        const userId = res.userId;
+        localStorage.setItem('userId', userId);
         this._router.navigate(['/modules'])
       }
     }, (error: HttpErrorResponse) => {

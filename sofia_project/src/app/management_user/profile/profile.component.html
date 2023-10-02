@@ -1,4 +1,4 @@
-<app-frameboard [hasSon] = "true">
+<app-frameboard [hasSon]="true">
   <div class="light-gray-background p-4 h-auto">
     <div class="card card-body border-radius-15 p-4 h-auto">
       <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
@@ -14,21 +14,23 @@
               </div>
             </div>
             <div class="d-flex w-75 flex-column">
-              <h2 class="secondary-title font-Inter-Black w-75 py-2 mb-3  text-uppercase d-flex justify-content-start big-font-size">
+              <h2
+                class="secondary-title font-Inter-Black w-75 py-2 mb-3  text-uppercase d-flex justify-content-start big-font-size">
                 Datos generales
               </h2>
-              <section class="card w-75 card-group d-flex justify-content-center align-items-center flex-column p-4 form">
+              <section
+                class="card w-75 card-group d-flex justify-content-center align-items-center flex-column p-4 form">
                 <div class="row">
                   <div class="col">
 
                     <div class="form-group">
-                      <h2  class="font-Inter-SemiBold medium-font-size">Código del estudiante</h2>
-                      <p  class="font-Inter-Regular">1052620065</p>
+                      <h2 class="font-Inter-SemiBold medium-font-size">Código del estudiante</h2>
+                      <p class="font-Inter-Regular">{{userProfile.studentCode}}</p>
 
                     </div>
                     <div class="form-group">
-                      <h2  class="font-Inter-SemiBold medium-font-size">Nombres</h2>
-                      <p  class="font-Inter-Regular">Nelson David</p>
+                      <h2 class="font-Inter-SemiBold medium-font-size">Nombres</h2>
+                      <p class="font-Inter-Regular">{{userProfile.name}}</p>
 
                     </div>
 
@@ -36,11 +38,11 @@
                   <div class="col">
                     <div class="form-group">
                       <h2 for="email" class="font-Inter-SemiBold medium-font-size">Correo electrónico</h2>
-                      <p  class="font-Inter-Regular">ncuevaj@autonoma.edu.pe</p>
+                      <p class="font-Inter-Regular">{{userProfile.email}}</p>
                     </div>
                     <div class="form-group">
-                      <h2  class=" font-Inter-SemiBold medium-font-size">Apellidos</h2>
-                      <p  class="font-Inter-Regular">Cueva Jaimes</p>
+                      <h2 class=" font-Inter-SemiBold medium-font-size">Apellidos</h2>
+                      <p class="font-Inter-Regular">{{userProfile.lastname}}</p>
 
                     </div>
                   </div>
@@ -56,11 +58,13 @@
             </div>
 
             <div class="d-flex w-75 flex-column">
-              <h2 class="secondary-title font-Inter-Black  py-2 mb-3 text-uppercase w-100 d-flex justify-content-start big-font-size">
+              <h2
+                class="secondary-title font-Inter-Black  py-2 mb-3 text-uppercase w-100 d-flex justify-content-start big-font-size">
                 Avance de progreso
               </h2>
-              <section class="card w-100 card-group d-flex justify-content-center align-items-start flex-column p-4 form">
-                <div class="d-flex align-items-center" >
+              <section
+                class="card w-100 card-group d-flex justify-content-center align-items-start flex-column p-4 form">
+                <div class="d-flex align-items-center">
                   <div class="progress-container">
                     <div class="progress-circle d-flex align-items-center justify-content-center">
                       65/100
@@ -68,7 +72,7 @@
                   </div>
                   <p class="ml-4 text-break ">Módulo de expresión de lenguaje de señas completado</p>
                 </div>
-                <div class="d-flex align-items-center mt-4" >
+                <div class="d-flex align-items-center mt-4">
                   <div class="progress-container">
                     <div class="progress-circle d-flex align-items-center justify-content-center">
                       65/100
@@ -76,7 +80,7 @@
                   </div>
                   <p class="ml-4 text-break ">Módulo de comprensión de lenguaje de señas completado</p>
                 </div>
-                <div class="d-flex align-items-center mt-4" >
+                <div class="d-flex align-items-center mt-4">
                   <div class="progress-container">
                     <div class="progress-circle d-flex align-items-center justify-content-center">
                       65/100

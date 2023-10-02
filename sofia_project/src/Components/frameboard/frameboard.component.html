@@ -6,8 +6,9 @@
     </div>
   </div>
   <div class="d-flex user align-items-center p-2 main-background br-rd-btm-left-30-px">
-    <div class="d-flex flex-column user-info pl-4 ">
-      <span class="font-Inter-semibold medium-font-size text-white flex-wrap mr-3">Nelson David Cueva Jaimes</span>
+    <div class="d-flex flex-column user-info pl-2">
+      <span class="font-Inter-semibold medium-font-size text-white flex-wrap mr-3">{{userProfile.lastname}}
+        {{userProfile.name}} </span>
     </div>
     <div class="circle d-flex align-items-end justify-content-center mr-2 bg-white"
          [ngbPopover]="popContent"
@@ -27,15 +28,20 @@
 <ng-template #popContent let-greeting="greeting">
   <ul class="list-unstyled mb-0 login-module">
     <li [routerLink]="['/modules/comprehension', 'question']"
-      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comprensión</li>
+        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comprensión
+    </li>
     <li [routerLink]="['/modules/expression', 'abc']"
-      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de expresión</li>
+        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de expresión
+    </li>
     <li [routerLink]="['/modules/comunication', 'adverb']"
-      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comunicación</li>
+        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comunicación
+    </li>
     <li [routerLink]="['/resources', 'books']"
-      class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de recursos adicionales</li>
+        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de recursos adicionales
+    </li>
     <li [routerLink]="['/account']"
-      class="p-2 medium-font-size main-color-text font-Inter-Medium cursor-pointer">Cerrar sesión</li>
+        class="p-2 medium-font-size main-color-text font-Inter-Medium cursor-pointer">Cerrar sesión
+    </li>
   </ul>
 </ng-template>
 
