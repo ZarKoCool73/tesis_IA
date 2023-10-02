@@ -30,7 +30,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
     if (header && content) {
-      content.style.height = window.innerHeight - header.offsetHeight - 21 + 'px'
+      content.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
     if (header && contentSon) {
       contentSon.style.height = window.innerHeight - header.offsetHeight + 'px'

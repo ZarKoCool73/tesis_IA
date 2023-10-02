@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-resources',
@@ -7,9 +8,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResourcesComponent implements OnInit {
 
-  constructor() { }
+  link = ''
+
+  constructor(private _activatedRoute: ActivatedRoute) {
+
+  }
 
   ngOnInit(): void {
+    this._activatedRoute.params.subscribe((params: any) => {
+      switch (params.type) {
+        case 'books':
+          this.link = 'Libros'; break;
+        case  'web':
+          this.link = 'Páginas web'; break;
+      }
+    })
   }
 
 }

@@ -23,18 +23,9 @@
       <mat-horizontal-stepper  linear #stepper labelPosition="bottom">
         <mat-step [stepControl]="firstFormGroup">
           <form [formGroup]="firstFormGroup" class="d-flex flex-column align-items-center">
-            <mat-form-field class="example-full-width">
-              <input type="text"
-                     placeholder="Cod. Estudiante"
-                     aria-label="Number"
-                     matInput
-                     formControlName="code"
-                     [matAutocomplete]="auto">
-              <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                  {{option}}
-                </mat-option>
-              </mat-autocomplete>
+            <mat-form-field>
+              <mat-label>Código</mat-label>
+              <input matInput formControlName="code" required>
             </mat-form-field>
             <mat-form-field>
               <mat-label>Nombres</mat-label>
