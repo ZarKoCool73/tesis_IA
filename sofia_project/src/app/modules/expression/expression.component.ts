@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse} from "@angular/common/http";
+import Swal from "sweetalert2";
+import {ResourceServiceService} from "../../../services/resource-service.service";
 
 @Component({
   selector: 'app-expression',
@@ -8,9 +11,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ExpressionComponent implements OnInit {
 
- link = ''
+  link = ''
+  categoryExpression: any;
+  category = 'expression'
 
-  constructor(private _activatedRoute: ActivatedRoute) {
+  constructor(
+    private _activatedRoute: ActivatedRoute,
+    private _servicesResource: ResourceServiceService) {
 
   }
 
@@ -18,13 +25,37 @@ export class ExpressionComponent implements OnInit {
     this._activatedRoute.params.subscribe((params: any) => {
       switch (params.type) {
         case 'abc':
-          this.link = 'Abecedario'; break;
+          this.link = 'Abecedario';
+          break;
         case  'common-expressions':
-          this.link = 'Expresiones comunes'; break;
+          this.link = 'Expresiones comunes';
+          break;
         case   'numbers':
-          this.link = 'Números'; break;
+          this.link = 'Números';
+          break;
         case  'colors':
-          this.link = 'Colores'; break;
+          this.link = 'Colores';
+          break;
+      }
+    })
+    this.loadDetail(this.category)
+  }
+
+  loadDetail(id: any) {
+    this._servicesResource.getCategory(id).subscribe((res: any) => {
+      if (res.state == 1) {
+        console.log('res', res)
+        this.categoryExpression = res.resources
+      }
+    }, (error: HttpErrorResponse) => {
+      Swal.close();
+      if (error.error.state == 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.error.message,
+          confirmButtonColor: '#ff3600',
+        });
       }
     })
   }
