@@ -14,6 +14,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   name = 'World';
   @Input() hasSon: boolean = false
   userProfile: any;
+  currentHour = '';
 
   constructor(private http: HttpClient,
               private _router: Router,
@@ -46,6 +47,23 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
      })*/
     const userId = localStorage.getItem('userId');
     this.loadDetail(userId)
+    this.updateCurrentHour();
+    setInterval(() => {
+      this.updateCurrentHour();
+    }, 1000);
+  }
+
+  private updateCurrentHour(): void {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12; // Convierte 0 a 12 en el formato de 12 horas
+    this.currentHour = `${this.formatNumber(formattedHours)}:${this.formatNumber(minutes)} ${ampm}`;
+  }
+
+  private formatNumber(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
   }
 
   obtenerData() {
