@@ -35,6 +35,10 @@
               <mat-label>Apellidos</mat-label>
               <input matInput formControlName="lastname" required>
             </mat-form-field>
+            <mat-form-field>
+              <mat-label>Edad</mat-label>
+              <input matInput formControlName="age" required>
+            </mat-form-field>
             <div>
               <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white" mat-button matStepperNext>Siguiente</button>
             </div>
@@ -79,7 +83,7 @@
             </mat-form-field>
             <div class="mt-3">
               <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white mr-4" mat-button matStepperPrevious>Atrás</button>
-              <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white" mat-button>Guardar</button>
+              <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white" mat-button (click)="createAccount()">Guardar</button>
             </div>
           </form>
 

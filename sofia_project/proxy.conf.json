@@ -1,0 +1,6 @@
+{
+  "/api": {
+    "target": "https://server-sofi.onrender.com/",
+    "secure": false
+  }
+}

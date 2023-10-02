@@ -1,4 +1,6 @@
 import {Component, OnInit} from '@angular/core';
+import {FormControl, FormGroup } from '@angular/forms';
+import { UserServiceService } from 'src/services/user-service.service';
 
 @Component({
   selector: 'app-sign-in',
@@ -8,7 +10,11 @@ import {Component, OnInit} from '@angular/core';
 export class SignInComponent implements OnInit {
   msg = 'Buenos días'
 
-  constructor() {
+  form = new FormGroup({
+    email: new FormControl(),
+    password: new FormControl()
+  })
+  constructor(private _userService: UserServiceService) {
   }
 
   ngOnInit(): void {
@@ -26,6 +32,18 @@ export class SignInComponent implements OnInit {
     } else {
       this.msg = 'Buenas noches';
     }
+  }
+  login() {
+    const values = this.form.getRawValue();
+    const body = {
+      email: values.email,
+      password: values.password
+    }
+    this._userService.login(body).subscribe(res => {
+
+    }, error => {
+
+    })
   }
 
 }
