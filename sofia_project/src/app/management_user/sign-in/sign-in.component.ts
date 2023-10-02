@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, FormGroup } from '@angular/forms';
-import { UserServiceService } from 'src/services/user-service.service';
+import {FormControl, FormGroup} from '@angular/forms';
+import {UserServiceService} from 'src/services/user-service.service';
+import {Router} from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-sign-in',
@@ -14,7 +17,8 @@ export class SignInComponent implements OnInit {
     email: new FormControl(),
     password: new FormControl()
   })
-  constructor(private _userService: UserServiceService) {
+
+  constructor(private _userService: UserServiceService, private _router: Router,) {
   }
 
   ngOnInit(): void {
@@ -33,16 +37,29 @@ export class SignInComponent implements OnInit {
       this.msg = 'Buenas noches';
     }
   }
+
   login() {
     const values = this.form.getRawValue();
     const body = {
       email: values.email,
       password: values.password
     }
-    this._userService.login(body).subscribe(res => {
-
-    }, error => {
-
+    Swal.showLoading();
+    this._userService.login(body).subscribe((res: any) => {
+      if (res.state == 1) {
+        Swal.close();
+        this._router.navigate(['/modules'])
+      }
+    }, (error: HttpErrorResponse) => {
+      Swal.close();
+      if (error.error.state == 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.error.message,
+          confirmButtonColor: '#ff3600',
+        });
+      }
     })
   }
 
