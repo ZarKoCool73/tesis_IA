@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {UserServiceService} from "../../../services/user-service.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
+import {User} from "../../models/user";
 
 @Component({
   selector: 'app-profile',
@@ -9,11 +10,12 @@ import Swal from "sweetalert2";
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
+  userProfile: User;
   constructor(private _userService: UserServiceService) {
+    this.userProfile = new User('', '', '', '', '', '', '', '', '');
+
   }
 
-  userProfile: any;
 
   ngOnInit(): void {
     const userId = localStorage.getItem('userId');

@@ -4,6 +4,7 @@ import {LearningServiceService} from "../../services/learning-service.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {UserServiceService} from "../../services/user-service.service";
 import Swal from "sweetalert2";
+import {User} from 'src/app/models/user';
 
 @Component({
   selector: 'app-frameboard',
@@ -13,7 +14,7 @@ import Swal from "sweetalert2";
 export class FrameboardComponent implements OnInit, AfterViewInit {
   name = 'World';
   @Input() hasSon: boolean = false
-  userProfile: any;
+  userProfile: User;
   currentHour = '';
 
   constructor(private http: HttpClient,
@@ -22,6 +23,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
               private elementRef: ElementRef,
               private _userService: UserServiceService,
               private learningServices: LearningServiceService) {
+    this.userProfile = new User('', '', '', '', '', '', '', '', '');
   }
 
   @HostListener('window:resize', ['$event'])
