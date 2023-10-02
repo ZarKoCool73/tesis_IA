@@ -4,8 +4,8 @@
       Recursos adicionales: <span class="link ml-2">{{link}}</span>
     </header>
     <main class="d-flex flex-wrap justify-content-between">
-      <div class="book-content light-gray-background align-items-center d-flex flex-column border-radius-15 mb-3 mx-4">
-        <span class="big-font-size font-Inter-Semibold flex-wrap text-break fw-900 mt-1 pt-2 px-2">Libro de ejemplo 1</span>
+      <div *ngFor="let data of category" class="book-content light-gray-background align-items-center d-flex flex-column border-radius-15 mb-3 mx-4">
+        <span class="big-font-size font-Inter-Semibold flex-wrap text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</span>
         <img src="assets/imgs/resources/internet.png" width="170">
       </div>
     </main>

@@ -12,7 +12,6 @@ import {ResourceServiceService} from "../../../services/resource-service.service
 export class ComunicationComponent implements OnInit {
 
   categoryComunication: any;
-  category = 'communication'
   link = ''
 
   constructor(
@@ -26,13 +25,14 @@ export class ComunicationComponent implements OnInit {
       switch (params.type) {
         case 'adverb':
           this.link = 'Adverbios';
+          this.loadDetail('adverb')
           break;
         case  'preposition':
           this.link = 'Preposiciones';
+          this.loadDetail('preposition')
           break;
       }
     })
-    this.loadDetail(this.category)
   }
 
   loadDetail(id: any) {

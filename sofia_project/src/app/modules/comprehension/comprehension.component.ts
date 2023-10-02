@@ -32,19 +32,22 @@ export class ComprehensionComponent implements OnInit {
       switch (params.type) {
         case 'question':
           this.link = 'Preguntas';
+          this.loadDetail('question')
           break;
         case  'verbs':
           this.link = 'Verbos';
+          this.loadDetail('verbs')
           break;
         case   'adjetives':
           this.link = 'Adjetivos';
+          this.loadDetail('adjetives')
           break;
         case  'utensils':
           this.link = 'Artículos del hogar';
+          this.loadDetail('utensils')
           break;
       }
     })
-    this.loadDetail(this.category)
   }
 
   loadDetail(id: any) {

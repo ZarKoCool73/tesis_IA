@@ -26,19 +26,22 @@ export class ExpressionComponent implements OnInit {
       switch (params.type) {
         case 'abc':
           this.link = 'Abecedario';
+          this.loadDetail('abc')
           break;
         case  'common-expressions':
           this.link = 'Expresiones comunes';
+          this.loadDetail('common-expressions')
           break;
         case   'numbers':
           this.link = 'Números';
+          this.loadDetail('numbers')
           break;
         case  'colors':
           this.link = 'Colores';
+          this.loadDetail('colors')
           break;
       }
     })
-    this.loadDetail(this.category)
   }
 
   loadDetail(id: any) {
