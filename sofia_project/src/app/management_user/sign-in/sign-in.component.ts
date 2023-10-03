@@ -1,9 +1,10 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild, TemplateRef} from '@angular/core';
 import {FormControl, FormGroup} from '@angular/forms';
 import {UserServiceService} from 'src/services/user-service.service';
 import {Router} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from 'sweetalert2';
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-sign-in',
@@ -11,14 +12,17 @@ import Swal from 'sweetalert2';
   styleUrls: ['./sign-in.component.scss']
 })
 export class SignInComponent implements OnInit {
-  msg = 'Buenos días'
-
+  msg = 'Buenos días';
   form = new FormGroup({
     email: new FormControl(),
     password: new FormControl()
-  })
+  });
 
-  constructor(private _userService: UserServiceService, private _router: Router,) {
+  constructor(
+    private _userService: UserServiceService,
+    private _router: Router,
+    private modalService: NgbModal,
+  ) {
   }
 
   ngOnInit(): void {
@@ -38,31 +42,41 @@ export class SignInComponent implements OnInit {
     }
   }
 
-  login() {
+  login(popContent: any) {
     const values = this.form.getRawValue();
     const body = {
       email: values.email,
       password: values.password
-    }
+    };
     Swal.showLoading();
-    this._userService.login(body).subscribe((res: any) => {
-      if (res.state == 1) {
+    this._userService.login(body).subscribe(
+      (res: any) => {
+        if (res.state == 1) {
+          Swal.close();
+          const userId = res.userId;
+          localStorage.setItem('userId', userId);
+          this.toggleWithGreeting(popContent, 'data', 'data')
+        }
+      },
+      (error: HttpErrorResponse) => {
         Swal.close();
-        const userId = res.userId;
-        localStorage.setItem('userId', userId);
-        this._router.navigate(['/modules'])
+        if (error.error.state == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.error.message,
+            confirmButtonColor: '#ff3600',
+          });
+        }
       }
-    }, (error: HttpErrorResponse) => {
-      Swal.close();
-      if (error.error.state == 0) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error',
-          text: error.error.message,
-          confirmButtonColor: '#ff3600',
-        });
-      }
-    })
+    );
   }
 
+  toggleWithGreeting(popover: any, greeting: string, language: string) {
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      popover.open({greeting, language});
+    }
+  }
 }

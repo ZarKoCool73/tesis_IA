@@ -1,7 +1,7 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
+import {NgModule} from '@angular/core';
+import {BrowserModule} from '@angular/platform-browser';
 
-import { ManagementUserRoutingModule } from './management-user-routing.module';
+import {ManagementUserRoutingModule} from './management-user-routing.module';
 import {PasswordRecoveryComponent} from "./password-recovery/password-recovery.component";
 import {ProfileComponent} from "./profile/profile.component";
 import {SignInComponent} from "./sign-in/sign-in.component";
@@ -14,6 +14,7 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
+import {NgbModalModule, NgbPopover} from "@ng-bootstrap/ng-bootstrap";
 
 @NgModule({
   declarations: [
@@ -29,9 +30,11 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
     HttpClientModule,
     MatButtonModule,
     MatInputModule,
+    NgbModalModule,
     ReactiveFormsModule,
     MatStepperModule,
     MatAutocompleteModule,
+    NgbPopover,
   ],
   exports: [
     PasswordRecoveryComponent,
@@ -42,4 +45,5 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
   providers: [],
   bootstrap: []
 })
-export class ManagementUserModule { }
+export class ManagementUserModule {
+}

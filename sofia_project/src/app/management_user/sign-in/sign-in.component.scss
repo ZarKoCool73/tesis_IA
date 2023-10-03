@@ -47,6 +47,7 @@
   text-align: center;
   //background-color: rgba(0, 0, 0, 0.5); /* Opcional: agregar un fondo semi-transparente */
 }
+
 .text-overlay-bottom {
   position: absolute;
   bottom: 0; /* Coloca el texto en la parte superior */
@@ -128,28 +129,55 @@
 .custom-background {
   background: linear-gradient(180deg, rgb(183 22 13 / 85%) 0%, rgb(115 18 11 / 89%) 50%, rgb(168 49 41) 100%)
 }
+
 @media (max-width: 800px) {
-  .content{
-    justify-content: center!important;
+  .content {
+    justify-content: center !important;
   }
-  .img-content{
+  .img-content {
     width: 100.2% !important;
-    .filter-background{
+
+    .filter-background {
       border-radius: 15px;
-      width: 100.2%!important;
+      width: 100.2% !important;
     }
   }
-  .form-content{
+  .form-content {
     position: absolute;
     border-radius: 15px;
     z-index: 99;
-    height: 350px!important;
-    min-width: 50%!important;
-    width: max-content!important;
+    height: 350px !important;
+    min-width: 50% !important;
+    width: max-content !important;
     bottom: 60px;
-    margin: 0!important;
-    .greetings{
+    margin: 0 !important;
+
+    .greetings {
       display: none;
     }
   }
+}
+
+.custom-popover {
+  display: flex;
+  font-size: 18px;
+  width: 650px;
+  height: 500px;
+  background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para el popover */
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 1; /* Asegúrate de que el popover esté encima de la imagen */
+  position: absolute;
+  top: -360px; /* Centra verticalmente el popover en relación con el contenedor principal */
+  left: -310px; /* Centra horizontalmente el popover en relación con el contenedor principal */
+  transform: translate(-50%, -50%); /* Ajusta el centro del popover en relación con el contenedor principal */
+}
+.custom-popover .popover-header .close {
+  display: none;
+}
+.title-message{
+  font-family: 'Brush Script MT';
+  font-weight: bold;
+  font-size: 50px;
+  align-content: center
 }
