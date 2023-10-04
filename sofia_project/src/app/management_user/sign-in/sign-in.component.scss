@@ -157,24 +157,6 @@
     }
   }
 }
-
-.custom-popover {
-  display: flex;
-  font-size: 18px;
-  width: 650px;
-  height: 500px;
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo semitransparente para el popover */
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  z-index: 1; /* Asegúrate de que el popover esté encima de la imagen */
-  position: absolute;
-  top: -360px; /* Centra verticalmente el popover en relación con el contenedor principal */
-  left: -310px; /* Centra horizontalmente el popover en relación con el contenedor principal */
-  transform: translate(-50%, -50%); /* Ajusta el centro del popover en relación con el contenedor principal */
-}
-.custom-popover .popover-header .close {
-  display: none;
-}
 .title-message{
   font-family: 'Brush Script MT';
   font-weight: bold;

@@ -3,7 +3,7 @@
     class="content border-radius-30 d-flex align-items-center justify-content-start position-absolute z-0 img-background background-container">
     <div class="position-relative h-100 w-75 img-content">
       <div class="contenedor-imagen w-100 h-100 ">
-        <img src="assets/imgs/classroom.jpg" style="height: 100.2%" class=" w-100 filter-background" #target>
+        <img src="assets/imgs/classroom.jpg" style="height: 100.2%" class=" w-100 filter-background">
       </div>
       <!--
             <img src="assets/imgs/classroom.jpg" class="filter-background">
@@ -50,12 +50,7 @@
           </div>
         </div>
         <div class="d-flex justify-content-center">
-          <button type="button" (click)="login(p1)"
-                  [positionTarget]="target"
-                  [ngbPopover]="popContent"
-                  triggers="manual"
-                  placement="bottom-right"
-                  #p1="ngbPopover"
+          <button type="button" (click)="login()"
                   class="btn btn-primary text-uppercase main-background font-Inter-Black">
             Ingresar
           </button>
@@ -68,27 +63,3 @@
     </main>
   </div>
 </div>
-<ng-template #popContent let-greeting="greeting">
-  <div class="custom-popover flex-column">
-    <h2 class="text-center very-big-font-size mt-3 font-Inter-SemiBold" style="font-style: italic;">Seleccione el módulo
-      al que desee ingresar:</h2>
-    <div class="d-flex align-items-center">
-      <img src="assets/imgs/SOFIA.svg" width="500">
-      <div class="d-flex flex-column align-items-start justify-content-start"
-           style="margin-left: -200px; margin-top: -100px;">
-        <div [routerLink]="['/modules/comprehension', 'question']"
-             class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-3">
-          <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de comprensión</span>
-        </div>
-        <div [routerLink]="['/modules/expression', 'abc']"
-             class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-3">
-          <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de expresión</span>
-        </div>
-        <div [routerLink]="['/modules/comunication', 'adverb']"
-             class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-3">
-          <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de comunicación</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</ng-template>

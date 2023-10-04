@@ -20,7 +20,6 @@ import {NgbModalModule, NgbPopover} from "@ng-bootstrap/ng-bootstrap";
   declarations: [
     PasswordRecoveryComponent,
     ProfileComponent,
-    SignInComponent,
     SignUpComponent
   ],
   imports: [
@@ -39,7 +38,6 @@ import {NgbModalModule, NgbPopover} from "@ng-bootstrap/ng-bootstrap";
   exports: [
     PasswordRecoveryComponent,
     ProfileComponent,
-    SignInComponent,
     SignUpComponent
   ],
   providers: [],
