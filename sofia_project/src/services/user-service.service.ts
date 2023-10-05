@@ -38,6 +38,19 @@ export class UserServiceService {
   }) {
     return this._http.post(`${this.baseUrl}login`, body)
   }
+
+  /*verifyAnswers(body: {
+    firstQuestion: string
+    secondQuestion: string
+    thirdQuestion: string
+  }) {
+    return this._http.get<any>(`${this.baseUrl}/verificar-respuestas`, body);
+  }*/
+
+  searchEmail(email: string) {
+    return this._http.post<any>(`${this.baseUrl}/users/${email}`, {email});
+  }
+
   changePassword(id: string, body: {
     password: string
   }) {

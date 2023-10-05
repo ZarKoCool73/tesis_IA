@@ -1,12 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {UtilsService} from "../../../services/utils.service";
+import {UserServiceService} from "../../../services/user-service.service";
+import {HttpErrorResponse} from "@angular/common/http";
+import Swal from "sweetalert2";
+import {MatStepper} from '@angular/material/stepper';
 
 @Component({
   selector: 'app-password-recovery',
   templateUrl: './password-recovery.component.html',
-  styleUrls: ['./password-recovery.component.scss']
+  styleUrls: ['./password-recovery.component.scss'],
+  viewProviders: [{provide: MatStepper}]
 })
 export class PasswordRecoveryComponent implements OnInit {
 
@@ -15,6 +20,7 @@ export class PasswordRecoveryComponent implements OnInit {
     password: new FormControl('', Validators.required),
     repeated_password: new FormControl('', Validators.required),
   }, this._utils.repeatedPassword)
+
   thirdFormGroup = new FormGroup({
     fquestion: new FormControl('', Validators.required),
     squestion: new FormControl('', Validators.required),
@@ -25,8 +31,12 @@ export class PasswordRecoveryComponent implements OnInit {
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]> | undefined;
 
-  constructor(private _utils: UtilsService) {
+  constructor(
+    private _utils: UtilsService,
+    private _userService: UserServiceService,
+    private _stepper: MatStepper) {
   }
+
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -40,4 +50,30 @@ export class PasswordRecoveryComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  obtenerData(event: any) {
+    const values = this.secondFormGroup.getRawValue()
+    const body = values.email
+    console.log('body', body)
+    if (body != null) {
+      this._userService.searchEmail(body).subscribe((res: any) => {
+        if (res.state == 1) {
+          event.next()
+        }
+      }, (error: HttpErrorResponse) => {
+        Swal.close();
+        if (error.error.state == 0) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.error.message,
+            confirmButtonColor: '#ff3600',
+          });
+        }
+      })
+    }
+  }
+
+  dataCompleta() {
+
+  }
 }
