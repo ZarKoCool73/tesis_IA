@@ -50,3 +50,8 @@ nav{
   color: $primary-color;
   font-weight: 500;
 }
+@media (max-width: 870px) {
+  .sophie-app{
+    display: none;
+  }
+}

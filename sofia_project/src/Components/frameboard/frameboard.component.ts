@@ -132,4 +132,11 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       }
     })
   }
+  get getSystemName() {
+    if(window.innerWidth > 1250) {
+      return 'Sistema de Orientación para el Fomento e Integración del Aprendizaje en Señas (SOFIA)'
+    } else {
+      return  'Sistema de Orientación... (SOFIA)'
+    }
+  }
 }
