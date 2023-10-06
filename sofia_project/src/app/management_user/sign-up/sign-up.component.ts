@@ -31,6 +31,7 @@ export class SignUpComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]> | undefined;
+  esCorreoValido = false;
 
   constructor(private _utils: UtilsService,
               private _router: Router,
@@ -38,6 +39,7 @@ export class SignUpComponent implements OnInit {
   }
 
   bandera = false
+  banderaEmail = false
   message = '';
 
   ngOnInit() {
@@ -107,5 +109,22 @@ export class SignUpComponent implements OnInit {
     const resultado = this.validarContrasenaFuerte(this.secondFormGroup.value.password);
     this.bandera = resultado.valido;
     this.message = resultado.mensaje; // Establece el mensaje de validación en la variable message.
+  }
+
+  verifyEmail(event: any): boolean {
+    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const data = event
+    let valido = true
+    if (regexCorreo.test(data)) {
+      valido = true
+    } else {
+      valido = false
+    }
+    return valido
+  }
+
+  validateEmail() {
+    const resultado = this.verifyEmail(this.secondFormGroup.value.email);
+    this.banderaEmail = resultado;
   }
 }

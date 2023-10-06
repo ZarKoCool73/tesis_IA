@@ -58,8 +58,12 @@
             <h1 class="main-color-text ml-4 mb-2 page-title">Crear cuenta</h1>
             <mat-form-field>
               <mat-label>Correo</mat-label>
-              <input matInput formControlName="email" required>
+              <input matInput formControlName="email" required (input)="validateEmail()">
             </mat-form-field>
+            <mat-error *ngIf="!banderaEmail && !secondFormGroup.get('email')?.pristine"
+                       style="margin-top: -20px;width: 180px;">
+              <span class="font-Inter-ExtraBold small-font-size">Correo no válido</span>
+            </mat-error>
             <mat-form-field>
               <mat-label>Contraseña</mat-label>
               <input type="password" matInput formControlName="password"
