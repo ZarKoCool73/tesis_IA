@@ -32,10 +32,7 @@ export class UserServiceService {
     return this._http.post(`${this.baseUrl}users`, body)
   }
 
-  login(body: {
-    email: string
-    password: string
-  }) {
+  login(body: { password: string | null; email: string | null }) {
     return this._http.post(`${this.baseUrl}login`, body)
   }
 

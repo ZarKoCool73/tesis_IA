@@ -38,11 +38,19 @@
         </h2>
         <div class="form-group">
           <label for="user" class="font-Inter-SemiBold text-black">Usuario</label>
-          <input type="text" formControlName="email" class="form-control" id="user" autocomplete="off">
+          <input type="text" formControlName="email" class="form-control" id="user" autocomplete="off"
+                 (input)="validateEmail()">
+          <mat-error *ngIf="!stateEmail && !form.get('email')?.pristine"
+                     style="margin-top: -20px;width: 180px;">
+            <span class="font-Inter-ExtraBold small-font-size">Correo no válido</span>
+          </mat-error>
         </div>
         <div class="form-group">
           <label for="password" class="font-Inter-SemiBold text-black">Contraseña</label>
           <input type="password" formControlName="password" class="form-control" id="password" autocomplete="off">
+          <div *ngIf="statePassword" class="main-color-text font-Inter-ExtraBold">
+            Ingrese contraseña
+          </div>
         </div>
         <div class="d-flex justify-content-end custom-size-recover-password mb-3 font-weight-bold">
           <div class="ml-auto">

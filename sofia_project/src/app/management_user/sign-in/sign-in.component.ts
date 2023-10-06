@@ -1,5 +1,5 @@
 import {Component, OnInit, ViewChild, TemplateRef, Inject} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
+import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserServiceService} from 'src/services/user-service.service';
 import {Router, RouterLink} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
@@ -9,6 +9,7 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angula
 import {NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalServiceReference} from "../../../services/modal-reference.service";
+import {MatFormFieldModule} from "@angular/material/form-field";
 
 @Component({
   selector: 'app-sign-in',
@@ -16,14 +17,20 @@ import {ModalServiceReference} from "../../../services/modal-reference.service";
   styleUrls: ['./sign-in.component.scss'],
   providers: [NgbModalConfig, NgbModal],
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, RouterLink, ReactiveFormsModule],
+  imports: [MatButtonModule, MatDialogModule, RouterLink, ReactiveFormsModule, NgIf, MatFormFieldModule],
 })
 export class SignInComponent implements OnInit {
+
+  /*BANDERAS*/
+  stateEmail = false
+  statePassword = false
+
   referenceModal: MatDialogRef<any> | any
   msg = 'Buenos días';
+
   form = new FormGroup({
-    email: new FormControl(),
-    password: new FormControl()
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', Validators.required)
   });
 
   constructor(
@@ -54,33 +61,35 @@ export class SignInComponent implements OnInit {
   }
 
   login() {
-    const values = this.form.getRawValue();
-    const body = {
-      email: values.email,
-      password: values.password
-    };
-    Swal.showLoading();
-    this._userService.login(body).subscribe(
-      (res: any) => {
-        if (res.state == 1) {
+    if (!this.form.invalid) {
+      const values = this.form.getRawValue();
+      const body = {
+        email: values.email,
+        password: values.password
+      };
+      Swal.showLoading();
+      this._userService.login(body).subscribe(
+        (res: any) => {
+          if (res.state == 1) {
+            Swal.close();
+            const userId = res.userId;
+            localStorage.setItem('userId', userId);
+            this.open()
+          }
+        },
+        (error: HttpErrorResponse) => {
           Swal.close();
-          const userId = res.userId;
-          localStorage.setItem('userId', userId);
-          this.open()
+          if (error.error.state == 0) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.error.message,
+              confirmButtonColor: '#ff3600',
+            });
+          }
         }
-      },
-      (error: HttpErrorResponse) => {
-        Swal.close();
-        if (error.error.state == 0) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: error.error.message,
-            confirmButtonColor: '#ff3600',
-          });
-        }
-      }
-    );
+      );
+    }
   }
 
   open() {
@@ -88,10 +97,27 @@ export class SignInComponent implements OnInit {
       data: {
         animal: 'panda',
       },
-      height:'550px',
-      width:'650px',
+      height: '550px',
+      width: '650px',
     })
     this.modalReference.setDialogRef(this.referenceModal);
+  }
+
+  verifyEmail(event: any): boolean {
+    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const data = event
+    let valido = true
+    if (regexCorreo.test(data)) {
+      valido = true
+    } else {
+      valido = false
+    }
+    return valido
+  }
+
+  validateEmail() {
+    const resultado = this.verifyEmail(this.form.value.email);
+    this.stateEmail = resultado;
   }
 }
 
