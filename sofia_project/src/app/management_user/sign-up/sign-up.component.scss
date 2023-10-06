@@ -47,6 +47,7 @@
   text-align: center;
   //background-color: rgba(0, 0, 0, 0.5); /* Opcional: agregar un fondo semi-transparente */
 }
+
 .text-overlay-bottom {
   position: absolute;
   bottom: 0; /* Coloca el texto en la parte superior */
@@ -128,31 +129,42 @@
 .custom-background {
   background: linear-gradient(180deg, rgb(183 22 13 / 85%) 0%, rgb(115 18 11 / 89%) 50%, rgb(168 49 41) 100%)
 }
+
 @media (max-width: 800px) {
-  .content{
-    justify-content: center!important;
+  .content {
+    justify-content: center !important;
   }
-  .img-content{
+  .img-content {
     width: 100.2% !important;
-    .filter-background{
+
+    .filter-background {
       border-radius: 15px;
-      width: 100.2%!important;
+      width: 100.2% !important;
     }
   }
-  .form-content{
+  .form-content {
     position: absolute;
     border-radius: 15px;
     z-index: 99;
-    height: 385px!important;
-    min-width: 50%!important;
-    width: max-content!important;
+    height: 385px !important;
+    min-width: 50% !important;
+    width: max-content !important;
     bottom: 60px;
-    margin: 0!important;
-    .greetings{
+    margin: 0 !important;
+
+    .greetings {
       display: none;
     }
   }
 }
-.btn-primary{
+
+.btn-primary {
   background-color: $primary-color;
+}
+
+.page-title {
+  font-size: 24px;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
 }

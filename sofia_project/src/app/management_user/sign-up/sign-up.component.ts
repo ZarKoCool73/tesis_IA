@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {map, Observable, startWith} from "rxjs";
 import {UtilsService} from "../../../services/utils.service";
 import {UserServiceService} from "../../../services/user-service.service";
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-sign-up',
@@ -12,7 +12,7 @@ import { Router } from '@angular/router';
 })
 export class SignUpComponent implements OnInit {
   firstFormGroup = new FormGroup({
-    code: new FormControl('', Validators.required),
+    code: new FormControl('', [Validators.required]),
     names: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
@@ -36,6 +36,9 @@ export class SignUpComponent implements OnInit {
               private _router: Router,
               private _userService: UserServiceService) {
   }
+
+  bandera = false
+
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -70,5 +73,31 @@ export class SignUpComponent implements OnInit {
     }, error => {
 
     })
+  }
+
+  // @ts-ignore
+  onInputNumbers(event: any): void {
+    event.target.value = event.target.value.replace(/\D/g, ''); // Elimina caracteres no numéricos
+  }
+
+  // @ts-ignore
+  onInputLetters(event: any): void {
+    event.target.value = event.target.value.replace(/[^a-zA-Z]/g, ''); // Elimina caracteres no alfabéticos
+  }
+
+  validarContrasenaFuerte(contrasena: any): boolean {
+    console.log('con', contrasena);
+
+    if (contrasena.length < 8) {
+      console.log('abc', contrasena);
+      this.bandera = false; // Contraseña débil
+    } else if (!/[A-Z]/.test(contrasena) || !/[a-z]/.test(contrasena) || !/\d/.test(contrasena)) {
+      console.log('abc1', contrasena);
+      this.bandera = false; // Contraseña débil
+    } else {
+      console.log('ab', contrasena);
+      this.bandera = true; // Contraseña fuerte
+    }
+    return this.bandera;
   }
 }

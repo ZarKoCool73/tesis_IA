@@ -16,7 +16,7 @@ import {MatStepper} from '@angular/material/stepper';
 export class PasswordRecoveryComponent implements OnInit {
 
   secondFormGroup = new FormGroup({
-    studentCode: new FormControl('', Validators.required),
+    email: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     repeated_password: new FormControl('', Validators.required),
   }, this._utils.repeatedPassword)
@@ -30,6 +30,7 @@ export class PasswordRecoveryComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]> | undefined;
+  bandera = false;
 
   constructor(
     private _utils: UtilsService,
@@ -52,7 +53,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
   obtenerData(event: any) {
     const values = this.secondFormGroup.getRawValue()
-    const body = values.studentCode
+    const body = values.email
     console.log('body', body)
     if (body != null) {
       this._userService.searchEmail(body).subscribe((res: any) => {
@@ -76,12 +77,12 @@ export class PasswordRecoveryComponent implements OnInit {
   dataCompleta() {
     const values = this.secondFormGroup.getRawValue()
     const values1 = this.thirdFormGroup.getRawValue()
-    const studentCode = values.studentCode;
+    const email = values.email;
     const firstQuestion = values1.fquestion;
     const secondQuestion = values1.squestion;
     const thirdQuestion = values1.tquestion;
 
-    this._userService.verifyAnswers(studentCode, firstQuestion, secondQuestion, thirdQuestion)
+    this._userService.verifyAnswers(email, firstQuestion, secondQuestion, thirdQuestion)
       .subscribe(
         (res: any) => {
           if (res.state === 1) {
@@ -93,5 +94,21 @@ export class PasswordRecoveryComponent implements OnInit {
           // Maneja errores aquí
         }
       );
+  }
+
+  validarContrasenaFuerte(contrasena: any): boolean {
+    console.log('con', contrasena);
+
+    if (contrasena.length < 8) {
+      console.log('abc', contrasena);
+      this.bandera = false; // Contraseña débil
+    } else if (!/[A-Z]/.test(contrasena) || !/[a-z]/.test(contrasena) || !/\d/.test(contrasena)) {
+      console.log('abc1', contrasena);
+      this.bandera = false; // Contraseña débil
+    } else {
+      console.log('ab', contrasena);
+      this.bandera = true; // Contraseña fuerte
+    }
+    return this.bandera;
   }
 }
