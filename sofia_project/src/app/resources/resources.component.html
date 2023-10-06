@@ -1,20 +1,17 @@
 <div class="light-gray-background p-4 h-auto">
-    <div class="card card-body border-radius-15 p-4 h-auto">
-        <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
-            Recursos adicionales: <span class="link ml-2">{{link}}</span>
-        </header>
-        <main class="d-flex flex-wrap justify-content-between">
-            <div *ngFor="let data of category"
-                 class="book-content-1 light-gray-background align-items-center d-flex flex-column border-radius-15 mb-5 mx-4">
-                <span class="big-font-size font-Inter-Semibold flex-wrap text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</span>
-                <!--<img src="assets/imgs/resources/pdf.png" width="170">-->
-                <img [src]=data.path width="170" *ngIf="data.icon=='pdf'">
-                <img [src]=data.path width="170" *ngIf="data.icon=='internet'">
-                <a [href]="data.url" target="_blank"
-                   class="big-font-size font-Inter-Semibold flex-wrap fw-900 pt-2 px-2 mb-2">
-                    {{ data.url }}
-                </a>
-            </div>
-        </main>
-    </div>
+  <div class="card card-body border-radius-15 p-4 h-auto">
+    <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
+      Recursos adicionales: <span class="link ml-2">{{link}}</span>
+    </header>
+    <main class="d-flex flex-wrap justify-content-between">
+      <div *ngFor="let data of category"
+           class="book-content-1 light-gray-background align-items-center d-flex flex-column border-radius-15 mb-5 mx-4">
+        <a class="big-font-size font-Inter-Semibold flex-wrap text-break fw-900 mt-1 pt-2 px-2"
+           href="{{ data.url }}">{{ data.name }}</a>
+        <!--<img src="assets/imgs/resources/pdf.png" width="170">-->
+        <img [src]=data.path width="170" *ngIf="data.icon=='pdf'">
+        <img [src]=data.path width="170" *ngIf="data.icon=='internet'">
+      </div>
+    </main>
+  </div>
 </div>
