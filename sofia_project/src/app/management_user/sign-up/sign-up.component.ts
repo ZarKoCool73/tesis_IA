@@ -38,6 +38,7 @@ export class SignUpComponent implements OnInit {
   }
 
   bandera = false
+  message = '';
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -85,19 +86,26 @@ export class SignUpComponent implements OnInit {
     event.target.value = event.target.value.replace(/[^a-zA-Z]/g, ''); // Elimina caracteres no alfabéticos
   }
 
-  validarContrasenaFuerte(contrasena: any): boolean {
+  validarContrasenaFuerte(contrasena: any): { valido: boolean, mensaje: string } {
     console.log('con', contrasena);
-
+    let mensaje = '';
+    let valido = true;
     if (contrasena.length < 8) {
-      console.log('abc', contrasena);
-      this.bandera = false; // Contraseña débil
+      mensaje = 'La contraseña debe tener al menos 8 caracteres de longitud.';
+      valido = false;
     } else if (!/[A-Z]/.test(contrasena) || !/[a-z]/.test(contrasena) || !/\d/.test(contrasena)) {
-      console.log('abc1', contrasena);
-      this.bandera = false; // Contraseña débil
+      mensaje = 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un dígito.';
+      valido = false;
     } else {
       console.log('ab', contrasena);
       this.bandera = true; // Contraseña fuerte
     }
-    return this.bandera;
+    return {valido, mensaje};
+  }
+
+  validatePassword() {
+    const resultado = this.validarContrasenaFuerte(this.secondFormGroup.value.password);
+    this.bandera = resultado.valido;
+    this.message = resultado.mensaje; // Establece el mensaje de validación en la variable message.
   }
 }
