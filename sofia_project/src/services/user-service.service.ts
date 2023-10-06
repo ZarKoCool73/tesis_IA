@@ -39,21 +39,24 @@ export class UserServiceService {
     return this._http.post(`${this.baseUrl}login`, body)
   }
 
-  /*verifyAnswers(body: {
-    firstQuestion: string
-    secondQuestion: string
-    thirdQuestion: string
-  }) {
-    return this._http.get<any>(`${this.baseUrl}/verificar-respuestas`, body);
-  }*/
+  verifyAnswers(email: string | null, firstQuestion: string | null, secondQuestion: string | null, thirdQuestion: string | null) {
+    const body = {
+      email: email,
+      firstQuestion: firstQuestion,
+      secondQuestion: secondQuestion,
+      thirdQuestion: thirdQuestion
+    };
 
-  searchEmail(email: string) {
-    return this._http.post<any>(`${this.baseUrl}/users/${email}`, {email});
+    return this._http.post(`${this.baseUrl}/users/check-security-answer`, body);
   }
 
-  changePassword(id: string, body: {
+  searchEmail(email: string) {
+    return this._http.post<any>(`${this.baseUrl}users/${email}`, {email});
+  }
+
+  changePassword(email: string, body: {
     password: string
   }) {
-    return this._http.put(`${this.baseUrl}users/${id}`, body)
+    return this._http.put(`${this.baseUrl}users/${email}`, body)
   }
 }

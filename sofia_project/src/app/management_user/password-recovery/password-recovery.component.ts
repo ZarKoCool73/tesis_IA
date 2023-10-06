@@ -16,7 +16,7 @@ import {MatStepper} from '@angular/material/stepper';
 export class PasswordRecoveryComponent implements OnInit {
 
   secondFormGroup = new FormGroup({
-    email: new FormControl('', Validators.required),
+    studentCode: new FormControl('', Validators.required),
     password: new FormControl('', Validators.required),
     repeated_password: new FormControl('', Validators.required),
   }, this._utils.repeatedPassword)
@@ -52,7 +52,7 @@ export class PasswordRecoveryComponent implements OnInit {
 
   obtenerData(event: any) {
     const values = this.secondFormGroup.getRawValue()
-    const body = values.email
+    const body = values.studentCode
     console.log('body', body)
     if (body != null) {
       this._userService.searchEmail(body).subscribe((res: any) => {
@@ -74,6 +74,24 @@ export class PasswordRecoveryComponent implements OnInit {
   }
 
   dataCompleta() {
+    const values = this.secondFormGroup.getRawValue()
+    const values1 = this.thirdFormGroup.getRawValue()
+    const studentCode = values.studentCode;
+    const firstQuestion = values1.fquestion;
+    const secondQuestion = values1.squestion;
+    const thirdQuestion = values1.tquestion;
 
+    this._userService.verifyAnswers(studentCode, firstQuestion, secondQuestion, thirdQuestion)
+      .subscribe(
+        (res: any) => {
+          if (res.state === 1) {
+            // La respuesta de seguridad es correcta, haz algo aquí
+          } else {
+            // La respuesta de seguridad es incorrecta, haz algo aquí
+          }
+        }, (error: HttpErrorResponse) => {
+          // Maneja errores aquí
+        }
+      );
   }
 }
