@@ -4,6 +4,8 @@ import {map, Observable, startWith} from "rxjs";
 import {UtilsService} from "../../../services/utils.service";
 import {UserServiceService} from "../../../services/user-service.service";
 import {Router} from '@angular/router';
+import Swal from "sweetalert2";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-sign-up',
@@ -40,6 +42,7 @@ export class SignUpComponent implements OnInit {
 
   bandera = false
   banderaEmail = false
+  banderaCode = false
   message = '';
 
   ngOnInit() {
@@ -56,6 +59,7 @@ export class SignUpComponent implements OnInit {
   }
 
   createAccount() {
+    debugger
     const firstValues = this.firstFormGroup.getRawValue()
     const secondValues = this.secondFormGroup.getRawValue()
     const thirdValues = this.thirdFormGroup.getRawValue()
@@ -70,22 +74,58 @@ export class SignUpComponent implements OnInit {
       thirdQuestion: thirdValues.tquestion,
       password: secondValues.password
     }
-
-    this._userService.saveUser(body).subscribe((res: any) => {
-      this._router.navigate(['/account'])
-    }, error => {
-
-    })
+    Swal.showLoading();
+    if (this.banderaCode && this.bandera && this.banderaEmail) {
+      this._userService.saveUser(body).subscribe((res: any) => {
+        Swal.close();
+        Swal.fire({
+          icon: 'success',
+          title: 'Éxito',
+          text: 'Su cuenta sea creado exitosamente',
+          confirmButtonColor: '#11e38a'
+        }).then((result) => {
+          if (result.isConfirmed) {
+            this._router.navigate(['/account']);
+          }
+        });
+      }, (error: HttpErrorResponse) => {
+        Swal.close();
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.error.message,
+          confirmButtonColor: '#ff3600',
+        });
+      })
+    } else {
+      Swal.close();
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Completar de manera correcta los datos',
+        confirmButtonColor: '#ff3600',
+      });
+    }
   }
 
   // @ts-ignore
   onInputNumbers(event: any): void {
-    event.target.value = event.target.value.replace(/\D/g, ''); // Elimina caracteres no numéricos
+    const inputValue = event.target.value;
+    const numericValue = inputValue.replace(/\D/g, ''); // Elimina caracteres no numéricos
+    if (inputValue !== numericValue) {
+      event.preventDefault(); // Evita que se ingresen caracteres no numéricos
+      event.target.value = numericValue; // Actualiza el valor del campo solo si ha habido cambios
+    }
+    if (numericValue.length < 8) {
+      this.banderaCode = false
+    } else {
+      this.banderaCode = true
+    }
   }
 
   // @ts-ignore
   onInputLetters(event: any): void {
-    event.target.value = event.target.value.replace(/[^a-zA-Z]/g, ''); // Elimina caracteres no alfabéticos
+    event.target.value = event.target.value.replace(/[^a-zA-Z\s]/g, ''); // Elimina caracteres no alfabéticos ni espacios
   }
 
   validarContrasenaFuerte(contrasena: any): { valido: boolean, mensaje: string } {
