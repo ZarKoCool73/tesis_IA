@@ -33,6 +33,7 @@ export class PasswordRecoveryComponent implements OnInit {
   filteredOptions: Observable<string[]> | undefined;
   bandera = false;
   message = ''
+  stateEmail = false
 
   constructor(
     private _utils: UtilsService,
@@ -161,5 +162,22 @@ export class PasswordRecoveryComponent implements OnInit {
     const resultado = this.validarContrasenaFuerte(this.secondFormGroup.value.password);
     this.bandera = resultado.valido;
     this.message = resultado.mensaje; // Establece el mensaje de validación en la variable message.
+  }
+
+  verifyEmail(event: any): boolean {
+    const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const data = event
+    let valido = true
+    if (regexCorreo.test(data)) {
+      valido = true
+    } else {
+      valido = false
+    }
+    return valido
+  }
+
+  validateEmail() {
+    const resultado = this.verifyEmail(this.secondFormGroup.value.email);
+    this.stateEmail = resultado;
   }
 }
