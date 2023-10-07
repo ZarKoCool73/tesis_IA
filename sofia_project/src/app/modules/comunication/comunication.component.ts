@@ -58,6 +58,6 @@ export class ComunicationComponent implements OnInit {
   }
 
   activeProgress(): void {
-    this.isActive = !this.isActive; // Cambia el estado de isActive al hacer clic en el ícono
+    this.isActive = !this.isActive;
   }
 }
