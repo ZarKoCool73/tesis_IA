@@ -1,15 +1,16 @@
 <div class="light-gray-background p-4 h-auto">
-    <div class="card card-body border-radius-15 p-4 h-auto">
-        <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
-            Módulo de expresión: <span class="link ml-2">{{link}}</span>
-        </header>
-        <main class="d-flex flex-wrap justify-content-between">
-            <div *ngFor="let data of categoryExpression" [style]="data.icon=='gif' ? 'width: 400px; height:280px' : ''"
-                 class="book-content light-gray-background px-4 align-items-center d-flex flex-column border-radius-10 mb-3 mx-4 ubication">
-                <span class="big-font-size font-Inter-Semibold flex-wrap mb-3 text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</span>
-                <img [src]=data.path width="170" *ngIf="data.icon=='png'">
-                <img [src]=data.path width="370" *ngIf="data.icon=='gif'">
-            </div>
-        </main>
-    </div>
+  <div class="card card-body border-radius-15 p-4 h-auto">
+    <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
+      Módulo de expresión: <span class="link ml-2">{{link}}</span>
+    </header>
+    <main class="d-flex flex-wrap justify-content-around">
+      <div *ngFor="let data of categoryExpression" [style]="data.icon=='gif' ? 'width: 340px; height:290px' : ''"
+           class="book-content light-gray-background px-4 align-items-center d-flex flex-column border-radius-10 mb-3 mx-4 ubication">
+        <span
+          class="big-font-size font-Inter-Semibold flex-wrap mb-3 text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</span>
+        <img [src]=data.path width="170" *ngIf="data.icon=='png'">
+        <img [src]=data.path width="260" *ngIf="data.icon=='gif'">
+      </div>
+    </main>
+  </div>
 </div>

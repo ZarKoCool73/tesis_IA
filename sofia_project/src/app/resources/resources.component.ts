@@ -29,7 +29,7 @@ export class ResourcesComponent implements OnInit {
           this.link = 'Libros';
           break;
         case  'web':
-          this.link = 'Páginas web';
+          this.link = 'Páginas web y Aplicativos mobile';
           this.loadDetail('web')
           break;
       }
