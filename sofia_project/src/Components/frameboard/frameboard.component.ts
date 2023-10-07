@@ -81,6 +81,8 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   obtenerVideo(): void {
     this.learningServices.abrirVentanaEmergente();
   }
+//cerrar el mmwbo ventana
+
 
   ngAfterViewInit(): void {
     const header = document.getElementById('header')
