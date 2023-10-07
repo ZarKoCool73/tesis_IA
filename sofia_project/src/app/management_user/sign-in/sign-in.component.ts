@@ -37,7 +37,6 @@ export class SignInComponent implements OnInit {
     private _userService: UserServiceService,
     private _router: Router,
     private modalService: NgbModal,
-    config: NgbModalConfig,
     public dialog: MatDialog,
     private modalReference: ModalServiceReference
   ) {
@@ -89,6 +88,13 @@ export class SignInComponent implements OnInit {
           }
         }
       );
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Completar de manera correcta los datos',
+        confirmButtonColor: '#ff3600',
+      });
     }
   }
 
