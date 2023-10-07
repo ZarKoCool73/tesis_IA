@@ -6,6 +6,12 @@
     <main class="d-flex flex-wrap justify-content-between">
       <div *ngFor="let data of categoryComunication"
            class="book-content light-gray-background align-items-center d-flex flex-column border-radius-15 mb-3 mx-4">
+        <div class="align-items-end mt-3" style="margin-left: 120px;" (click)="activeProgress()" *ngIf="!isActive">
+          <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
+        </div>
+        <div class="align-items-end mt-3" style="margin-left: 120px;" (click)="activeProgress()" *ngIf="isActive">
+          <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
+        </div>
         <span
           class="big-font-size font-Inter-Semibold flex-wrap text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</span>
         <img src="assets/imgs/resources/internet.png" width="170">

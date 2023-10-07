@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {CommonServices} from "../app/CommonServices";
 
@@ -16,5 +16,18 @@ export class ResourceServiceService {
   getCategory(category: string) {
     const headers = {params: {}}
     return this._http.get(`${this.baseUrl}resources/${category}`, headers)
+  }
+
+  getListComprehension() {
+    const headers = {params: {}}
+    return this._http.get(`${this.baseUrl}resources-comprehension`, headers)
+  }
+  getListExpression() {
+    const headers = {params: {}}
+    return this._http.get(`${this.baseUrl}resources-expression`, headers)
+  }
+  getListComunication() {
+    const headers = {params: {}}
+    return this._http.get(`${this.baseUrl}resources-comunication`, headers)
   }
 }

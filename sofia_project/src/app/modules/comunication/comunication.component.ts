@@ -20,6 +20,9 @@ export class ComunicationComponent implements OnInit {
 
   }
 
+  text: string = 'fa-regular fa-circle-check fa-xl gray-icon';
+  isActive = false
+
   ngOnInit(): void {
     this._activatedRoute.params.subscribe((params: any) => {
       switch (params.type) {
@@ -52,5 +55,9 @@ export class ComunicationComponent implements OnInit {
         });
       }
     })
+  }
+
+  activeProgress(): void {
+    this.isActive = !this.isActive; // Cambia el estado de isActive al hacer clic en el ícono
   }
 }
