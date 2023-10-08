@@ -70,3 +70,27 @@ main{
 .secondary-title{
   border-bottom: 2px solid $primary-color;
 }
+.spiral-progress {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+
+.spiral-path {
+  fill: none;
+  stroke: #007bff;
+  stroke-width: 5;
+  stroke-dasharray: 0, 1000;
+  stroke-dashoffset: 1000;
+  animation: spiral-progress 5s linear forwards;
+}
+
+.progress-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  font-weight: bold;
+}
+
