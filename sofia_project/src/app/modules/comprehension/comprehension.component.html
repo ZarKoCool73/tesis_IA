@@ -4,11 +4,17 @@
       Módulo de comprensión: <span class="link ml-2">{{link}}</span>
     </header>
     <main class="d-flex flex-wrap justify-content-between">
-      <div *ngFor="let data of categoryComprehension"
-           [style]="data.icon=='gif' ? 'width: 550px; height:320px' : 'width: 360px; height:300px'"
-           class="book-content light-gray-background px-4 align-items-center d-flex flex-column border-radius-10 mb-3 mx-4 ubication">
-        <span
-          class="big-font-size font-Inter-Semibold flex-wrap mb-3 text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</span>
+      <div *ngFor="let data of categoryComprehension; let i = index"
+           [style]="data.icon=='gif' ? 'width: 550px; height:320px' : 'width: 310px; height:320px'"
+           class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4">
+        <div class="big-font-size font-Inter-Semibold text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</div>
+        <div class="align-items-start" style="margin-top: 12px;" (click)="activeProgress(data)"
+             *ngIf="data.state=='0'">
+          <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
+        </div>
+        <div class="align-items-start " style="margin-top: 12px;" *ngIf="data.state=='1'">
+          <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
+        </div>
         <img [src]=data.path width="260" *ngIf="data.icon=='png'">
         <img [src]=data.path width="450" *ngIf="data.icon=='gif'">
       </div>

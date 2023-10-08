@@ -68,4 +68,42 @@ export class ComprehensionComponent implements OnInit {
       }
     })
   }
+
+  activeProgress(data: any): void {
+    const id = data._id
+    const state = "1"
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: '¿Quieres actualizar el estado?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, actualizar'
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        this._servicesResource.refreshState(id, state).subscribe(
+          response => {
+            console.log('Respuesta del servidor:', response);
+            this.loadDetail(data.category)
+            return Swal.fire({
+              icon: 'success',
+              title: 'Éxito',
+              text: 'Estado de la imagen actualizado exitosamente',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Ok'
+            });
+          }, (error: HttpErrorResponse) => {
+            console.error('Error en la solicitud:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.error.message,
+              confirmButtonColor: '#ff3600',
+            });
+          }
+        );
+      }
+    })
+  }
 }

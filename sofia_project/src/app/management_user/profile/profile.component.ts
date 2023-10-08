@@ -20,6 +20,17 @@ export class ProfileComponent implements OnInit {
 
   }
 
+  /*COMUNICATION*/
+  dataComunicationEnd: any
+  dataComunicationInit: any
+
+  /*COMPREHENSION*/
+  dataComprehensionEnd: any
+  dataComprehensionInit: any
+
+  /*EXPRESSION*/
+  dataExpressionEnd: any
+  dataExpressionInit: any
 
   ngOnInit(): void {
     const userId = localStorage.getItem('userId');
@@ -51,6 +62,9 @@ export class ProfileComponent implements OnInit {
     this._resourceService.getListComprehension().subscribe((res: any) => {
       if (res.state == 1) {
         console.log('loadDetailComprehension', res)
+        this.dataComprehensionEnd = res.resources.length
+        const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
+        this.dataComprehensionInit = filteredResources.length
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -69,6 +83,9 @@ export class ProfileComponent implements OnInit {
     this._resourceService.getListExpression().subscribe((res: any) => {
       if (res.state == 1) {
         console.log('loadDetailExpression', res)
+        this.dataExpressionEnd = res.resources.length
+        const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
+        this.dataExpressionInit = filteredResources.length
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -86,7 +103,9 @@ export class ProfileComponent implements OnInit {
   loadDetailComunication() {
     this._resourceService.getListComunication().subscribe((res: any) => {
       if (res.state == 1) {
-        console.log('loadDetailComunication', res)
+        this.dataComunicationEnd = res.resources.length
+        const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
+        this.dataComunicationInit = filteredResources.length
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -100,4 +119,5 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
+
 }
