@@ -15,12 +15,13 @@ import {MatButtonModule} from "@angular/material/button";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {NgbModalModule, NgbPopover} from "@ng-bootstrap/ng-bootstrap";
+import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 
 @NgModule({
   declarations: [
     PasswordRecoveryComponent,
     ProfileComponent,
-    SignUpComponent
+    SignUpComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +35,7 @@ import {NgbModalModule, NgbPopover} from "@ng-bootstrap/ng-bootstrap";
     MatStepperModule,
     MatAutocompleteModule,
     NgbPopover,
+    MatProgressSpinnerModule,
   ],
   exports: [
     PasswordRecoveryComponent,

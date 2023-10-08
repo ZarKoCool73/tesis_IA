@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ElementRef, Input, OnInit} from '@angular/core';
 import {UserServiceService} from "../../../services/user-service.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
@@ -15,10 +15,16 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _userService: UserServiceService,
+    private el: ElementRef,
     private _resourceService: ResourceServiceService) {
     this.userProfile = new User('', '', '', '', '', '', '', '', '');
 
   }
+
+
+  color = 'primary';
+  mode = 'determinate';
+  value = 50;
 
   /*COMUNICATION*/
   dataComunicationEnd: any
@@ -119,5 +125,4 @@ export class ProfileComponent implements OnInit {
       }
     })
   }
-
 }

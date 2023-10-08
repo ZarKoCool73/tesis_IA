@@ -47,8 +47,6 @@
                     </div>
                   </div>
                 </div>
-
-
               </section>
             </div>
           </div>
@@ -64,29 +62,35 @@
               </h2>
               <section
                 class="card w-100 card-group d-flex justify-content-center align-items-start flex-column p-4 form">
-                <div class="d-flex align-items-center">
-                  <div class="progress-container">
-                    <div class="progress-circle d-flex align-items-center justify-content-center">
-                      {{dataExpressionInit}}/{{dataExpressionEnd}}
-                    </div>
-                  </div>
-                  <p class="ml-4 text-break ">Módulo de expresión de lenguaje de señas completado</p>
-                </div>
                 <div class="d-flex align-items-center mt-4">
-                  <div class="progress-container">
-                    <div class="progress-circle d-flex align-items-center justify-content-center">
-                      {{dataComprehensionInit}}/{{dataComprehensionEnd}}
-                    </div>
-                  </div>
+                  <mat-progress-spinner
+                    class="example-margin custom-progress-spinner"
+                    color="primary"
+                    mode="determinate"
+                    [value]="(dataComprehensionInit / dataComprehensionEnd) * 100"
+                  ></mat-progress-spinner>
+                  {{ ((dataComprehensionInit / dataComprehensionEnd) * 100) | number:'1.2-2' }}%
                   <p class="ml-4 text-break ">Módulo de comprensión de lenguaje de señas completado</p>
                 </div>
                 <div class="d-flex align-items-center mt-4">
-                  <div class="progress-container">
-                    <div class="progress-circle d-flex align-items-center justify-content-center" role="progressbar">
-                      {{dataComunicationInit}}/{{dataComunicationEnd}}
-                    </div>
-                  </div>
-                  <p class="ml-4 text-break ">Módulo de comunicación de lenguaje de señas completado</p>
+                  <mat-progress-spinner
+                    class="example-margin custom-progress-spinner"
+                    color="primary"
+                    mode="determinate"
+                    [value]="(dataExpressionInit / dataExpressionEnd) * 100"
+                  ></mat-progress-spinner>
+                  {{ ((dataExpressionInit / dataExpressionEnd) * 100) | number:'1.2-2' }}%
+                  <p class="ml-4 text-break ">Módulo de expresión de lenguaje de señas completado</p>
+                </div>
+                <div class="d-flex align-items-center mt-4">
+                  <mat-progress-spinner
+                    class="example-margin"
+                    color="primary"
+                    mode="determinate"
+                    [value]="(dataComunicationInit / dataComunicationEnd) * 100"
+                  ></mat-progress-spinner>
+                  {{ ((dataComunicationInit / dataComunicationEnd) * 100) | number:'1.2-2' }}%
+                  <p class="ml-4 text-break ">Módulo de comunicacion de lenguaje de señas completado</p>
                 </div>
               </section>
             </div>

@@ -1,17 +1,20 @@
 @import "../../../assets/css/variables";
 
-.form{
+.form {
   border-radius: 30px;
   height: max-content;
 }
-.border-radius-50{
+
+.border-radius-50 {
   border-radius: 50%;
 }
-.photo{
+
+.photo {
   width: 150px;
   height: 150px;
   overflow: hidden;
 }
+
 /* Estilos para el contenedor del progress bar */
 .progress-container {
   width: 100px;
@@ -29,25 +32,31 @@
   border-radius: 50%;
 }
 
-.w-400{
+.w-400 {
   width: 400px;
 }
-.card-title{
-  border-bottom: 3px solid ;
+
+.card-title {
+  border-bottom: 3px solid;
   font-weight: 900;
 }
-.book-content{
+
+.book-content {
   width: 170px;
-  span{
+
+  span {
     word-break: break-all;
   }
 }
-main{
+
+main {
   height: max-content;
 }
-.h-auto{
+
+.h-auto {
   min-height: 100%;
 }
+
 .circle {
   position: relative; /* Agregamos posición relativa */
   border-radius: 50%;
@@ -67,30 +76,8 @@ main{
   right: 0; /* Coloca la imagen en la derecha */
   bottom: 0; /* Coloca la imagen en la parte inferior */
 }
-.secondary-title{
+
+.secondary-title {
   border-bottom: 2px solid $primary-color;
-}
-.spiral-progress {
-  position: relative;
-  width: 100px;
-  height: 100px;
-}
-
-.spiral-path {
-  fill: none;
-  stroke: #007bff;
-  stroke-width: 5;
-  stroke-dasharray: 0, 1000;
-  stroke-dashoffset: 1000;
-  animation: spiral-progress 5s linear forwards;
-}
-
-.progress-value {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  font-size: 20px;
-  font-weight: bold;
 }
 
