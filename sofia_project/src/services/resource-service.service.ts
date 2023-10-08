@@ -22,12 +22,19 @@ export class ResourceServiceService {
     const headers = {params: {}}
     return this._http.get(`${this.baseUrl}resources-comprehension`, headers)
   }
+
   getListExpression() {
     const headers = {params: {}}
     return this._http.get(`${this.baseUrl}resources-expression`, headers)
   }
+
   getListComunication() {
     const headers = {params: {}}
     return this._http.get(`${this.baseUrl}resources-comunication`, headers)
+  }
+
+  refreshState(id: string, state: string) {
+    const body = {state};
+    return this._http.put<any>(`${this.baseUrl}resources-state/${id}`, body);
   }
 }
