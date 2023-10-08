@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {User} from "../../models/user";
 import {ResourceServiceService} from "../../../services/resource-service.service";
+import {EncryptionService} from "../../../services/encryption-service.service";
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +17,7 @@ export class ProfileComponent implements OnInit {
   constructor(
     private _userService: UserServiceService,
     private el: ElementRef,
+    private encryptionService: EncryptionService,
     private _resourceService: ResourceServiceService) {
     this.userProfile = new User('', '', '', '', '', '', '', '', '');
 
@@ -40,6 +42,8 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit(): void {
     const userId = localStorage.getItem('userId');
+    const idDecrypt = this.decrypt(userId)
+    this.loadDetail(idDecrypt)
     this.loadDetail(userId)
     this.loadDetailComprehension()
     this.loadDetailExpression()
@@ -124,5 +128,9 @@ export class ProfileComponent implements OnInit {
         });
       }
     })
+  }
+
+  decrypt(id: any) {
+    return this.encryptionService.decryptData(id);
   }
 }

@@ -1,74 +1,74 @@
 <section class="d-flex justify-content-between header" id="header">
-  <div class="logo d-flex align-items-center">
-    <div class="d-flex logo w-25 align-items-center ml-3">
-      <img src="assets/imgs/logo.jpg" width="70">
-      <span class="ml-3 font-Inter-Black medium-font-size main-color-text">MARISCAL RAMÓN CASTILLA</span>
-    </div>
-    <div class="d-flex logo w-75 align-items-center justify-content-around">
+    <div class="logo d-flex align-items-center">
+        <div class="d-flex logo w-25 align-items-center ml-3">
+            <img src="assets/imgs/logo.jpg" width="70">
+            <span class="ml-3 font-Inter-Black medium-font-size main-color-text">MARISCAL RAMÓN CASTILLA</span>
+        </div>
+        <div class="d-flex logo w-75 align-items-center justify-content-around">
       <span class="ml-2 sophie-app font-Inter-Black medium-font-size w-50 main-color-text text-uppercase">
         {{ getSystemName }}
       </span>
-      <span class="ml-3 font-Inter-Black medium-font-size d-flex justify-content-end w-25 main-color-text text-uppercase">
+            <span class="ml-3 font-Inter-Black medium-font-size d-flex justify-content-end w-25 main-color-text text-uppercase">
     {{ currentHour }}
   </span>
-    </div>
+        </div>
 
-  </div>
-  <div class="d-flex user align-items-center p-2 main-background br-rd-btm-left-30-px">
-    <div class="d-flex flex-column user-info pl-2">
+    </div>
+    <div class="d-flex user align-items-center p-2 main-background br-rd-btm-left-30-px">
+        <div class="d-flex flex-column user-info pl-2">
       <span class="font-Inter-semibold medium-font-size text-white flex-wrap mr-3">{{userProfile.lastname}}
-        {{userProfile.name}} </span>
+          {{userProfile.name}} </span>
+        </div>
+        <div class="circle d-flex align-items-end justify-content-center mr-2 bg-white"
+             [ngbPopover]="popContent"
+             [popoverTitle]="popTitle"
+             triggers="manual"
+             placement="bottom-right"
+             #p1="ngbPopover"
+             (click)="toggleWithGreeting(p1, 'Bonjour', 'French')">
+            <img src="assets/imgs/icon-user.svg" style="border-radius: 30%">
+        </div>
     </div>
-    <div class="circle d-flex align-items-end justify-content-center mr-2 bg-white"
-         [ngbPopover]="popContent"
-         [popoverTitle]="popTitle"
-         triggers="manual"
-         placement="bottom-right"
-         #p1="ngbPopover"
-         (click)="toggleWithGreeting(p1, 'Bonjour', 'French')">
-      <img src="assets/imgs/icon-user.svg" style="border-radius: 30%">
-    </div>
-  </div>
 </section>
 <ng-template #popTitle let-language="language">
   <span class="medium-font-size font-Inter-Medium cursor-pointer title-login"
         [routerLink]="['/account/profile']">Mi perfil</span>
 </ng-template>
 <ng-template #popContent let-greeting="greeting">
-  <ul class="list-unstyled mb-0 login-module">
-    <li [routerLink]="['/modules/comprehension', 'question']"
-        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comprensión
-    </li>
-    <li [routerLink]="['/modules/expression', 'abc']"
-        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de expresión
-    </li>
-    <li [routerLink]="['/modules/comunication', 'adverb']"
-        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comunicación
-    </li>
-    <li [routerLink]="['/resources', 'books']"
-        class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de recursos adicionales
-    </li>
-    <li [routerLink]="['/account']"
-        class="p-2 medium-font-size main-color-text font-Inter-Medium cursor-pointer">Cerrar sesión
-    </li>
-  </ul>
+    <ul class="list-unstyled mb-0 login-module">
+        <li [routerLink]="['/modules/comprehension', 'question']"
+            class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comprensión
+        </li>
+        <li [routerLink]="['/modules/expression', 'abc']"
+            class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de expresión
+        </li>
+        <li [routerLink]="['/modules/comunication', 'adverb']"
+            class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de comunicación
+        </li>
+        <li [routerLink]="['/resources', 'books']"
+            class="p-2 medium-font-size font-Inter-Medium cursor-pointer">Módulo de recursos adicionales
+        </li>
+        <li (click)="deleteID()"
+            class="p-2 medium-font-size main-color-text font-Inter-Medium cursor-pointer">Cerrar sesión
+        </li>
+    </ul>
 </ng-template>
 
 <div class="d-flex" id="main">
-  <nav *ngIf="!getNavBar('profile')" class="menu d-flex flex-column justify-content-between " id="navbar">
-    <app-comprehension *ngIf="getNavBar('comprehension')"></app-comprehension>
-    <app-expression *ngIf="getNavBar('expression')"></app-expression>
-    <app-comunication *ngIf="getNavBar('comunication')"></app-comunication>
-    <app-resources *ngIf="getNavBar('resources')"></app-resources>
-    <div class="camera  d-flex justify-content-center">
-      <img src="assets/imgs/camera.png" class="cursor-pointer" width="150" (click)="obtenerVideo()">
+    <nav *ngIf="!getNavBar('profile')" class="menu d-flex flex-column justify-content-between " id="navbar">
+        <app-comprehension *ngIf="getNavBar('comprehension')"></app-comprehension>
+        <app-expression *ngIf="getNavBar('expression')"></app-expression>
+        <app-comunication *ngIf="getNavBar('comunication')"></app-comunication>
+        <app-resources *ngIf="getNavBar('resources')"></app-resources>
+        <div class="camera  d-flex justify-content-center">
+            <img src="assets/imgs/camera.png" class="cursor-pointer" width="150" (click)="obtenerVideo()">
+        </div>
+    </nav>
+    <div class="w-100" id="content" style="overflow:auto;" *ngIf="!hasSon">
+        <router-outlet></router-outlet>
     </div>
-  </nav>
-  <div class="w-100" id="content" style="overflow:auto;" *ngIf="!hasSon">
-    <router-outlet></router-outlet>
-  </div>
-  <div class="w-100" id="contentSon" style="overflow:auto;" *ngIf="hasSon">
-    <ng-content></ng-content>
-  </div>
+    <div class="w-100" id="contentSon" style="overflow:auto;" *ngIf="hasSon">
+        <ng-content></ng-content>
+    </div>
 </div>
 

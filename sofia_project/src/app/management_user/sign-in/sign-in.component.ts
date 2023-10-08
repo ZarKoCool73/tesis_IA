@@ -10,6 +10,7 @@ import {NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalServiceReference} from "../../../services/modal-reference.service";
 import {MatFormFieldModule} from "@angular/material/form-field";
+import {EncryptionService} from "../../../services/encryption-service.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -38,7 +39,8 @@ export class SignInComponent implements OnInit {
     private _router: Router,
     private modalService: NgbModal,
     public dialog: MatDialog,
-    private modalReference: ModalServiceReference
+    private modalReference: ModalServiceReference,
+    private encryptionService: EncryptionService
   ) {
   }
 
@@ -72,7 +74,9 @@ export class SignInComponent implements OnInit {
           if (res.state == 1) {
             Swal.close();
             const userId = res.userId;
-            localStorage.setItem('userId', userId);
+            console.log('USERID1', userId)
+            this.encrypt(userId)
+            //localStorage.setItem('userId', userId);
             this.open()
           }
         },
@@ -88,7 +92,7 @@ export class SignInComponent implements OnInit {
           }
         }
       );
-    }else{
+    } else {
       Swal.fire({
         icon: 'error',
         title: 'Error',
@@ -125,6 +129,16 @@ export class SignInComponent implements OnInit {
     const resultado = this.verifyEmail(this.form.value.email);
     this.stateEmail = resultado;
   }
+
+  encrypt(id: any) {
+    const encryptID = this.encryptionService.encryptData(id);
+    console.log('USERID2', encryptID)
+    localStorage.setItem('userId', encryptID);
+  }
+
+  /*decrypt() {
+    this.decryptedText = this.encryptionService.decryptData(this.encryptedText);
+  }*/
 }
 
 @Component({
