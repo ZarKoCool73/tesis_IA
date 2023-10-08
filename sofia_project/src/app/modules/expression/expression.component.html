@@ -4,7 +4,8 @@
       Módulo de expresión: <span class="link ml-2">{{link}}</span>
     </header>
     <main class="d-flex flex-wrap justify-content-between">
-      <div *ngFor="let data of categoryExpression; let i = index" style="width: 200px; height: 230px;"
+      <div *ngFor="let data of categoryExpression; let i = index"
+           [style]="data.icon=='gif' ? 'width: 310px; height:320px' : 'width: 210px; height:290px'"
            class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4">
         <div class="big-font-size font-Inter-Semibold text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</div>
         <div class="align-items-start" style="margin-top: 12px;" (click)="activeProgress(data)"
@@ -14,7 +15,8 @@
         <div class="align-items-start " style="margin-top: 12px;" *ngIf="data.state=='1'">
           <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
         </div>
-        <img [src]="data.path" width="170">
+        <img [src]=data.path width="170" *ngIf="data.icon=='png'">
+        <img [src]=data.path width="230" *ngIf="data.icon=='gif'">
       </div>
     </main>
   </div>
