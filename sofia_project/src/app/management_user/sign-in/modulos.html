@@ -1,30 +1,31 @@
 <div class="flex-column">
-    <h2 class="text-center very-big-font-size mt-3 font-Inter-SemiBold" style="font-style: italic;">Seleccione el módulo
-        al que desee ingresar:</h2>
-    <div class="d-flex align-items-center">
-        <img src="assets/imgs/SOFIA.svg" width="500">
-        <div class="d-flex flex-column align-items-start justify-content-start"
-             style="margin-left: -200px; margin-top: -60px;">
-            <div [routerLink]="['/modules/comprehension', 'question']"
-                 (click)="close()"
-                 class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
-                <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de comprensión</span>
-            </div>
-            <div [routerLink]="['/modules/expression', 'abc']"
-                 (click)="close()"
-                 class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
-                <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de expresión</span>
-            </div>
-            <div [routerLink]="['/modules/comunication', 'adverb']"
-                 (click)="close()"
-                 class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
-                <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de comunicación</span>
-            </div>
-            <div [routerLink]="['/resources', 'books']"
-                 (click)="close()"
-                 class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
-                <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de recursos adicionales</span>
-            </div>
-        </div>
+  <h2 class="text-center very-big-font-size mt-3 font-Inter-SemiBold" style="font-style: italic;">Seleccione el módulo
+    al que desee ingresar:</h2>
+  <div class="d-flex align-items-center">
+    <!--<img src="assets/imgs/SOFIA.svg" width="500">-->
+    <img src="assets/imgs/sofia_4.png" width="220" style="margin-right: 50px; margin-left: 60px;">
+    <div class="d-flex flex-column align-items-start justify-content-start"
+         style="margin-top: -60px;">
+      <div [routerLink]="['/modules/comprehension', 'question']"
+           (click)="close()"
+           class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
+        <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de comprensión</span>
+      </div>
+      <div [routerLink]="['/modules/expression', 'abc']"
+           (click)="close()"
+           class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
+        <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de expresión</span>
+      </div>
+      <div [routerLink]="['/modules/comunication', 'adverb']"
+           (click)="close()"
+           class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
+        <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de comunicación</span>
+      </div>
+      <div [routerLink]="['/resources', 'books']"
+           (click)="close()"
+           class="book-content light-gray-background cursor-pointer d-flex flex-column border-radius-10 mb-5">
+        <span class="p-2 very-big-font-size font-Inter-Medium">Módulo de recursos adicionales</span>
+      </div>
     </div>
+  </div>
 </div>
