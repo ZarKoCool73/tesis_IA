@@ -107,7 +107,7 @@ export class SignInComponent implements OnInit {
       data: {
         animal: 'panda',
       },
-      height: '550px',
+      height: '530px',
       width: '650px',
       disableClose: true,
     })
