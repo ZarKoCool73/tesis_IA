@@ -109,6 +109,7 @@ export class SignInComponent implements OnInit {
       },
       height: '550px',
       width: '650px',
+      disableClose: true,
     })
     this.modalReference.setDialogRef(this.referenceModal);
   }
