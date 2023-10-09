@@ -70,9 +70,9 @@ main {
   object-fit: contain;
   width: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
   height: 100%; /* Asegura que la imagen ocupe todo el espacio disponible */
-  position: absolute; /* Hace que la imagen se ajuste al contenedor */
+  position: relative; /* Hace que la imagen se ajuste al contenedor */
   top: 0; /* Coloca la imagen en la parte superior */
-  left: 0; /* Coloca la imagen en la izquierda */
+  left: 40px; /* Coloca la imagen en la izquierda */
   right: 0; /* Coloca la imagen en la derecha */
   bottom: 0; /* Coloca la imagen en la parte inferior */
 }
