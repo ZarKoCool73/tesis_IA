@@ -123,6 +123,15 @@ export class SignUpComponent implements OnInit {
     }
   }
 
+  onInputNumbersAge(event: any): void {
+    const inputValue = event.target.value;
+    const numericValue = inputValue.replace(/\D/g, ''); // Elimina caracteres no numéricos
+    if (inputValue !== numericValue) {
+      event.preventDefault(); // Evita que se ingresen caracteres no numéricos
+      event.target.value = numericValue; // Actualiza el valor del campo solo si ha habido cambios
+    }
+  }
+
   // @ts-ignore
   onInputLetters(event: any): void {
     event.target.value = event.target.value.replace(/[^a-zA-Z\s]/g, ''); // Elimina caracteres no alfabéticos ni espacios
