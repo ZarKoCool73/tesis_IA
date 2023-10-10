@@ -67,7 +67,9 @@
                     mode="determinate"
                     [value]="(dataComprehensionInit / dataComprehensionEnd) * 100"
                   ></mat-progress-spinner>
-                  {{ ((dataComprehensionInit / dataComprehensionEnd) * 100) | number:'1.2-2' }}%
+                  <p
+                    class="ml-4 text-break ">{{ ((dataComprehensionInit / dataComprehensionEnd) * 100) | number:'1.2-2' }}
+                    %</p>
                   <div class="d-flex flex-column">
                     <p class="ml-4 text-break ">Módulo de comprensión de lenguaje de señas completado</p>
                     <p class="ml-4 text-break ">Recursos: {{dataComprehensionInit}}/{{dataComprehensionEnd}}
@@ -81,7 +83,8 @@
                     mode="determinate"
                     [value]="(dataExpressionInit / dataExpressionEnd) * 100"
                   ></mat-progress-spinner>
-                  {{ ((dataExpressionInit / dataExpressionEnd) * 100) | number:'1.2-2' }}%
+                  <p class="ml-4 text-break ">{{ ((dataExpressionInit / dataExpressionEnd) * 100) | number:'1.2-2' }}
+                    %</p>
                   <div class="d-flex flex-column">
                     <p class="ml-4 text-break ">Módulo de expresión de lenguaje de señas completado</p>
                     <p class="ml-4 text-break ">Recursos: {{dataExpressionInit}}/{{dataExpressionEnd}}
@@ -95,7 +98,9 @@
                     mode="determinate"
                     [value]="(dataComunicationInit / dataComunicationEnd) * 100"
                   ></mat-progress-spinner>
-                  {{ ((dataComunicationInit / dataComunicationEnd) * 100) | number:'1.2-2' }}%
+                  <p
+                    class="ml-4 text-break ">{{ ((dataComunicationInit / dataComunicationEnd) * 100) | number:'1.2-2' }}
+                    %</p>
                   <div class="d-flex flex-column">
                     <p class="ml-4 text-break">Módulo de comunicacion de lenguaje de señas completado</p>
                     <p class="ml-4 text-break">Recursos: {{dataComunicationInit}}/{{dataComunicationEnd}}
