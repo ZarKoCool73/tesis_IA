@@ -13,6 +13,7 @@ export class ComunicationComponent implements OnInit {
 
   categoryComunication: any;
   link = ''
+  nameList: any
 
   constructor(
     private _activatedRoute: ActivatedRoute,
@@ -39,12 +40,10 @@ export class ComunicationComponent implements OnInit {
   }
 
   loadDetail(id: any) {
-    Swal.showLoading()
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       if (res.state == 1) {
         console.log('res', res)
         this.categoryComunication = res.resources
-        Swal.close()
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -60,16 +59,20 @@ export class ComunicationComponent implements OnInit {
   }
 
   activeProgress(data: any): void {
-    const id = data._id
-    const state = "1"
+    this.nameList = data.name;
+    const id = data._id;
+    const state = "1";
     Swal.fire({
-      title: '¿Estás seguro?',
-      text: '¿Quieres actualizar el estado?',
+      title: '<strong>¡Confirmación de Aprendizaje!</strong>',
+      html: 'Antes de confirmar, asegúrate de que te sientes cómodo y seguro ' +
+        'con la seña que has aprendido. ¿Estás seguro de que has dominado la seña: <strong>' + this.nameList + '</strong>?',
       icon: 'question',
       showCancelButton: true,
-      confirmButtonColor: '#3085d6',
+      confirmButtonColor: '#11e38a',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, actualizar'
+      confirmButtonText: 'Sí, estoy seguro',
+      cancelButtonText: 'Aún necesito practicar',
+      allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result: any) => {
       if (result.isConfirmed) {
         this._servicesResource.refreshState(id, state).subscribe(
@@ -78,8 +81,8 @@ export class ComunicationComponent implements OnInit {
             this.loadDetail(data.category)
             return Swal.fire({
               icon: 'success',
-              title: 'Éxito',
-              text: 'Estado de la imagen actualizado exitosamente',
+              title: '¡Felicidades!',
+              html: 'Has confirmado tu aprendizaje de la seña: <strong>' + this.nameList + '</strong>. Sigue practicando y mejorando tus habilidades.',
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
             });
