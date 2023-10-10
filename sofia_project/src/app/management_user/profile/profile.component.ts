@@ -51,9 +51,11 @@ export class ProfileComponent implements OnInit {
   }
 
   loadDetail(id: any) {
+    Swal.showLoading()
     this._userService.getUser(id).subscribe((res: any) => {
       if (res.state == 1) {
         this.userProfile = res.user
+        Swal.close()
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();

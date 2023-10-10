@@ -8,151 +8,153 @@ import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
 
 @Component({
-    selector: 'app-frameboard',
-    templateUrl: './frameboard.component.html',
-    styleUrls: ['./frameboard.component.scss']
+  selector: 'app-frameboard',
+  templateUrl: './frameboard.component.html',
+  styleUrls: ['./frameboard.component.scss']
 })
 export class FrameboardComponent implements OnInit, AfterViewInit {
-    name = 'World';
-    @Input() hasSon: boolean = false
-    userProfile: User;
-    currentHour = '';
+  name = 'World';
+  @Input() hasSon: boolean = false
+  userProfile: User;
+  currentHour = '';
 
-    constructor(
-        private http: HttpClient,
-        private _router: Router,
-        private _activatedRoute: ActivatedRoute,
-        private elementRef: ElementRef,
-        private _userService: UserServiceService,
-        private encryptionService: EncryptionService,
-        private learningServices: LearningServiceService) {
-        this.userProfile = new User('', '', '', '', '', '', '', '', '');
+  constructor(
+    private http: HttpClient,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute,
+    private elementRef: ElementRef,
+    private _userService: UserServiceService,
+    private encryptionService: EncryptionService,
+    private learningServices: LearningServiceService) {
+    this.userProfile = new User('', '', '', '', '', '', '', '', '');
+  }
+
+  @HostListener('window:resize', ['$event'])
+  changeNavHeight() {
+    const header = document.getElementById('header')
+    const navbar = document.getElementById('navbar')
+    const content = document.getElementById('content')
+    const contentSon = document.getElementById('contentSon')
+    if (header && navbar) {
+      navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
-
-    @HostListener('window:resize', ['$event'])
-    changeNavHeight() {
-        const header = document.getElementById('header')
-        const navbar = document.getElementById('navbar')
-        const content = document.getElementById('content')
-        const contentSon = document.getElementById('contentSon')
-        if (header && navbar) {
-            navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
-        }
-        if (header && content) {
-            content.style.height = window.innerHeight - header.offsetHeight + 'px'
-        }
-        if (header && contentSon) {
-            contentSon.style.height = window.innerHeight - header.offsetHeight + 'px'
-        }
+    if (header && content) {
+      content.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
-
-    ngOnInit(): void {
-        /* this._activatedRoute.params.subscribe((link) => {
-
-         })*/
-        const userId = localStorage.getItem('userId');
-        const idDecrypt = this.decrypt(userId)
-        this.loadDetail(idDecrypt)
-        this.updateCurrentHour();
-        setInterval(() => {
-            this.updateCurrentHour();
-        }, 1000);
+    if (header && contentSon) {
+      contentSon.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
+  }
 
-    private updateCurrentHour(): void {
-        const now = new Date();
-        const hours = now.getHours();
-        const minutes = now.getMinutes();
-        const ampm = hours >= 12 ? 'PM' : 'AM';
-        const formattedHours = hours % 12 === 0 ? 12 : hours % 12; // Convierte 0 a 12 en el formato de 12 horas
-        this.currentHour = `${this.formatNumber(formattedHours)}:${this.formatNumber(minutes)} ${ampm}`;
-    }
+  ngOnInit(): void {
+    /* this._activatedRoute.params.subscribe((link) => {
 
-    private formatNumber(num: number): string {
-        return num < 10 ? `0${num}` : `${num}`;
-    }
+     })*/
+    const userId = localStorage.getItem('userId');
+    const idDecrypt = this.decrypt(userId)
+    this.loadDetail(idDecrypt)
+    this.updateCurrentHour();
+    setInterval(() => {
+      this.updateCurrentHour();
+    }, 1000);
+  }
 
-    obtenerData() {
-        this.learningServices.isVentanaEmergenteAbierta().subscribe((ventanaAbierta) => {
-            if (!ventanaAbierta) {
-                // La ventana emergente se ha cerrado, realiza las acciones que necesites
-                this.learningServices.detenerServicioDeVideo();
-                console.log('La ventana emergente se ha cerrado.');
-            }
-        });
-    }
+  private updateCurrentHour(): void {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const ampm = hours >= 12 ? 'PM' : 'AM';
+    const formattedHours = hours % 12 === 0 ? 12 : hours % 12; // Convierte 0 a 12 en el formato de 12 horas
+    this.currentHour = `${this.formatNumber(formattedHours)}:${this.formatNumber(minutes)} ${ampm}`;
+  }
 
-    obtenerVideo(): void {
-        this.learningServices.abrirVentanaEmergente();
-    }
+  private formatNumber(num: number): string {
+    return num < 10 ? `0${num}` : `${num}`;
+  }
+
+  obtenerData() {
+    this.learningServices.isVentanaEmergenteAbierta().subscribe((ventanaAbierta) => {
+      if (!ventanaAbierta) {
+        // La ventana emergente se ha cerrado, realiza las acciones que necesites
+        this.learningServices.detenerServicioDeVideo();
+        console.log('La ventana emergente se ha cerrado.');
+      }
+    });
+  }
+
+  obtenerVideo(): void {
+    this.learningServices.abrirVentanaEmergente();
+  }
 
 //cerrar el mmwbo ventana
 
 
-    ngAfterViewInit(): void {
-        const header = document.getElementById('header')
-        const navbar = document.getElementById('navbar')
-        const content = document.getElementById('content')
-        const contentSon = document.getElementById('contentSon')
-        if (header && navbar) {
-            navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
-        }
-        if (header && content) {
-            const height = window.innerHeight - header.offsetHeight
-            content.style.height = height + 'px'
-        }
-        if (header && contentSon) {
-            const height = window.innerHeight - header.offsetHeight
-            contentSon.style.height = height + 'px'
-        }
-        this.obtenerData()
+  ngAfterViewInit(): void {
+    const header = document.getElementById('header')
+    const navbar = document.getElementById('navbar')
+    const content = document.getElementById('content')
+    const contentSon = document.getElementById('contentSon')
+    if (header && navbar) {
+      navbar.style.height = window.innerHeight - header.offsetHeight + 'px'
     }
-
-    getNavBar(module: string) {
-        return document.location.href.includes(module)
+    if (header && content) {
+      const height = window.innerHeight - header.offsetHeight
+      content.style.height = height + 'px'
     }
-
-
-    toggleWithGreeting(popover: any, greeting: string, language: string) {
-        if (popover.isOpen()) {
-            popover.close();
-        } else {
-            popover.open({greeting, language});
-        }
+    if (header && contentSon) {
+      const height = window.innerHeight - header.offsetHeight
+      contentSon.style.height = height + 'px'
     }
+    this.obtenerData()
+  }
 
-    loadDetail(id: any) {
-        this._userService.getUser(id).subscribe((res: any) => {
-            if (res.state == 1) {
-                this.userProfile = res.user
-            }
-        }, (error: HttpErrorResponse) => {
-            Swal.close();
-            if (error.error.state == 0) {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: error.error.message,
-                    confirmButtonColor: '#ff3600',
-                });
-            }
-        })
-    }
+  getNavBar(module: string) {
+    return document.location.href.includes(module)
+  }
 
-    get getSystemName() {
-        if (window.innerWidth > 1250) {
-            return 'Sistema de Orientación para el Fomento e Integración del Aprendizaje en Señas (SOFIA)'
-        } else {
-            return 'Sistema de Orientación... (SOFIA)'
-        }
-    }
 
-    decrypt(id: any) {
-        return this.encryptionService.decryptData(id);
+  toggleWithGreeting(popover: any, greeting: string, language: string) {
+    if (popover.isOpen()) {
+      popover.close();
+    } else {
+      popover.open({greeting, language});
     }
+  }
 
-    deleteID() {
-        localStorage.removeItem('userId')
-        this._router.navigate(['/account'])
+  loadDetail(id: any) {
+    this._userService.getUser(id).subscribe((res: any) => {
+      if (res.state == 1) {
+        this.userProfile = res.user
+      }
+    }, (error: HttpErrorResponse) => {
+      Swal.close();
+      if (error.error.state == 0) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: error.error.message,
+          confirmButtonColor: '#ff3600',
+        });
+      }
+    })
+  }
+
+  get getSystemName() {
+    if (window.innerWidth > 1250) {
+      return 'Sistema de Orientación para el Fomento e Integración del Aprendizaje en Señas (SOFIA)'
+    } else {
+      return 'Sistema de Orientación... (SOFIA)'
     }
+  }
+
+  decrypt(id: any) {
+    return this.encryptionService.decryptData(id);
+  }
+
+  deleteID() {
+    Swal.showLoading()
+    localStorage.removeItem('userId')
+    this._router.navigate(['/account'])
+    Swal.close()
+  }
 }

@@ -6,7 +6,7 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class LearningServiceService {
-  private apiUrl = 'http://localhost:5000/api/video';
+  private apiUrl = 'http://localhost:8000/api/video';
   private ventanaEmergenteAbiertaSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {

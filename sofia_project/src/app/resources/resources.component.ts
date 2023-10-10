@@ -37,11 +37,13 @@ export class ResourcesComponent implements OnInit {
   }
 
   loadDetail(id: any) {
+    Swal.showLoading()
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       console.log('res', res)
       if (res.state == 1) {
         console.log('res', res)
         this.category = res.resources
+        Swal.close()
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();

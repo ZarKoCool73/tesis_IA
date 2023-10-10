@@ -3,7 +3,7 @@
     <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
       Módulo de comprensión: <span class="link ml-2">{{link}}</span>
     </header>
-    <main class="d-flex flex-wrap justify-content-between">
+    <main class="d-flex flex-wrap justify-content-around">
       <div *ngFor="let data of categoryComprehension; let i = index"
            [style]="data.icon=='gif' ? 'width: 550px; height:320px' : 'width: 310px; height:320px'"
            class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4">

@@ -51,10 +51,12 @@ export class ComprehensionComponent implements OnInit {
   }
 
   loadDetail(id: any) {
+    Swal.showLoading()
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       if (res.state == 1) {
         console.log('res', res)
         this.categoryComprehension = res.resources
+        Swal.close()
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
