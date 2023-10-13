@@ -6,6 +6,7 @@ import {UserServiceService} from "../../services/user-service.service";
 import Swal from "sweetalert2";
 import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-frameboard',
@@ -17,12 +18,14 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   @Input() hasSon: boolean = false
   userProfile: User;
   currentHour = '';
+  titleEntity: any
 
   constructor(
     private http: HttpClient,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private elementRef: ElementRef,
+    private _utilsService: UtilsService,
     private _userService: UserServiceService,
     private encryptionService: EncryptionService,
     private learningServices: LearningServiceService) {
@@ -57,6 +60,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     setInterval(() => {
       this.updateCurrentHour();
     }, 1000);
+    this.InitDatos()
   }
 
   private updateCurrentHour(): void {
@@ -156,5 +160,14 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     localStorage.removeItem('userId')
     this._router.navigate(['/account'])
     Swal.close()
+  }
+
+  InitDatos() {
+    this._utilsService.data$.subscribe(data => {
+      if (data) {
+        console.log('data', data);
+        this.titleEntity = data.entity.nameEntity
+      }
+    });
   }
 }

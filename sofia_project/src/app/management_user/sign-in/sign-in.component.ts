@@ -12,6 +12,7 @@ import {ModalServiceReference} from "../../../services/modal-reference.service";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {EncryptionService} from "../../../services/encryption-service.service";
 import {EntityService} from "../../../services/entity.service";
+import {UtilsService} from "../../../services/utils.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -24,7 +25,7 @@ import {EntityService} from "../../../services/entity.service";
 export class SignInComponent implements OnInit {
 
   listEntity: any
-
+  titleEntity: any
   /*BANDERAS*/
   stateEmail = false
   statePassword = false
@@ -43,13 +44,24 @@ export class SignInComponent implements OnInit {
     public dialog: MatDialog,
     private modalReference: ModalServiceReference,
     private encryptionService: EncryptionService,
-    private _entityService: EntityService
+    private _entityService: EntityService,
+    private _utilsService: UtilsService
   ) {
   }
 
   ngOnInit(): void {
     this.updateGreeting();
     this.openEntitys()
+    this.InitDatos()
+  }
+
+  InitDatos() {
+    this._utilsService.data$.subscribe(data => {
+      if (data) {
+        console.log('data', data);
+        this.titleEntity = data.entity.nameEntity
+      }
+    });
   }
 
   updateGreeting() {
@@ -180,7 +192,6 @@ export class DialogDataExampleDialog {
 
 
   close() {
-    // Accede al dialogRef a través del servicio y cierra el diálogo
     const dialogRef = this.modalReference.getDialogRef();
     if (dialogRef) {
       dialogRef.close();
@@ -202,7 +213,8 @@ export class DialogDataModulosEntidad {
     @Inject(MAT_DIALOG_DATA)
     public data: DialogDataModulosEntidad,
     private modalReference: ModalServiceReference,
-    private _entityService: EntityService
+    private _entityService: EntityService,
+    private _utilsService: UtilsService
   ) {
   }
 
@@ -219,7 +231,6 @@ export class DialogDataModulosEntidad {
   }
 
   obtenerData(data: any) {
-    debugger
     const id = data._id;
     let nameEntidad = ''
     if (data.nameEntity == 'CENTRO EDUCATIVO MARISCAL RAMÓN CASTILLA N°1199') {
@@ -237,6 +248,7 @@ export class DialogDataModulosEntidad {
     this._entityService.EntityState(id, nameEntidad).subscribe(
       (res: any) => {
         console.log('Respuesta del servidor:', res)
+        this._utilsService.sendData(res);
         this.close()
       }, (error: HttpErrorResponse) => {
         console.error('Error en la solicitud:', error);
@@ -245,7 +257,6 @@ export class DialogDataModulosEntidad {
   }
 
   close() {
-    // Accede al dialogRef a través del servicio y cierra el diálogo
     const dialogRef = this.modalReference.getDialogRef();
     if (dialogRef) {
       dialogRef.close();

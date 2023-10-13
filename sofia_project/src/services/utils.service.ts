@@ -1,10 +1,13 @@
 import {Injectable} from '@angular/core';
 import {AbstractControl, FormControl, FormGroup, ValidationErrors, ValidatorFn} from '@angular/forms';
+import {BehaviorSubject} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
+  private dataSubject = new BehaviorSubject<any>(null);
+  public data$ = this.dataSubject.asObservable();
   constructor() {
   }
 
@@ -21,4 +24,8 @@ export class UtilsService {
       : {password_repeated: true}
   }
 
+
+  sendData(data: any) {
+    this.dataSubject.next(data);
+  }
 }
