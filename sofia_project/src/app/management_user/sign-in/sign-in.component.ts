@@ -6,11 +6,12 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from 'sweetalert2';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {NgIf} from "@angular/common";
+import {NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalServiceReference} from "../../../services/modal-reference.service";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {EncryptionService} from "../../../services/encryption-service.service";
+import {EntityService} from "../../../services/entity.service";
 
 @Component({
   selector: 'app-sign-in',
@@ -22,10 +23,11 @@ import {EncryptionService} from "../../../services/encryption-service.service";
 })
 export class SignInComponent implements OnInit {
 
+  listEntity: any
+
   /*BANDERAS*/
   stateEmail = false
   statePassword = false
-
   referenceModal: MatDialogRef<any> | any
   msg = 'Buenos días';
 
@@ -40,12 +42,14 @@ export class SignInComponent implements OnInit {
     private modalService: NgbModal,
     public dialog: MatDialog,
     private modalReference: ModalServiceReference,
-    private encryptionService: EncryptionService
+    private encryptionService: EncryptionService,
+    private _entityService: EntityService
   ) {
   }
 
   ngOnInit(): void {
     this.updateGreeting();
+    this.openEntitys()
   }
 
   updateGreeting() {
@@ -114,6 +118,18 @@ export class SignInComponent implements OnInit {
     this.modalReference.setDialogRef(this.referenceModal);
   }
 
+  openEntitys() {
+    this.referenceModal = this.dialog.open(DialogDataModulosEntidad, {
+      data: {
+        animal: 'panda',
+      },
+      height: '530px',
+      width: '650px',
+      disableClose: true,
+    })
+    this.modalReference.setDialogRef(this.referenceModal);
+  }
+
   verifyEmail(event: any): boolean {
     const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const data = event
@@ -137,6 +153,14 @@ export class SignInComponent implements OnInit {
     localStorage.setItem('userId', encryptID);
   }
 
+  getEntityList() {
+    this._entityService.getListEntity().subscribe((res: any) => {
+      console.log('res', res)
+      this.listEntity = res.entities
+    })
+  }
+
+
   /*decrypt() {
     this.decryptedText = this.encryptionService.decryptData(this.encryptedText);
   }*/
@@ -152,6 +176,72 @@ export class DialogDataExampleDialog {
   constructor(@Inject(MAT_DIALOG_DATA) public data: DialogDataExampleDialog,
               private modalReference: ModalServiceReference
   ) {
+  }
+
+
+  close() {
+    // Accede al dialogRef a través del servicio y cierra el diálogo
+    const dialogRef = this.modalReference.getDialogRef();
+    if (dialogRef) {
+      dialogRef.close();
+    }
+  }
+}
+
+@Component({
+  selector: 'mat-dialog-content',
+  templateUrl: 'modulosEntidad.html',
+  standalone: true,
+  imports: [MatDialogModule, NgIf, RouterLink, NgForOf],
+})
+export class DialogDataModulosEntidad {
+  listEntity: any
+  stateEntity: any
+
+  constructor(
+    @Inject(MAT_DIALOG_DATA)
+    public data: DialogDataModulosEntidad,
+    private modalReference: ModalServiceReference,
+    private _entityService: EntityService
+  ) {
+  }
+
+
+  ngOnInit() {
+    this.getEntityList()
+  }
+
+  getEntityList() {
+    this._entityService.getListEntity().subscribe((res: any) => {
+      console.log('res', res)
+      this.listEntity = res.entities
+    })
+  }
+
+  obtenerData(data: any) {
+    debugger
+    const id = data._id;
+    let nameEntidad = ''
+    if (data.nameEntity == 'CENTRO EDUCATIVO MARISCAL RAMÓN CASTILLA N°1199') {
+      nameEntidad = "1";
+    }
+    if (data.nameEntity == 'IET JOSÉ DE LA RIVA AGUERO Y OSMA') {
+      nameEntidad = "2";
+    }
+    if (data.nameEntity == 'BRIGIDA SILVA DE OCHOA') {
+      nameEntidad = "3";
+    }
+    if (data.nameEntity == 'MARIA INMACULADA') {
+      nameEntidad = "4";
+    }
+    this._entityService.EntityState(id, nameEntidad).subscribe(
+      (res: any) => {
+        console.log('Respuesta del servidor:', res)
+        this.close()
+      }, (error: HttpErrorResponse) => {
+        console.error('Error en la solicitud:', error);
+      }
+    );
   }
 
   close() {

@@ -1,0 +1,19 @@
+<div class="d-flex flex-wrap">
+  <h2 class="w-100 very-big-font-size mt-3 font-Inter-SemiBold justify-content-center text-center"
+      style="font-style: italic;">Seleccione la institución a la que pertenece: </h2>
+  <main class="d-flex flex-wrap justify-content-around mt-4">
+    <div *ngFor="let data of listEntity; let i = index"
+         style="width: 210px; height: 200px;"
+         class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4" (click)="obtenerData(data)">
+      <div class="small-font-size font-Inter-ExtraBold text-break fw-900 mt-1 pt-2 px-2 text-center">{{ data.nameEntity }}</div>
+      <div class="align-items-start" style="margin-top: 12px;"
+           *ngIf="data.state=='0'">
+        <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
+      </div>
+      <div class="align-items-start " style="margin-top: 12px;" *ngIf="data.state=='1'">
+        <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
+      </div>
+      <img [src]=data.imgEntity width="120">
+    </div>
+  </main>
+</div>
