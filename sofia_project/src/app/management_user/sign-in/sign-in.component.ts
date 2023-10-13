@@ -53,18 +53,20 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateGreeting();
-    this.openEntitys()
+    this.getEntityList()
     this.InitDatos()
   }
 
   InitDatos() {
-    console.log('this.list', this.listEntity)
-
     this._utilsService.data$.subscribe(data => {
       if (data) {
         this.Entidad = data.entity
-        this.stateEnti = data.entity.stateEntity
-        this.titleEntity = data.entity.nameEntity
+        this.stateEnti = data.entity?.stateEntity  || '0'
+        if (this.stateEnti != '0') {
+          this.titleEntity = data.entity.nameEntity
+        } else {
+          this.titleEntity = ''
+        }
       }
     });
   }
@@ -136,7 +138,6 @@ export class SignInComponent implements OnInit {
   }
 
   openEntitys() {
-    this.getEntityList()
     this.referenceModal = this.dialog.open(DialogDataModulosEntidad, {
       data: {
         animal: 'panda',
@@ -173,8 +174,13 @@ export class SignInComponent implements OnInit {
 
   getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
-      console.log('res', res)
       this.Entidad = res.entities
+      const index = this.Entidad.findIndex((f: any) => f.stateEntity == '1')
+      if (index == -1) {
+        this.openEntitys()
+      } else {
+        this._utilsService.sendData({entity: this.Entidad[index]})
+      }
     })
   }
   /*decrypt() {
@@ -229,7 +235,6 @@ export class DialogDataModulosEntidad {
 
   getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
-      console.log('res', res)
       this.listEntity = res.entities
     })
   }
@@ -251,7 +256,6 @@ export class DialogDataModulosEntidad {
     }
     this._entityService.EntityState(id, stateEntidad).subscribe(
       (res: any) => {
-        console.log('Respuesta del servidor:', res)
         this._utilsService.sendData(res);
         this.close()
       }, (error: HttpErrorResponse) => {

@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
 import {EntityService} from "../../services/entity.service";
+import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-frameboard',
@@ -28,6 +29,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     private elementRef: ElementRef,
     private _entityService: EntityService,
     private _userService: UserServiceService,
+    private _utilService: UtilsService,
     private encryptionService: EncryptionService,
     private learningServices: LearningServiceService) {
     this.userProfile = new User('', '', '', '', '', '', '', '', '');
@@ -167,7 +169,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   InitDatos() {
     this._entityService.getListEntity().subscribe((res: any) => {
       if (res) {
-        console.log('a', res);
         const datafilter = res.entities
           .filter((entity: any) => entity.stateEntity === "1")
           .map((entity: any) => {
@@ -180,9 +181,9 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   }
 
   updateState() {
-    debugger
     this._entityService.EntityState(this.idEntity, '0').subscribe(
       (res: any) => {
+        this._utilService.sendData(res.entity)
         console.log('Respuesta del servidor:', res)
       }, (error: HttpErrorResponse) => {
         console.error('Error en la solicitud:', error);
