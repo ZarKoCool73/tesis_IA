@@ -27,6 +27,7 @@ export class SignInComponent implements OnInit {
   listEntity: any
   titleEntity: any
   stateEnti: any
+  Entidad: any
   /*BANDERAS*/
   stateEmail = false
   statePassword = false
@@ -61,7 +62,7 @@ export class SignInComponent implements OnInit {
 
     this._utilsService.data$.subscribe(data => {
       if (data) {
-        console.log('data', data);
+        this.Entidad = data.entity
         this.stateEnti = data.entity.stateEntity
         this.titleEntity = data.entity.nameEntity
       }
@@ -135,6 +136,7 @@ export class SignInComponent implements OnInit {
   }
 
   openEntitys() {
+    this.getEntityList()
     this.referenceModal = this.dialog.open(DialogDataModulosEntidad, {
       data: {
         animal: 'panda',
@@ -167,6 +169,13 @@ export class SignInComponent implements OnInit {
     const encryptID = this.encryptionService.encryptData(id);
     console.log('USERID2', encryptID)
     localStorage.setItem('userId', encryptID);
+  }
+
+  getEntityList() {
+    this._entityService.getListEntity().subscribe((res: any) => {
+      console.log('res', res)
+      this.Entidad = res.entities
+    })
   }
   /*decrypt() {
     this.decryptedText = this.encryptionService.decryptData(this.encryptedText);
