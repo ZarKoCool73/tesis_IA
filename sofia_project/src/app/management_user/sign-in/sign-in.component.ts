@@ -26,6 +26,7 @@ export class SignInComponent implements OnInit {
 
   listEntity: any
   titleEntity: any
+  stateEnti: any
   /*BANDERAS*/
   stateEmail = false
   statePassword = false
@@ -56,9 +57,12 @@ export class SignInComponent implements OnInit {
   }
 
   InitDatos() {
+    console.log('this.list', this.listEntity)
+
     this._utilsService.data$.subscribe(data => {
       if (data) {
         console.log('data', data);
+        this.stateEnti = data.entity.stateEntity
         this.titleEntity = data.entity.nameEntity
       }
     });
@@ -164,15 +168,6 @@ export class SignInComponent implements OnInit {
     console.log('USERID2', encryptID)
     localStorage.setItem('userId', encryptID);
   }
-
-  getEntityList() {
-    this._entityService.getListEntity().subscribe((res: any) => {
-      console.log('res', res)
-      this.listEntity = res.entities
-    })
-  }
-
-
   /*decrypt() {
     this.decryptedText = this.encryptionService.decryptData(this.encryptedText);
   }*/
@@ -232,20 +227,20 @@ export class DialogDataModulosEntidad {
 
   obtenerData(data: any) {
     const id = data._id;
-    let nameEntidad = ''
-    if (data.nameEntity == 'CENTRO EDUCATIVO MARISCAL RAMÓN CASTILLA N°1199') {
-      nameEntidad = "1";
+    let stateEntidad = ''
+    if (data.nameEntity == 'COLEGIO MARISCAL RAMÓN CASTILLA N°1199') {
+      stateEntidad = "1";
     }
-    if (data.nameEntity == 'IET JOSÉ DE LA RIVA AGUERO Y OSMA') {
-      nameEntidad = "2";
+    if (data.nameEntity == 'COLEGIO JOSÉ DE LA RIVA AGUERO Y OSMA') {
+      stateEntidad = "1";
     }
-    if (data.nameEntity == 'BRIGIDA SILVA DE OCHOA') {
-      nameEntidad = "3";
+    if (data.nameEntity == 'COLEGIO BRIGIDA SILVA DE OCHOA') {
+      stateEntidad = "1";
     }
-    if (data.nameEntity == 'MARIA INMACULADA') {
-      nameEntidad = "4";
+    if (data.nameEntity == 'COLEGIO MARIA INMACULADA') {
+      stateEntidad = "1";
     }
-    this._entityService.EntityState(id, nameEntidad).subscribe(
+    this._entityService.EntityState(id, stateEntidad).subscribe(
       (res: any) => {
         console.log('Respuesta del servidor:', res)
         this._utilsService.sendData(res);

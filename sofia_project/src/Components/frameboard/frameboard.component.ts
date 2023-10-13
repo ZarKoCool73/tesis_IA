@@ -6,7 +6,7 @@ import {UserServiceService} from "../../services/user-service.service";
 import Swal from "sweetalert2";
 import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
-import {UtilsService} from "../../services/utils.service";
+import {EntityService} from "../../services/entity.service";
 
 @Component({
   selector: 'app-frameboard',
@@ -18,14 +18,15 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   @Input() hasSon: boolean = false
   userProfile: User;
   currentHour = '';
-  titleEntity: any
+  dataEntity: any
+  idEntity: any
 
   constructor(
     private http: HttpClient,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
     private elementRef: ElementRef,
-    private _utilsService: UtilsService,
+    private _entityService: EntityService,
     private _userService: UserServiceService,
     private encryptionService: EncryptionService,
     private learningServices: LearningServiceService) {
@@ -158,16 +159,34 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   deleteID() {
     Swal.showLoading()
     localStorage.removeItem('userId')
+    this.updateState()
     this._router.navigate(['/account'])
     Swal.close()
   }
 
   InitDatos() {
-    this._utilsService.data$.subscribe(data => {
-      if (data) {
-        console.log('data', data);
-        this.titleEntity = data.entity.nameEntity
+    this._entityService.getListEntity().subscribe((res: any) => {
+      if (res) {
+        console.log('a', res);
+        const datafilter = res.entities
+          .filter((entity: any) => entity.stateEntity === "1")
+          .map((entity: any) => {
+            return entity
+          });
+        this.dataEntity = datafilter[0]
+        this.idEntity = datafilter[0]._id
       }
     });
+  }
+
+  updateState() {
+    debugger
+    this._entityService.EntityState(this.idEntity, '0').subscribe(
+      (res: any) => {
+        console.log('Respuesta del servidor:', res)
+      }, (error: HttpErrorResponse) => {
+        console.error('Error en la solicitud:', error);
+      }
+    );
   }
 }

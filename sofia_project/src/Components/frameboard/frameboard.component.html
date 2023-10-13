@@ -1,9 +1,9 @@
 <section class="d-flex justify-content-between header" id="header">
   <div class="logo d-flex align-items-center">
-    <div class="d-flex logo w-25 align-items-center ml-3">
-      <img src="assets/imgs/logo.jpg" width="70">
-      <span class="ml-3 font-Inter-Black medium-font-size main-color-text">{{titleEntity}}</span>
+    <div class="d-flex logo align-items-center ml-3" style="width: 120px;">
+      <img [src]="dataEntity?.imgEntity" width="120">
     </div>
+      <span class="ml-3 font-Inter-Black medium-font-size main-color-text">{{dataEntity?.nameEntity}}</span>
     <div class="d-flex logo w-75 align-items-center justify-content-around">
       <span class="ml-2 sophie-app font-Inter-Black medium-font-size w-50 main-color-text text-uppercase">
         {{ getSystemName }}
