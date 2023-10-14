@@ -44,6 +44,7 @@ export class ExpressionComponent implements OnInit {
           break;
       }
     })
+    this.openInfo()
   }
 
   loadDetail(id: any) {
@@ -105,5 +106,26 @@ export class ExpressionComponent implements OnInit {
         );
       }
     })
+  }
+
+  openInfo() {
+    Swal.fire({
+      icon: 'info',
+      title: 'Créditos',
+      width: '600px',
+      confirmButtonColor: '#11e38a',
+      html: `
+        Este sistema utiliza información sobre el lenguaje de señas proporcionada por el Gobierno del Perú.<br><br>
+
+        <strong>Créditos:</strong><br>
+        - Información sobre el lenguaje de señas: Gobierno del Perú [Enlace al sitio web oficial o fuente específica]<br>
+        - [Otros créditos según corresponda, como desarrolladores, diseñadores, etc.]<br><br>
+
+        <strong>Derechos de autor y uso:</strong><br>
+        [Incluye aquí cualquier información relevante sobre los derechos de autor y el uso de la información proporcionada por el Gobierno del Perú, como licencias específicas, términos de uso, etc.]<br><br>
+
+       <strong>Agradecemos al Gobierno del Perú por proporcionar valiosa información que ha hecho posible el desarrollo de este sistema.</strong>`,
+      /*footer: '<a href="#">¿Por qué tengo este problema?</a>',*/
+    });
   }
 }
