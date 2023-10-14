@@ -111,13 +111,13 @@ export class ComunicationComponent implements OnInit {
         Este sistema utiliza información sobre el lenguaje de señas proporcionada por el Gobierno del Perú.<br><br>
 
         <strong>Créditos:</strong><br>
-        - Información sobre el lenguaje de señas: Gobierno del Perú [Enlace al sitio web oficial o fuente específica]<br>
-        - [Otros créditos según corresponda, como desarrolladores, diseñadores, etc.]<br><br>
+        - Información sobre el lenguaje de señas: Gobierno del Perú<br>
+        - <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545" target="_blank" class="custom-tooltip" aria-label="" title="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545">Lengua de Señas Peruana</a><br><br>
 
         <strong>Derechos de autor y uso:</strong><br>
         [Incluye aquí cualquier información relevante sobre los derechos de autor y el uso de la información proporcionada por el Gobierno del Perú, como licencias específicas, términos de uso, etc.]<br><br>
 
-       <strong>Agradecemos al Gobierno del Perú por proporcionar valiosa información que ha hecho posible el desarrollo de este sistema.</strong>`,
+        <strong>Agradecemos al Gobierno del Perú por proporcionar valiosa información que ha hecho posible el desarrollo de este sistema.</strong>`,
       /*footer: '<a href="#">¿Por qué tengo este problema?</a>',*/
     });
   }
