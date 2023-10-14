@@ -16,6 +16,7 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {NgbModalModule, NgbPopover} from "@ng-bootstrap/ng-bootstrap";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
+import {MatSelectModule} from "@angular/material/select";
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
     MatAutocompleteModule,
     NgbPopover,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ],
   exports: [
     PasswordRecoveryComponent,

@@ -48,6 +48,14 @@
               <input matInput formControlName="age" pattern="[0-9]*" required maxlength="2"
                      (input)="onInputNumbersAge($event)">
             </mat-form-field>
+            <mat-form-field>
+              <mat-label>Escoge el colegio</mat-label>
+              <mat-select formControlName="id_School" required (selectionChange)="onSchoolSelectionChange($event)">
+                <mat-option *ngFor="let colegio of listSchool" [value]="colegio.id_Entity">
+                  {{ colegio.nameEntity }}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
             <div class="mt-3">
               <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white mr-2"
                       [routerLink]="['/account']"

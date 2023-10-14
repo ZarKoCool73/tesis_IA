@@ -6,6 +6,7 @@ import {UserServiceService} from "../../../services/user-service.service";
 import {Router} from '@angular/router';
 import Swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";
+import {EntityService} from "../../../services/entity.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -18,6 +19,7 @@ export class SignUpComponent implements OnInit {
     names: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
+    id_School: new FormControl('', Validators.required),
   })
   secondFormGroup = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -37,6 +39,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(private _utils: UtilsService,
               private _router: Router,
+              private _entityService: EntityService,
               private _userService: UserServiceService) {
   }
 
@@ -44,18 +47,33 @@ export class SignUpComponent implements OnInit {
   banderaEmail = false
   banderaCode = false
   message = '';
+  listSchool: any
+  id_school: any
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value: any) => this._filter(value))
     );
+    this.getEntityList()
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  getEntityList() {
+    this._entityService.getListEntity().subscribe((res: any) => {
+      console.log('res', res.entities)
+      this.listSchool = res.entities
+    })
+  }
+
+  onSchoolSelectionChange(event: any) {
+    this.id_school = event.value; // Obtener el ID seleccionado
+    console.log('ID del colegio seleccionado:', this.id_school);
   }
 
   createAccount() {
@@ -67,6 +85,7 @@ export class SignUpComponent implements OnInit {
       name: firstValues.names,
       lastname: firstValues.lastname,
       age: firstValues.age,
+      id_School: firstValues.id_School,
       email: secondValues.email,
       studentCode: firstValues.code,
       firstQuestion: thirdValues.fquestion,
@@ -74,6 +93,7 @@ export class SignUpComponent implements OnInit {
       thirdQuestion: thirdValues.tquestion,
       password: secondValues.password
     }
+    console.log('body', body)
     Swal.showLoading();
     if (this.banderaCode && this.bandera && this.banderaEmail) {
       this._userService.saveUser(body).subscribe((res: any) => {
