@@ -22,7 +22,6 @@ export class ComprehensionComponent implements OnInit {
     adjetives: 'Adjetivos',
     utensils: 'Artículos del hogar'
   }
-  dataState = false
   link = ''
 
   constructor(
@@ -40,30 +39,33 @@ export class ComprehensionComponent implements OnInit {
         case 'question':
           this.link = 'Preguntas';
           this.loadDetail('question')
+          this.loadComprehensionProgress()
           break;
         case  'verbs':
           this.link = 'Verbos';
           this.loadDetail('verbs')
+          this.loadComprehensionProgress()
           break;
         case   'adjetives':
           this.link = 'Adjetivos';
           this.loadDetail('adjetives')
+          this.loadComprehensionProgress()
           break;
         case  'utensils':
           this.link = 'Artículos del hogar';
           this.loadDetail('utensils')
+          this.loadComprehensionProgress()
           break;
       }
     })
     this.openInfo()
-    this.loadComprehensionProgress()
   }
 
   loadDetail(id: any) {
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       if (res.state == 1) {
         this.categoryComprehension = res.resources
-        this.categoryComprehension= this.categoryComprehension.map((c: any) => ({...c, state: '0'}))
+        this.categoryComprehension = this.categoryComprehension.map((c: any) => ({...c, state: '0'}))
 
       }
     }, (error: HttpErrorResponse) => {
@@ -122,16 +124,21 @@ export class ComprehensionComponent implements OnInit {
       }
     })
   }
+
   loadComprehensionProgress() {
     this._servicesResource.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
       if (res.state == 1) {
         const ids = (res?.comprehensions || []).map((c: any) => c.id_Resource)
         console.log(ids)
-        this.categoryComprehension = this.categoryComprehension.map((c: any) => ({...c, state: ids.includes(c._id) ? '1': '0'}))
+        this.categoryComprehension = this.categoryComprehension.map((c: any) => ({
+          ...c,
+          state: ids.includes(c._id) ? '1' : '0'
+        }))
         console.log(this.categoryComprehension)
       }
     })
   }
+
   openInfo() {
     Swal.fire({
       icon: 'info',
