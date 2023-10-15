@@ -22,6 +22,7 @@ export class ComprehensionComponent implements OnInit {
     adjetives: 'Adjetivos',
     utensils: 'Artículos del hogar'
   }
+  dataState = false
   link = ''
 
   constructor(
@@ -97,6 +98,16 @@ export class ComprehensionComponent implements OnInit {
           response => {
             console.log('Respuesta del servidor:', response);
             this.loadDetail(data.category)
+            this._servicesResource.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
+              if (res.state == 1) {
+                const index = res.comprehensions.find((f: any) => f.id_Resource === idResource)
+                if (index == -1) {
+                  console.log('index1', index)
+                } else {
+                  this.dataState = true
+                }
+              }
+            })
             return Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',

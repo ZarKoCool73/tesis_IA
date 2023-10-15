@@ -33,11 +33,6 @@ export class ResourceServiceService {
     return this._http.get(`${this.baseUrl}resources-comunication`, headers)
   }
 
-  refreshState(id: string, state: string) {
-    const body = {state};
-    return this._http.put<any>(`${this.baseUrl}resources-state/${id}`, body);
-  }
-
   addCommunication(idUser: string | null, idResource: string | null, stateResource: string | null) {
     const body = {
       id_User: idUser,
@@ -46,6 +41,7 @@ export class ResourceServiceService {
     };
     return this._http.post(`${this.baseUrl}create-communication`, body);
   }
+
   addExpression(idUser: string | null, idResource: string | null, stateResource: string | null) {
     const body = {
       id_User: idUser,
@@ -54,6 +50,7 @@ export class ResourceServiceService {
     };
     return this._http.post(`${this.baseUrl}create-expression`, body);
   }
+
   addComprehension(idUser: string | null, idResource: string | null, stateResource: string | null) {
     const body = {
       id_User: idUser,
@@ -61,5 +58,15 @@ export class ResourceServiceService {
       stateResource: stateResource,
     };
     return this._http.post(`${this.baseUrl}create-comprehension`, body);
+  }
+
+  getComprehensionsByIdUser(idUser: string) {
+    return this._http.get<any>(`${this.baseUrl}list-comprehension/${idUser}`);
+  }
+  getExpressionsByIdUser(idUser: string){
+    return this._http.get<any>(`${this.baseUrl}list-expression/${idUser}`);
+  }
+  getCommunicationsByIdUser(idUser: string){
+    return this._http.get<any>(`${this.baseUrl}list-communication/${idUser}`);
   }
 }
