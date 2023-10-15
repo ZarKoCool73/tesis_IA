@@ -56,13 +56,15 @@ export class ComprehensionComponent implements OnInit {
       }
     })
     this.openInfo()
+    this.loadComprehensionProgress()
   }
 
   loadDetail(id: any) {
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       if (res.state == 1) {
-        console.log('res', res)
         this.categoryComprehension = res.resources
+        this.categoryComprehension= this.categoryComprehension.map((c: any) => ({...c, state: '0'}))
+
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -98,22 +100,14 @@ export class ComprehensionComponent implements OnInit {
           response => {
             console.log('Respuesta del servidor:', response);
             this.loadDetail(data.category)
-            this._servicesResource.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
-              if (res.state == 1) {
-                const index = res.comprehensions.find((f: any) => f.id_Resource === idResource)
-                if (index == -1) {
-                  console.log('index1', index)
-                } else {
-                  this.dataState = true
-                }
-              }
-            })
-            return Swal.fire({
+            Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',
               html: 'Has confirmado tu aprendizaje de la seña: <strong>' + this.nameList + '</strong>. Sigue practicando y mejorando tus habilidades.',
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
+            }).then(() => {
+              this.loadComprehensionProgress()
             });
           }, (error: HttpErrorResponse) => {
             console.error('Error en la solicitud:', error);
@@ -128,7 +122,16 @@ export class ComprehensionComponent implements OnInit {
       }
     })
   }
-
+  loadComprehensionProgress() {
+    this._servicesResource.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
+      if (res.state == 1) {
+        const ids = (res?.comprehensions || []).map((c: any) => c.id_Resource)
+        console.log(ids)
+        this.categoryComprehension = this.categoryComprehension.map((c: any) => ({...c, state: ids.includes(c._id) ? '1': '0'}))
+        console.log(this.categoryComprehension)
+      }
+    })
+  }
   openInfo() {
     Swal.fire({
       icon: 'info',
