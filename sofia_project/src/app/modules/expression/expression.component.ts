@@ -34,18 +34,22 @@ export class ExpressionComponent implements OnInit {
         case 'abc':
           this.link = 'Abecedario';
           this.loadDetail('abc')
+          this.loadExpressionProgress()
           break;
         case  'common-expressions':
           this.link = 'Expresiones comunes';
           this.loadDetail('common-expressions')
+          this.loadExpressionProgress()
           break;
         case   'numbers':
           this.link = 'Números';
           this.loadDetail('numbers')
+          this.loadExpressionProgress()
           break;
         case  'colors':
           this.link = 'Colores';
           this.loadDetail('colors')
+          this.loadExpressionProgress()
           break;
       }
     })
@@ -57,6 +61,7 @@ export class ExpressionComponent implements OnInit {
       if (res.state == 1) {
         console.log('res', res)
         this.categoryExpression = res.resources
+        this.categoryExpression = this.categoryExpression.map((c: any) => ({...c, state: '0'}))
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -92,12 +97,14 @@ export class ExpressionComponent implements OnInit {
           response => {
             console.log('Respuesta del servidor:', response);
             this.loadDetail(data.category)
-            return Swal.fire({
+            Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',
               html: 'Has confirmado tu aprendizaje de la seña: <strong>' + this.nameList + '</strong>. Sigue practicando y mejorando tus habilidades.',
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
+            }).then(() => {
+              this.loadExpressionProgress()
             });
           }, (error: HttpErrorResponse) => {
             console.error('Error en la solicitud:', error);
@@ -109,6 +116,21 @@ export class ExpressionComponent implements OnInit {
             });
           }
         );
+      }
+    })
+  }
+
+  loadExpressionProgress() {
+    this._servicesResource.getExpressionsByIdUser(this.IdUser).subscribe((res: any) => {
+      if (res.state == 1) {
+        console.log('ress', res)
+        const ids = (res?.expressions || []).map((c: any) => c.id_Resource)
+        console.log(ids)
+        this.categoryExpression = this.categoryExpression.map((c: any) => ({
+          ...c,
+          state: ids.includes(c._id) ? '1' : '0'
+        }))
+        console.log(this.categoryExpression)
       }
     })
   }

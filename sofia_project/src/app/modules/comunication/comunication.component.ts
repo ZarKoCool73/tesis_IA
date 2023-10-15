@@ -36,10 +36,12 @@ export class ComunicationComponent implements OnInit {
         case 'adverb':
           this.link = 'Adverbios';
           this.loadDetail('adverb')
+          this.loadCommunicationProgress()
           break;
         case  'preposition':
           this.link = 'Preposiciones';
           this.loadDetail('preposition')
+          this.loadCommunicationProgress()
           break;
       }
     })
@@ -50,6 +52,7 @@ export class ComunicationComponent implements OnInit {
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       if (res.state == 1) {
         this.categoryComunication = res.resources
+        this.categoryComunication = this.categoryComunication.map((c: any) => ({...c, state: '0'}))
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -85,12 +88,14 @@ export class ComunicationComponent implements OnInit {
           response => {
             console.log('Respuesta del servidor:', response);
             this.loadDetail(data.category)
-            return Swal.fire({
+            Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',
               html: 'Has confirmado tu aprendizaje de la seña: <strong>' + this.nameList + '</strong>. Sigue practicando y mejorando tus habilidades.',
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
+            }).then(() => {
+              this.loadCommunicationProgress()
             });
           }, (error: HttpErrorResponse) => {
             console.error('Error en la solicitud:', error);
@@ -102,6 +107,20 @@ export class ComunicationComponent implements OnInit {
             });
           }
         );
+      }
+    })
+  }
+
+  loadCommunicationProgress() {
+    this._servicesResource.getCommunicationsByIdUser(this.IdUser).subscribe((res: any) => {
+      if (res.state == 1) {
+        const ids = (res?.communications || []).map((c: any) => c.id_Resource)
+        console.log(ids)
+        this.categoryComunication = this.categoryComunication.map((c: any) => ({
+          ...c,
+          state: ids.includes(c._id) ? '1' : '0'
+        }))
+        console.log(this.categoryComunication)
       }
     })
   }
