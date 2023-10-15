@@ -3,6 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {ResourceServiceService} from "../../../services/resource-service.service";
+import {EncryptionService} from "../../../services/encryption-service.service";
 
 @Component({
   selector: 'app-comunication',
@@ -14,9 +15,11 @@ export class ComunicationComponent implements OnInit {
   categoryComunication: any;
   link = ''
   nameList: any
+  IdUser: any
 
   constructor(
     private _activatedRoute: ActivatedRoute,
+    private encryptionService: EncryptionService,
     private _servicesResource: ResourceServiceService) {
 
   }
@@ -25,6 +28,9 @@ export class ComunicationComponent implements OnInit {
   isActive = false
 
   ngOnInit(): void {
+    const iduser = localStorage.getItem('userId');
+    this.IdUser = this.decrypt(iduser)
+
     this._activatedRoute.params.subscribe((params: any) => {
       switch (params.type) {
         case 'adverb':
@@ -61,7 +67,7 @@ export class ComunicationComponent implements OnInit {
 
   activeProgress(data: any): void {
     this.nameList = data.name;
-    const id = data._id;
+    const idResource = data._id;
     const state = "1";
     Swal.fire({
       title: '<strong>¡Confirmación de Aprendizaje!</strong>',
@@ -76,7 +82,7 @@ export class ComunicationComponent implements OnInit {
       allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this._servicesResource.refreshState(id, state).subscribe(
+        this._servicesResource.addCommunication(this.IdUser, idResource, state).subscribe(
           response => {
             console.log('Respuesta del servidor:', response);
             this.loadDetail(data.category)
@@ -120,5 +126,9 @@ export class ComunicationComponent implements OnInit {
         <strong>Agradecemos al Gobierno del Perú por proporcionar valiosa información que ha hecho posible el desarrollo de este sistema.</strong>`,
       /*footer: '<a href="#">¿Por qué tengo este problema?</a>',*/
     });
+  }
+
+  decrypt(id: any) {
+    return this.encryptionService.decryptData(id);
   }
 }

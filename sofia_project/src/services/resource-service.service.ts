@@ -37,4 +37,29 @@ export class ResourceServiceService {
     const body = {state};
     return this._http.put<any>(`${this.baseUrl}resources-state/${id}`, body);
   }
+
+  addCommunication(idUser: string | null, idResource: string | null, stateResource: string | null) {
+    const body = {
+      id_User: idUser,
+      id_Resource: idResource,
+      stateResource: stateResource,
+    };
+    return this._http.post(`${this.baseUrl}create-communication`, body);
+  }
+  addExpression(idUser: string | null, idResource: string | null, stateResource: string | null) {
+    const body = {
+      id_User: idUser,
+      id_Resource: idResource,
+      stateResource: stateResource,
+    };
+    return this._http.post(`${this.baseUrl}create-expression`, body);
+  }
+  addComprehension(idUser: string | null, idResource: string | null, stateResource: string | null) {
+    const body = {
+      id_User: idUser,
+      id_Resource: idResource,
+      stateResource: stateResource,
+    };
+    return this._http.post(`${this.baseUrl}create-comprehension`, body);
+  }
 }
