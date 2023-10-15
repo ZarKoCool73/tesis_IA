@@ -34,22 +34,18 @@ export class ExpressionComponent implements OnInit {
         case 'abc':
           this.link = 'Abecedario';
           this.loadDetail('abc')
-          this.loadExpressionProgress()
           break;
         case  'common-expressions':
           this.link = 'Expresiones comunes';
           this.loadDetail('common-expressions')
-          this.loadExpressionProgress()
           break;
         case   'numbers':
           this.link = 'Números';
           this.loadDetail('numbers')
-          this.loadExpressionProgress()
           break;
         case  'colors':
           this.link = 'Colores';
           this.loadDetail('colors')
-          this.loadExpressionProgress()
           break;
       }
     })
@@ -62,6 +58,7 @@ export class ExpressionComponent implements OnInit {
         console.log('res', res)
         this.categoryExpression = res.resources
         this.categoryExpression = this.categoryExpression.map((c: any) => ({...c, state: '0'}))
+        this.loadExpressionProgress()
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -96,7 +93,6 @@ export class ExpressionComponent implements OnInit {
         this._servicesResource.addExpression(this.IdUser, idResource, state).subscribe(
           response => {
             console.log('Respuesta del servidor:', response);
-            this.loadDetail(data.category)
             Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',
@@ -104,7 +100,7 @@ export class ExpressionComponent implements OnInit {
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
             }).then(() => {
-              this.loadExpressionProgress()
+              this.loadDetail(data.category)
             });
           }, (error: HttpErrorResponse) => {
             console.error('Error en la solicitud:', error);
