@@ -44,10 +44,9 @@ export class ProfileComponent implements OnInit {
     const userId = localStorage.getItem('userId');
     const idDecrypt = this.decrypt(userId)
     this.loadDetail(idDecrypt)
-    this.loadDetail(userId)
-    this.loadDetailComprehension(userId)
-    this.loadDetailExpression(userId)
-    this.loadDetailComunication(userId)
+    this.loadDetailComprehension(idDecrypt)
+    this.loadDetailExpression(idDecrypt)
+    this.loadDetailComunication(idDecrypt)
   }
 
   loadDetail(id: any) {
@@ -77,7 +76,7 @@ export class ProfileComponent implements OnInit {
         this.dataComprehensionEnd = res.resources.length
         this._resourceService.getComprehensionsByIdUser(id).subscribe((res: any) => {
           if (res.state == 1) {
-            this.dataComprehensionInit = (res.comprehension || []).length
+            this.dataComprehensionInit = (res.comprehensions || []).length
           }
         })
         const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
@@ -103,7 +102,7 @@ export class ProfileComponent implements OnInit {
         this.dataExpressionEnd = res.resources.length
         this._resourceService.getExpressionsByIdUser(id).subscribe((res: any) => {
           if (res.state == 1) {
-            this.dataExpressionInit = (res.comprehension || []).length
+            this.dataExpressionInit = (res.expressions || []).length
           }
         })
         const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
@@ -128,7 +127,7 @@ export class ProfileComponent implements OnInit {
         this.dataComunicationEnd = res.resources.length
         this._resourceService.getCommunicationsByIdUser(id).subscribe((res: any) => {
           if (res.state == 1) {
-            this.dataComunicationInit = (res.comprehension || []).length
+            this.dataComunicationInit = (res.communications || []).length
           }
         })
         const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
