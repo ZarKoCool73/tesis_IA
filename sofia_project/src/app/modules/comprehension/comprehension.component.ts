@@ -39,22 +39,18 @@ export class ComprehensionComponent implements OnInit {
         case 'question':
           this.link = 'Preguntas';
           this.loadDetail('question')
-          this.loadComprehensionProgress()
           break;
         case  'verbs':
           this.link = 'Verbos';
           this.loadDetail('verbs')
-          this.loadComprehensionProgress()
           break;
         case   'adjetives':
           this.link = 'Adjetivos';
           this.loadDetail('adjetives')
-          this.loadComprehensionProgress()
           break;
         case  'utensils':
           this.link = 'Artículos del hogar';
           this.loadDetail('utensils')
-          this.loadComprehensionProgress()
           break;
       }
     })
@@ -66,6 +62,7 @@ export class ComprehensionComponent implements OnInit {
       if (res.state == 1) {
         this.categoryComprehension = res.resources
         this.categoryComprehension = this.categoryComprehension.map((c: any) => ({...c, state: '0'}))
+        this.loadComprehensionProgress()
 
       }
     }, (error: HttpErrorResponse) => {
@@ -100,7 +97,6 @@ export class ComprehensionComponent implements OnInit {
       if (result.isConfirmed) {
         this._servicesResource.addComprehension(this.IdUser, idResource, state).subscribe(
           response => {
-            this.loadDetail(data.category)
             Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',
@@ -108,7 +104,7 @@ export class ComprehensionComponent implements OnInit {
               confirmButtonColor: '#3085d6',
               confirmButtonText: 'Ok'
             }).then(() => {
-              this.loadComprehensionProgress()
+              this.loadDetail(data.category)
             });
           }, (error: HttpErrorResponse) => {
             console.error('Error en la solicitud:', error);
