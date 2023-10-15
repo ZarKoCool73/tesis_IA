@@ -49,7 +49,6 @@ export class ComunicationComponent implements OnInit {
   loadDetail(id: any) {
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       if (res.state == 1) {
-        console.log('res', res)
         this.categoryComunication = res.resources
       }
     }, (error: HttpErrorResponse) => {

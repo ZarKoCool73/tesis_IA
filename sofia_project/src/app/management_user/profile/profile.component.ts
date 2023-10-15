@@ -45,9 +45,9 @@ export class ProfileComponent implements OnInit {
     const idDecrypt = this.decrypt(userId)
     this.loadDetail(idDecrypt)
     this.loadDetail(userId)
-    this.loadDetailComprehension()
-    this.loadDetailExpression()
-    this.loadDetailComunication()
+    this.loadDetailComprehension(userId)
+    this.loadDetailExpression(userId)
+    this.loadDetailComunication(userId)
   }
 
   loadDetail(id: any) {
@@ -70,11 +70,16 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  loadDetailComprehension() {
+  loadDetailComprehension(id: any) {
     this._resourceService.getListComprehension().subscribe((res: any) => {
       if (res.state == 1) {
         console.log('loadDetailComprehension', res)
         this.dataComprehensionEnd = res.resources.length
+        this._resourceService.getComprehensionsByIdUser(id).subscribe((res: any) => {
+          if (res.state == 1) {
+            this.dataComprehensionInit = (res.comprehension || []).length
+          }
+        })
         const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
         this.dataComprehensionInit = filteredResources.length
       }
@@ -91,11 +96,16 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  loadDetailExpression() {
+  loadDetailExpression(id: any) {
     this._resourceService.getListExpression().subscribe((res: any) => {
       if (res.state == 1) {
         console.log('loadDetailExpression', res)
         this.dataExpressionEnd = res.resources.length
+        this._resourceService.getExpressionsByIdUser(id).subscribe((res: any) => {
+          if (res.state == 1) {
+            this.dataExpressionInit = (res.comprehension || []).length
+          }
+        })
         const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
         this.dataExpressionInit = filteredResources.length
       }
@@ -112,10 +122,15 @@ export class ProfileComponent implements OnInit {
     })
   }
 
-  loadDetailComunication() {
+  loadDetailComunication(id: any) {
     this._resourceService.getListComunication().subscribe((res: any) => {
       if (res.state == 1) {
         this.dataComunicationEnd = res.resources.length
+        this._resourceService.getCommunicationsByIdUser(id).subscribe((res: any) => {
+          if (res.state == 1) {
+            this.dataComunicationInit = (res.comprehension || []).length
+          }
+        })
         const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
         this.dataComunicationInit = filteredResources.length
       }

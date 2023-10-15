@@ -98,7 +98,6 @@ export class ComprehensionComponent implements OnInit {
       if (result.isConfirmed) {
         this._servicesResource.addComprehension(this.IdUser, idResource, state).subscribe(
           response => {
-            console.log('Respuesta del servidor:', response);
             this.loadDetail(data.category)
             Swal.fire({
               icon: 'success',
@@ -126,9 +125,7 @@ export class ComprehensionComponent implements OnInit {
     this._servicesResource.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
       if (res.state == 1) {
         const ids = (res?.comprehensions || []).map((c: any) => c.id_Resource)
-        console.log(ids)
         this.categoryComprehension = this.categoryComprehension.map((c: any) => ({...c, state: ids.includes(c._id) ? '1': '0'}))
-        console.log(this.categoryComprehension)
       }
     })
   }
