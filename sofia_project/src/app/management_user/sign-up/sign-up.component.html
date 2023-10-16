@@ -52,8 +52,8 @@
             <mat-form-field>
               <mat-label>Escoge el colegio</mat-label>
               <mat-select formControlName="id_School" required (selectionChange)="onSchoolSelectionChange($event)">
-                <mat-option *ngFor="let colegio of listSchool" [value]="colegio.id_Entity">
-                  {{ colegio.nameEntity }}
+                <mat-option [value]="Entidad?.id_Entity">
+                  {{ Entidad?.nameEntity }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

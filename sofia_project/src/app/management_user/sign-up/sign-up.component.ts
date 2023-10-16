@@ -92,6 +92,7 @@ export class SignUpComponent implements OnInit {
   }*/
   getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
+      //this.listSchool = res.entities
       this.Entidad = res.entities
       const index = this.Entidad.findIndex((f: any) => f.stateEntity == '1')
       if (index !== -1) {
