@@ -188,3 +188,7 @@
 .custom-tooltip:hover::after {
   opacity: 1;
 }
+.book-content:hover {
+  background-color: #fa9683; /* Cambia el color de fondo cuando el mouse está encima */
+  cursor: pointer; /* Cambia el cursor a una mano para indicar que es interactivo */
+}
