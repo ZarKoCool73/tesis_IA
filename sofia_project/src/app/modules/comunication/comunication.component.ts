@@ -134,8 +134,11 @@ export class ComunicationComponent implements OnInit {
 
         <strong>Créditos:</strong><br>
         - Información sobre el lenguaje de señas: Gobierno del Perú<br>
-        - <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545" target="_blank" class="custom-tooltip" aria-label="" title="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545">Lengua de Señas Peruana</a><br><br>
-
+        - <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545" target="_blank" class="custom-tooltip" aria-label="" title="https://lc.cx/OYmoMx">Lengua de Señas Peruana</a><br>
+        - <a href="https://www.slideshare.net/assoliperu?utm_campaign=profiletracking&utm_medium=sssite&utm_source=ssslideview" target="_blank" class="custom-tooltip" aria-label=""
+        title="https://lc.cx/VnoLQt">Asociacion de Sordos de Lima</a><br>
+        - <a href="https://www.youtube.com/@GerenciaDeDesarrolloHumanoMML" target="_blank" class="custom-tooltip" aria-label=""
+        title="https://lc.cx/t5pkOB">Gerencia de Desarrollo Humano MML</a><br><br>
         <strong>Derechos de autor y uso:</strong><br>
         [Incluye aquí cualquier información relevante sobre los derechos de autor y el uso de la información proporcionada por el Gobierno del Perú, como licencias específicas, términos de uso, etc.]<br><br>
 

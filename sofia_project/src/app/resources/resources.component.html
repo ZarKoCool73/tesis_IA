@@ -1,7 +1,10 @@
 <div class="light-gray-background p-4 h-auto">
   <div class="card card-body border-radius-15 p-4 h-auto">
     <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
-      Recursos adicionales: <span class="link ml-2">{{link}}</span>
+      <span class="mr-auto">Recursos adicionales: <span class="link ml-2">{{link}}</span></span>
+      <span (click)="openInfo()">
+        <i class="fa-solid fa-circle-exclamation fa-bounce fa-lg" style="color: #02f647"></i>
+    </span>
     </header>
     <main class="d-flex flex-wrap justify-content-around">
       <div *ngFor="let data of category"
