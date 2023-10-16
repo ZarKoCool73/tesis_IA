@@ -7,6 +7,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {MatStepper} from '@angular/material/stepper';
 import {Router} from "@angular/router";
+import {EntityService} from "../../../services/entity.service";
 
 @Component({
   selector: 'app-password-recovery',
@@ -34,9 +35,13 @@ export class PasswordRecoveryComponent implements OnInit {
   bandera = false;
   message = ''
   stateEmail = false
-
+  Entidad: any
+  titleEntity: any
+  stateEnti: any
   constructor(
     private _utils: UtilsService,
+    private _utilsService: UtilsService,
+    private _entityService: EntityService,
     private _userService: UserServiceService,
     private _router: Router) {
   }
@@ -46,12 +51,37 @@ export class PasswordRecoveryComponent implements OnInit {
       startWith(''),
       map((value: any) => this._filter(value))
     );
+    this.InitDatos()
+    this.getEntityList()
   }
 
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
+  InitDatos() {
+    this._utilsService.data$.subscribe(data => {
+      if (data) {
+        this.Entidad = data.entity
+        this.stateEnti = data.entity?.stateEntity || '0'
+        if (this.stateEnti != '0') {
+          this.titleEntity = data.entity.nameEntity
+        } else {
+          this.titleEntity = ''
+        }
+      }
+    });
+  }
+  getEntityList() {
+    this._entityService.getListEntity().subscribe((res: any) => {
+      this.Entidad = res.entities
+      const index = this.Entidad.findIndex((f: any) => f.stateEntity == '1')
+      if (index !== -1) {
+        this._utilsService.sendData({entity: this.Entidad[index]})
+      }
+    })
   }
 
   obtenerData(event: any) {
