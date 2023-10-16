@@ -61,7 +61,7 @@ export class SignInComponent implements OnInit {
     this._utilsService.data$.subscribe(data => {
       if (data) {
         this.Entidad = data.entity
-        this.stateEnti = data.entity?.stateEntity  || '0'
+        this.stateEnti = data.entity?.stateEntity || '0'
         if (this.stateEnti != '0') {
           this.titleEntity = data.entity.nameEntity
         } else {
@@ -183,6 +183,7 @@ export class SignInComponent implements OnInit {
       }
     })
   }
+
   /*decrypt() {
     this.decryptedText = this.encryptionService.decryptData(this.encryptedText);
   }*/
@@ -240,28 +241,59 @@ export class DialogDataModulosEntidad {
   }
 
   obtenerData(data: any) {
-    const id = data._id;
-    let stateEntidad = ''
-    if (data.nameEntity == 'COLEGIO MARISCAL RAMÓN CASTILLA N°1199') {
-      stateEntidad = "1";
-    }
-    if (data.nameEntity == 'COLEGIO JOSÉ DE LA RIVA AGUERO Y OSMA') {
-      stateEntidad = "1";
-    }
-    if (data.nameEntity == 'COLEGIO BRIGIDA SILVA DE OCHOA') {
-      stateEntidad = "1";
-    }
-    if (data.nameEntity == 'COLEGIO MARIA INMACULADA') {
-      stateEntidad = "1";
-    }
-    this._entityService.EntityState(id, stateEntidad).subscribe(
-      (res: any) => {
-        this._utilsService.sendData(res);
-        this.close()
-      }, (error: HttpErrorResponse) => {
-        console.error('Error en la solicitud:', error);
+    const idEntity = data
+    console.log('asdasd', idEntity)
+    Swal.fire({
+      title: '<strong>¡Confirmación de Institución!</strong>',
+      html: 'Antes de confirmar, asegúrate de que estás seleccionando' +
+        ' de manera correcta la institución a la que perteneces. ¿Estás seguro de escoger la institución: <strong>' + idEntity.nameEntity + '</strong>  ?',
+      icon: 'question',
+      showCancelButton: true,
+      confirmButtonColor: '#11e38a',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, estoy seguro',
+      cancelButtonText: 'No, fue un error',
+      allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        const id = data._id;
+        let stateEntidad = ''
+        if (data.nameEntity == 'COLEGIO MARISCAL RAMÓN CASTILLA N°1199') {
+          stateEntidad = "1";
+        }
+        if (data.nameEntity == 'COLEGIO JOSÉ DE LA RIVA AGUERO Y OSMA') {
+          stateEntidad = "1";
+        }
+        if (data.nameEntity == 'COLEGIO BRIGIDA SILVA DE OCHOA') {
+          stateEntidad = "1";
+        }
+        if (data.nameEntity == 'COLEGIO MARIA INMACULADA') {
+          stateEntidad = "1";
+        }
+        this._entityService.EntityState(id, stateEntidad).subscribe(
+          (res: any) => {
+            Swal.fire({
+              icon: 'success',
+              title: '¡Felicidades!',
+              html: 'Has confirmado la selección de institución: <strong>' + idEntity.nameEntity + '</strong>.',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Ok'
+            }).then(() => {
+              this._utilsService.sendData(res);
+              this.close()
+            });
+          }, (error: HttpErrorResponse) => {
+            console.error('Error en la solicitud:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.error.message,
+              confirmButtonColor: '#ff3600',
+            });
+          }
+        );
       }
-    );
+    })
   }
 
   close() {

@@ -39,6 +39,7 @@ export class SignUpComponent implements OnInit {
 
   constructor(private _utils: UtilsService,
               private _router: Router,
+              private _utilsService: UtilsService,
               private _entityService: EntityService,
               private _userService: UserServiceService) {
   }
@@ -50,12 +51,17 @@ export class SignUpComponent implements OnInit {
   listSchool: any
   id_school: any
 
+  Entidad: any
+  titleEntity: any
+  stateEnti: any
+
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map((value: any) => this._filter(value))
     );
     this.getEntityList()
+    this.InitDatos()
   }
 
   private _filter(value: string): string[] {
@@ -64,10 +70,33 @@ export class SignUpComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
-  getEntityList() {
+  InitDatos() {
+    this._utilsService.data$.subscribe(data => {
+      if (data) {
+        this.Entidad = data.entity
+        this.stateEnti = data.entity?.stateEntity || '0'
+        if (this.stateEnti != '0') {
+          this.titleEntity = data.entity.nameEntity
+        } else {
+          this.titleEntity = ''
+        }
+      }
+    });
+  }
+
+  /*getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
       console.log('res', res.entities)
       this.listSchool = res.entities
+    })
+  }*/
+  getEntityList() {
+    this._entityService.getListEntity().subscribe((res: any) => {
+      this.Entidad = res.entities
+      const index = this.Entidad.findIndex((f: any) => f.stateEntity == '1')
+      if (index !== -1) {
+        this._utilsService.sendData({entity: this.Entidad[index]})
+      }
     })
   }
 
