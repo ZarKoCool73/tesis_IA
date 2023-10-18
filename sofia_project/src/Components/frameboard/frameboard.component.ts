@@ -184,6 +184,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     this._entityService.EntityState(this.idEntity, '0').subscribe(
       (res: any) => {
         this._utilService.sendData(res.entity)
+        window.location.reload()
         console.log('Respuesta del servidor:', res)
       }, (error: HttpErrorResponse) => {
         console.error('Error en la solicitud:', error);
