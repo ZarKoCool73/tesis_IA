@@ -98,7 +98,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
         'por favor, ponerse en contacto con el personal de<strong style="color: #3498db"> Soporte de TI</strong>.<br><br>' +
         '¿Estás listo para proceder?',
       icon: 'info',
-      showCancelButton: true,
       showCloseButton: true,
       confirmButtonColor: '#11e38a',
       cancelButtonColor: '#d33',
