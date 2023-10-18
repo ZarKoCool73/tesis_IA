@@ -27,7 +27,7 @@ export class SignInComponent implements OnInit {
   titleEntity: any
   stateEnti: any
   Entidad: any
-  
+
   /*BANDERAS*/
   stateEmail = false
   statePassword = false
@@ -37,7 +37,7 @@ export class SignInComponent implements OnInit {
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', Validators.required),
-    idSchool: new FormControl('')
+    id_School: new FormControl('')
   });
 
   constructor(
@@ -91,7 +91,7 @@ export class SignInComponent implements OnInit {
       const body = {
         email: values.email,
         password: values.password,
-        idSchool: this.Entidad.id_Entity
+        id_School: this.Entidad.id_Entity
       };
       Swal.showLoading();
       this._userService.login(body).subscribe(
