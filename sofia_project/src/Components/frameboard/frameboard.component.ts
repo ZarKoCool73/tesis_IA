@@ -90,7 +90,26 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   }
 
   obtenerVideo(): void {
-    this.learningServices.abrirVentanaEmergente();
+    Swal.fire({
+      title: '<strong>¡Aviso importante!</strong>',
+      html: 'Antes de utilizar la cámara, asegúrate de estar en un lugar <strong>cómodo y bien iluminado</strong>.<br><br>' +
+        'Recuerda que un entorno adecuado te ayudará a tener una mejor calidad de video y experiencia. ' +
+        'Si necesitas más información sobre cómo configurar tu entorno para una óptima calidad de video, ' +
+        'por favor, ponerse en contacto con el personal de<strong style="color: #3498db"> Soporte de TI</strong>.<br><br>' +
+        '¿Estás listo para proceder?',
+      icon: 'info',
+      showCancelButton: true,
+      showCloseButton: true,
+      confirmButtonColor: '#11e38a',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, estoy listo',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.learningServices.abrirVentanaEmergente();
+      }
+    });
   }
 
 //cerrar el mmwbo ventana
