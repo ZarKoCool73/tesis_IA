@@ -33,7 +33,7 @@ export class UserServiceService {
     return this._http.post(`${this.baseUrl}users`, body)
   }
 
-  login(body: { password: string | null; email: string | null }) {
+  login(body: { password: string | null; email: string | null; idSchool: string | null }) {
     return this._http.post(`${this.baseUrl}login`, body)
   }
 

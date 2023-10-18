@@ -24,10 +24,10 @@ import {UtilsService} from "../../../services/utils.service";
 })
 export class SignInComponent implements OnInit {
 
-  listEntity: any
   titleEntity: any
   stateEnti: any
   Entidad: any
+  
   /*BANDERAS*/
   stateEmail = false
   statePassword = false
@@ -36,7 +36,8 @@ export class SignInComponent implements OnInit {
 
   form = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', Validators.required)
+    password: new FormControl('', Validators.required),
+    idSchool: new FormControl('')
   });
 
   constructor(
@@ -89,7 +90,8 @@ export class SignInComponent implements OnInit {
       const values = this.form.getRawValue();
       const body = {
         email: values.email,
-        password: values.password
+        password: values.password,
+        idSchool: this.Entidad.id_Entity
       };
       Swal.showLoading();
       this._userService.login(body).subscribe(
