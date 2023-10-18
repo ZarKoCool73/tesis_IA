@@ -127,22 +127,40 @@ export class ComunicationComponent implements OnInit {
     Swal.fire({
       icon: 'info',
       title: 'Créditos',
-      width: '600px',
+      showCloseButton: true,
+      width: '1100px',
       confirmButtonColor: '#11e38a',
-      html: `
-        Este sistema utiliza información sobre el lenguaje de señas proporcionada por el Gobierno del Perú.<br><br>
+      html: `<div class="creditos">
+    <p>Este sistema utiliza información sobre el lenguaje de señas proporcionada por el Gobierno del Perú.</p>
 
-        <strong>Créditos:</strong><br>
-        - Información sobre el lenguaje de señas: Gobierno del Perú<br>
-        - <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545" target="_blank" class="custom-tooltip" aria-label="" title="https://lc.cx/OYmoMx">Lengua de Señas Peruana</a><br>
-        - <a href="https://www.slideshare.net/assoliperu?utm_campaign=profiletracking&utm_medium=sssite&utm_source=ssslideview" target="_blank" class="custom-tooltip" aria-label=""
-        title="https://lc.cx/VnoLQt">Asociacion de Sordos de Lima</a><br>
-        - <a href="https://www.youtube.com/@GerenciaDeDesarrolloHumanoMML" target="_blank" class="custom-tooltip" aria-label=""
-        title="https://lc.cx/t5pkOB">Gerencia de Desarrollo Humano MML</a><br><br>
-        <strong>Derechos de autor y uso:</strong><br>
-        [Incluye aquí cualquier información relevante sobre los derechos de autor y el uso de la información proporcionada por el Gobierno del Perú, como licencias específicas, términos de uso, etc.]<br><br>
-
-        <strong>Agradecemos al Gobierno del Perú por proporcionar valiosa información que ha hecho posible el desarrollo de este sistema.</strong>`,
+    <div class="container text-center">
+    <div class="creditos-seccion">
+        <strong>Créditos:</strong>
+        <p>Información sobre el lenguaje de señas: Gobierno del Perú</p>
+        <ul class="list-inline">
+            <li class="list-inline-item"><a href="https://lc.cx/OYmoMx" target="_blank" class="custom-tooltip" title="Lengua de Señas Peruana">Lengua de Señas Peruana</a></li>
+            <li class="list-inline-item"><a href="https://lc.cx/VnoLQt" target="_blank" class="custom-tooltip" title="Asociación de Sordos de Lima">Asociación de Sordos de Lima</a></li>
+            <li class="list-inline-item"><a href="https://lc.cx/t5pkOB" target="_blank" class="custom-tooltip" title="Gerencia de Desarrollo Humano MML">Gerencia de Desarrollo Humano MML</a></li>
+        </ul>
+    </div>
+</div>
+    <div class="creditos-seccion">
+        <strong>Derechos de autor y uso:</strong>
+        <p>
+            Este sistema web de aprendizaje de lenguaje de señas utiliza el dataset de gestos de lenguaje de señas
+            de Ahmed Khanak, disponible en <a href="https://www.kaggle.com/datasets/ahmedkhanak1995/sign-language-gesture-images-dataset" target="_blank">Kaggle</a>.
+             El dataset está licenciado bajo la licencia Creative Commons Attribution 4.0 International (CC BY 4.0). El autor original del dataset es Ahmed Khanak,
+             y el dataset fue creado en 2023.<br><br>Este sistema web de aprendizaje de lenguaje de señas utiliza el libro "Lenguaje de señas peruana:
+             vocabulario básico" del Ministerio de Educación de Perú, disponible en <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545"
+             target="_blank">Repositorio del Ministerio de Educación de Perú</a>. El libro está licenciado bajo la licencia Creative Commons
+             Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional (CC BY-NC-ND 4.0). El autor original del libro es el Ministerio de Educación de Perú,
+             y el libro fue publicado en 2023.
+        </p>
+    </div>
+    <p class="agradecimiento">
+        <strong>Agradecemos al Gobierno del Perú por proporcionar valiosa información que ha hecho posible el desarrollo de este sistema.</strong>
+    </p>
+</div>`,
       /*footer: '<a href="#">¿Por qué tengo este problema?</a>',*/
     });
   }
