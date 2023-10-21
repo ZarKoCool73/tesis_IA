@@ -128,7 +128,7 @@ export class ComunicationComponent implements OnInit {
       icon: 'info',
       title: 'Créditos',
       showCloseButton: true,
-      width: '600px',
+      width: '1100px',
       confirmButtonColor: '#11e38a',
       html: `<div class="creditos">
     <p>Este sistema utiliza información sobre el lenguaje de señas proporcionada por el Gobierno del Perú.</p>
