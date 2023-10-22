@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild, TemplateRef, Inject} from '@angular/core';
+import {Component, OnInit, Inject} from '@angular/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators} from '@angular/forms';
 import {UserServiceService} from 'src/services/user-service.service';
-import {Router, RouterLink} from "@angular/router";
+import {RouterLink} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from 'sweetalert2';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
@@ -42,12 +42,9 @@ export class SignInComponent implements OnInit {
 
   constructor(
     private _userService: UserServiceService,
-    private _router: Router,
-    private modalService: NgbModal,
     public dialog: MatDialog,
     private modalReference: ModalServiceReference,
     private encryptionService: EncryptionService,
-    private _entityService: EntityService,
     private _utilsService: UtilsService
   ) {
   }
@@ -181,16 +178,7 @@ export class SignInComponent implements OnInit {
     this.stateEnti = '1'
     this.titleEntity = entity.name
     this.Entidad = entity
-    /*this._entityService.getListEntity().subscribe((res: any) => {
-      this.Entidad = res.entities
-      console.log(this.Entidad)
-        this.openEntitys()
-    })*/
   }
-
-  /*decrypt() {
-    this.decryptedText = this.encryptionService.decryptData(this.encryptedText);
-  }*/
 }
 
 @Component({
@@ -222,7 +210,6 @@ export class DialogDataExampleDialog {
 })
 export class DialogDataModulosEntidad {
   listEntity: any
-  stateEntity: any
 
   constructor(
     @Inject(MAT_DIALOG_DATA)
@@ -259,32 +246,10 @@ export class DialogDataModulosEntidad {
       allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result: any) => {
       if (result.isConfirmed) {
-        const body = {name: data.nameEntity, state: 1, id: data._id};
+        const body = {name: data.nameEntity, state: 1, id: data.id_Entity};
         localStorage.setItem('selectedEntity', JSON.stringify(body))
         this._utilsService.sendData(body);
         this.close()
-       /* this._entityService.EntityState(id, stateEntidad).subscribe(
-          (res: any) => {
-            Swal.fire({
-              icon: 'success',
-              title: '¡Felicidades!',
-              html: 'Has confirmado la selección de institución: <strong>' + idEntity.nameEntity + '</strong>.',
-              confirmButtonColor: '#3085d6',
-              confirmButtonText: 'Ok'
-            }).then(() => {
-              this._utilsService.sendData(res);
-              this.close()
-            });
-          }, (error: HttpErrorResponse) => {
-            console.error('Error en la solicitud:', error);
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: error.error.message,
-              confirmButtonColor: '#ff3600',
-            });
-          }
-        );*/
       }
     })
   }
