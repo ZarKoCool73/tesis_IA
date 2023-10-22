@@ -1,5 +1,9 @@
 @import "../../../assets/css/variables";
-
+.exit-icon{
+  top: 0;
+  right: 0;
+  cursor: pointer;
+}
 .login-form {
   width: 500px;
 }
@@ -156,10 +160,17 @@
       display: none;
     }
   }
+  .exit-icon{
+    margin: 10px!important;
+    img{
+      width: 30px;
+      height: 30px;
+    }
+  }
 }
 .title-message{
   font-family: 'Brush Script MT';
   font-weight: bold;
-  font-size: 50px;
+  font-size: 2rem;
   align-content: center
 }

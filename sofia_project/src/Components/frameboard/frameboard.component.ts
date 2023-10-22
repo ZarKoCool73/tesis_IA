@@ -190,7 +190,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
         const datafilter = res.entities
           .filter((entity: any) => {
             const entidad = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
-            return entity._id === entidad.id
+            return entity.id_Entity === entidad.id
           })
           .map((entity: any) => {
             return entity

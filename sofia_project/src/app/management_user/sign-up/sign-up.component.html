@@ -52,7 +52,7 @@
             <mat-form-field>
               <mat-label>Escoge el colegio</mat-label>
               <mat-select formControlName="id_School" required (selectionChange)="onSchoolSelectionChange($event)">
-                <mat-option [value]="entity?._id" *ngFor="let entity of Entidad">
+                <mat-option [value]="entity?.id_Entity" *ngFor="let entity of Entidad">
                   {{ entity?.nameEntity }}
                 </mat-option>
               </mat-select>

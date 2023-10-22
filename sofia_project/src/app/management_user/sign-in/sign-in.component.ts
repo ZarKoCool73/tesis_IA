@@ -81,7 +81,10 @@ export class SignInComponent implements OnInit {
       this.msg = 'Buenas noches';
     }
   }
-
+  clearEntity() {
+    localStorage.clear()
+    this.getEntityList()
+  }
   login() {
     if (!this.form.invalid) {
       const values = this.form.getRawValue();
@@ -260,4 +263,6 @@ export class DialogDataModulosEntidad {
       dialogRef.close();
     }
   }
+
+
 }

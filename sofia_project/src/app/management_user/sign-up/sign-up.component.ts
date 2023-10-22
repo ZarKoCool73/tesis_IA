@@ -97,10 +97,11 @@ export class SignUpComponent implements OnInit {
       //this.listSchool = res.entities
       this.Entidad = res.entities
       const entity = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
-      const index = this.Entidad.findIndex((f: any) => f._id == entity.id)
+      const index = this.Entidad.findIndex((f: any) => f.id_Entity == entity.id)
       if (index !== -1) {
         this._utilsService.sendData(entity)
       }
+
     })
   }
 
