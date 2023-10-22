@@ -6,7 +6,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from 'sweetalert2';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {NgForOf, NgIf} from "@angular/common";
+import {JsonPipe, NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalServiceReference} from "../../../services/modal-reference.service";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -54,17 +54,17 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateGreeting();
-    this.getEntityList()
     this.InitDatos()
+    this.getEntityList()
   }
 
   InitDatos() {
-    this._utilsService.data$.subscribe(data => {
+    this._utilsService.getData.subscribe(data => {
       if (data) {
-        this.Entidad = data.entity
-        this.stateEnti = data.entity?.stateEntity || '0'
+        this.Entidad = data
+        this.stateEnti = data?.state || '0'
         if (this.stateEnti != '0') {
-          this.titleEntity = data.entity.nameEntity
+          this.titleEntity = data?.name
         } else {
           this.titleEntity = ''
         }
@@ -91,7 +91,7 @@ export class SignInComponent implements OnInit {
       const body = {
         email: values.email,
         password: values.password,
-        id_School: this.Entidad.id_Entity
+        id_School: this.Entidad.id
       };
       Swal.showLoading();
       this._userService.login(body).subscribe(
@@ -99,7 +99,6 @@ export class SignInComponent implements OnInit {
           if (res.state == 1) {
             Swal.close();
             const userId = res.userId;
-            console.log('USERID1', userId)
             this.encrypt(userId)
             //localStorage.setItem('userId', userId);
             this.open()
@@ -175,15 +174,18 @@ export class SignInComponent implements OnInit {
   }
 
   getEntityList() {
-    this._entityService.getListEntity().subscribe((res: any) => {
+    const entity = JSON.parse(localStorage.getItem('selectedEntity') || 'null')
+    if (!entity) {
+      this.openEntitys()
+    }
+    this.stateEnti = '1'
+    this.titleEntity = entity.name
+    this.Entidad = entity
+    /*this._entityService.getListEntity().subscribe((res: any) => {
       this.Entidad = res.entities
-      const index = this.Entidad.findIndex((f: any) => f.stateEntity == '1')
-      if (index == -1) {
+      console.log(this.Entidad)
         this.openEntitys()
-      } else {
-        this._utilsService.sendData({entity: this.Entidad[index]})
-      }
-    })
+    })*/
   }
 
   /*decrypt() {
@@ -216,7 +218,7 @@ export class DialogDataExampleDialog {
   selector: 'mat-dialog-content',
   templateUrl: 'modulosEntidad.html',
   standalone: true,
-  imports: [MatDialogModule, NgIf, RouterLink, NgForOf],
+  imports: [MatDialogModule, NgIf, RouterLink, NgForOf, JsonPipe],
 })
 export class DialogDataModulosEntidad {
   listEntity: any
@@ -244,7 +246,6 @@ export class DialogDataModulosEntidad {
 
   obtenerData(data: any) {
     const idEntity = data
-    console.log('asdasd', idEntity)
     Swal.fire({
       title: '<strong>¡Confirmación de Institución!</strong>',
       html: 'Antes de confirmar, asegúrate de que estás seleccionando' +
@@ -258,21 +259,11 @@ export class DialogDataModulosEntidad {
       allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result: any) => {
       if (result.isConfirmed) {
-        const id = data._id;
-        let stateEntidad = ''
-        if (data.nameEntity == 'COLEGIO MARISCAL RAMÓN CASTILLA N°1199') {
-          stateEntidad = "1";
-        }
-        if (data.nameEntity == 'COLEGIO JOSÉ DE LA RIVA AGUERO Y OSMA') {
-          stateEntidad = "1";
-        }
-        if (data.nameEntity == 'COLEGIO BRIGIDA SILVA DE OCHOA') {
-          stateEntidad = "1";
-        }
-        if (data.nameEntity == 'COLEGIO MARIA INMACULADA') {
-          stateEntidad = "1";
-        }
-        this._entityService.EntityState(id, stateEntidad).subscribe(
+        const body = {name: data.nameEntity, state: 1, id: data._id};
+        localStorage.setItem('selectedEntity', JSON.stringify(body))
+        this._utilsService.sendData(body);
+        this.close()
+       /* this._entityService.EntityState(id, stateEntidad).subscribe(
           (res: any) => {
             Swal.fire({
               icon: 'success',
@@ -293,7 +284,7 @@ export class DialogDataModulosEntidad {
               confirmButtonColor: '#ff3600',
             });
           }
-        );
+        );*/
       }
     })
   }

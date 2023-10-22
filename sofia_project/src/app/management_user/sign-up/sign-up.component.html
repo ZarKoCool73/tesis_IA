@@ -28,7 +28,7 @@
           <h1 class="main-color-text ml-4 mb-2 page-title">Crear cuenta</h1>
           <form [formGroup]="firstFormGroup" class="d-flex flex-column align-items-center">
             <mat-form-field>
-              <mat-label>Código</mat-label>
+              <mat-label>Código o DNI</mat-label>
               <input matInput formControlName="code" required pattern="[0-9]*" (input)="onInputNumbers($event)"
                      maxlength="8">
             </mat-form-field>
@@ -52,8 +52,8 @@
             <mat-form-field>
               <mat-label>Escoge el colegio</mat-label>
               <mat-select formControlName="id_School" required (selectionChange)="onSchoolSelectionChange($event)">
-                <mat-option [value]="Entidad?.id_Entity">
-                  {{ Entidad?.nameEntity }}
+                <mat-option [value]="entity?._id" *ngFor="let entity of Entidad">
+                  {{ entity?.nameEntity }}
                 </mat-option>
               </mat-select>
             </mat-form-field>

@@ -188,7 +188,10 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     this._entityService.getListEntity().subscribe((res: any) => {
       if (res) {
         const datafilter = res.entities
-          .filter((entity: any) => entity.stateEntity === "1")
+          .filter((entity: any) => {
+            const entidad = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
+            return entity._id === entidad.id
+          })
           .map((entity: any) => {
             return entity
           });
@@ -199,7 +202,8 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   }
 
   updateState() {
-    this._entityService.EntityState(this.idEntity, '0').subscribe(
+   // this._utilService.sendData(res.entity)
+    /*this._entityService.EntityState(this.idEntity, '0').subscribe(
       (res: any) => {
         this._utilService.sendData(res.entity)
         window.location.reload()
@@ -207,6 +211,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       }, (error: HttpErrorResponse) => {
         console.error('Error en la solicitud:', error);
       }
-    );
+    );*/
   }
 }

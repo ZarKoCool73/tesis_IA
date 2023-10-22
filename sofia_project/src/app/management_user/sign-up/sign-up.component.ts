@@ -51,7 +51,7 @@ export class SignUpComponent implements OnInit {
   listSchool: any
   id_school: any
 
-  Entidad: any
+  Entidad: any[] = []
   titleEntity: any
   stateEnti: any
 
@@ -71,12 +71,14 @@ export class SignUpComponent implements OnInit {
   }
 
   InitDatos() {
-    this._utilsService.data$.subscribe(data => {
+    this._utilsService.getData.subscribe(data => {
       if (data) {
-        this.Entidad = data.entity
-        this.stateEnti = data.entity?.stateEntity || '0'
+        //this.Entidad = data
+        this.firstFormGroup.get('id_School')?.setValue(data.id)
+        this.firstFormGroup.get('id_School')?.disable()
+        this.stateEnti = data.state || '0'
         if (this.stateEnti != '0') {
-          this.titleEntity = data.entity.nameEntity
+          this.titleEntity = data?.name
         } else {
           this.titleEntity = ''
         }
@@ -94,9 +96,10 @@ export class SignUpComponent implements OnInit {
     this._entityService.getListEntity().subscribe((res: any) => {
       //this.listSchool = res.entities
       this.Entidad = res.entities
-      const index = this.Entidad.findIndex((f: any) => f.stateEntity == '1')
+      const entity = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
+      const index = this.Entidad.findIndex((f: any) => f._id == entity.id)
       if (index !== -1) {
-        this._utilsService.sendData({entity: this.Entidad[index]})
+        this._utilsService.sendData(entity)
       }
     })
   }
@@ -107,7 +110,6 @@ export class SignUpComponent implements OnInit {
   }
 
   createAccount() {
-    debugger
     const firstValues = this.firstFormGroup.getRawValue()
     const secondValues = this.secondFormGroup.getRawValue()
     const thirdValues = this.thirdFormGroup.getRawValue()
@@ -188,7 +190,6 @@ export class SignUpComponent implements OnInit {
   }
 
   validarContrasenaFuerte(contrasena: any): { valido: boolean, mensaje: string } {
-    console.log('con', contrasena);
     let mensaje = '';
     let valido = true;
     if (contrasena.length < 8) {
@@ -198,7 +199,6 @@ export class SignUpComponent implements OnInit {
       mensaje = 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un dígito.';
       valido = false;
     } else {
-      console.log('ab', contrasena);
       this.bandera = true; // Contraseña fuerte
     }
     return {valido, mensaje};

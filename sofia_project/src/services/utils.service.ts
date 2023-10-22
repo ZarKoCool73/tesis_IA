@@ -28,4 +28,8 @@ export class UtilsService {
   sendData(data: any) {
     this.dataSubject.next(data);
   }
+
+  get getData() {
+    return this.dataSubject
+  }
 }
