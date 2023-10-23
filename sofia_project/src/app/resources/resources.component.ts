@@ -34,7 +34,9 @@ export class ResourcesComponent implements OnInit {
           break;
       }
     })
-    this.openInfo()
+    if (!localStorage.getItem('infoShowed')) {
+      this.openInfo()
+    }
   }
 
   loadDetail(id: any) {
@@ -95,6 +97,8 @@ export class ResourcesComponent implements OnInit {
     </p>
 </div>`,
       /*footer: '<a href="#">¿Por qué tengo este problema?</a>',*/
+    }).then(() => {
+      localStorage.setItem('infoShowed', '1')
     });
   }
 }
