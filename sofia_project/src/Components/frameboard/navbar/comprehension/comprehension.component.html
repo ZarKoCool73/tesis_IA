@@ -1,14 +1,16 @@
 <div class="content mt-4">
   <ul class="list-unstyled nav-bar">
-    <li ngbTooltip="Preguntas" placement="end"
-        [ngClass]="{active: getUrl('question')}"
-        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
-      <img src="assets/imgs/modules/icon-question.svg" [routerLink]="['/modules/comprehension', 'question']" class="cursor-pointer" alt="">
-    </li>
     <li ngbTooltip="Verbos" placement="end"
         [ngClass]="{active: getUrl('verbs')}"
         class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
-      <img src="assets/imgs/modules/icon-action.svg" [routerLink]="['/modules/comprehension', 'verbs']" class="cursor-pointer" alt="">
+      <img src="assets/imgs/modules/icon-action.svg" [routerLink]="['/modules/comprehension', 'verbs']"
+           class="cursor-pointer" alt="">
+    </li>
+    <li ngbTooltip="Preguntas" placement="end"
+        [ngClass]="{active: getUrl('question')}"
+        class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
+      <img src="assets/imgs/modules/icon-question.svg" [routerLink]="['/modules/comprehension', 'question']"
+           class="cursor-pointer" alt="">
     </li>
     <!--<li ngbTooltip="Adjetivos" placement="end"
         [ngClass]="{active: getUrl('adjetives')}"

@@ -179,7 +179,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   deleteID() {
     Swal.showLoading()
     localStorage.removeItem('userId')
-    this.updateState()
     this._router.navigate(['/account'])
     Swal.close()
   }
@@ -201,16 +200,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  updateState() {
-   // this._utilService.sendData(res.entity)
-    /*this._entityService.EntityState(this.idEntity, '0').subscribe(
-      (res: any) => {
-        this._utilService.sendData(res.entity)
-        window.location.reload()
-        console.log('Respuesta del servidor:', res)
-      }, (error: HttpErrorResponse) => {
-        console.error('Error en la solicitud:', error);
-      }
-    );*/
+  getUrl(url: string) {
+    return document.location.href.includes(url)
   }
 }

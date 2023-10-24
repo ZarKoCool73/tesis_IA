@@ -62,7 +62,7 @@
     <app-comunication *ngIf="getNavBar('comunication')"></app-comunication>
     <app-resources *ngIf="getNavBar('resources')"></app-resources>
     <div class="camera  d-flex justify-content-center">
-      <img src="assets/imgs/camera.png" class="cursor-pointer" width="150" (click)="obtenerVideo()">
+      <img src="assets/imgs/camera.png" class="cursor-pointer" width="150" (click)="obtenerVideo()" *ngIf="!getUrl('comunication') && !getUrl('comprehension/question') && !getUrl('resources')">
     </div>
   </nav>
   <div class="w-100" id="content" style="overflow:auto;" *ngIf="!hasSon">
