@@ -17,8 +17,8 @@ export class ComprehensionComponent implements OnInit {
   nameList: any
   IdUser: any
   url = {
-    question: 'Preguntas',
     verbs: 'Verbos',
+    question: 'Preguntas',
     adjetives: 'Adjetivos',
     utensils: 'Artículos del hogar'
   }
@@ -36,13 +36,13 @@ export class ComprehensionComponent implements OnInit {
     this.IdUser = this.decrypt(iduser)
     this._activatedRoute.params.subscribe((params: any) => {
       switch (params.type) {
-        case 'question':
-          this.link = 'Preguntas';
-          this.loadDetail('question')
-          break;
         case  'verbs':
           this.link = 'Verbos';
           this.loadDetail('verbs')
+          break;
+        case 'question':
+          this.link = 'Preguntas';
+          this.loadDetail('question')
           break;
         case   'adjetives':
           this.link = 'Adjetivos';
