@@ -89,7 +89,9 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     });
   }
 
-  obtenerVideo(): void {
+  obtenerVideo(event: any): void {
+    const url = this.getUrl('verbs')
+    console.log('urñl', url)
     Swal.fire({
       title: '<strong>¡Aviso importante!</strong>',
       html: 'Antes de utilizar la cámara, asegúrate de estar en un lugar <strong>cómodo y bien iluminado</strong>.<br><br>' +
@@ -106,7 +108,11 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result) => {
       if (result.isConfirmed) {
-        this.learningServices.abrirVentanaEmergente();
+        if (url) {
+          this.learningServices.abrirVentanaVerbos()
+        } else {
+          this.learningServices.abrirVentanaEmergente();
+        }
       }
     });
   }

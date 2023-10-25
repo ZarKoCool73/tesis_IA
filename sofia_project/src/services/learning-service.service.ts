@@ -7,6 +7,7 @@ import {HttpClient} from "@angular/common/http";
 })
 export class LearningServiceService {
   private apiUrl = 'http://localhost:5000/api/video';
+  private apiVerbos = 'http://localhost:5000/api/videoVerbos';
   private ventanaEmergenteAbiertaSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
@@ -45,6 +46,45 @@ export class LearningServiceService {
 
       popup.onbeforeunload = () => {
         popup.postMessage('closed', this.apiUrl);
+      };
+    } else {
+      console.error('No se pudo abrir la ventana emergente. Asegúrate de que los bloqueadores de ventanas emergentes estén desactivados.');
+    }
+  }
+
+  abrirVentanaVerbos(): void {
+    const width = 635;
+    const height = 480;
+    const left = (window.innerWidth - width) / 2;
+    const top = (window.innerHeight - height) / 2;
+
+    const popup = window.open(this.apiVerbos, '_blank', `width=${width},height=${height},left=${left},top=${top}`);
+
+    if (popup) {
+      const interval = setInterval(() => {
+        if (popup.closed) {
+          clearInterval(interval);
+          this.ventanaEmergenteAbiertaSubject.next(false);
+        }
+      }, 1000);
+
+      window.addEventListener('message', (event) => {
+        if (event.origin === this.apiVerbos) {
+          if (event.data === 'loaded') {
+            this.ventanaEmergenteAbiertaSubject.next(true);
+          } else if (event.data === 'closed') {
+            clearInterval(interval);
+            this.ventanaEmergenteAbiertaSubject.next(false);
+          }
+        }
+      });
+
+      popup.onload = () => {
+        popup.postMessage('loaded', this.apiVerbos);
+      };
+
+      popup.onbeforeunload = () => {
+        popup.postMessage('closed', this.apiVerbos);
       };
     } else {
       console.error('No se pudo abrir la ventana emergente. Asegúrate de que los bloqueadores de ventanas emergentes estén desactivados.');
