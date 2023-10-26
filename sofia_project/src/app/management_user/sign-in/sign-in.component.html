@@ -42,7 +42,7 @@
           Iniciar sesión
         </h2>
         <div class="form-group">
-          <label for="user" class="font-Inter-SemiBold text-black">Usuario</label>
+          <label for="user" class="font-Inter-SemiBold text-black">Correo</label>
           <input type="text" formControlName="email" class="form-control" id="user" autocomplete="off"
                  (input)="validateEmail()">
           <mat-error *ngIf="!stateEmail && !form.get('email')?.pristine"
