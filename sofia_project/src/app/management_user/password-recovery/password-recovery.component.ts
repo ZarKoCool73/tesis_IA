@@ -120,15 +120,14 @@ export class PasswordRecoveryComponent implements OnInit {
         (res: any) => {
           if (res.state === 1) {
             this.reestablecerContraseña()
-          } else {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              text: 'Una de las preguntas es incorrecta',
-              confirmButtonColor: '#ff3600',
-            });
           }
         }, (error: HttpErrorResponse) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.error.message,
+            confirmButtonColor: '#ff3600',
+          });
         }
       );
   }

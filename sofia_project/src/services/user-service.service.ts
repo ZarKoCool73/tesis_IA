@@ -45,7 +45,7 @@ export class UserServiceService {
       thirdQuestion: thirdQuestion
     };
 
-    return this._http.post(`${this.baseUrl}/users/check-security-answer`, body);
+    return this._http.post(`${this.baseUrl}users/${email}/check-answer`, body);
   }
 
   searchEmail(email: string) {
@@ -54,6 +54,6 @@ export class UserServiceService {
 
   resetPassword(email: string | null, newPassword: string | null) {
     const body = {email, newPassword};
-    return this._http.post(`${this.baseUrl}/users/reset-password`, body);
+    return this._http.post(`${this.baseUrl}users/reset-password`, body);
   }
 }
