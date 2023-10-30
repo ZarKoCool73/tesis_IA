@@ -111,7 +111,8 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
         if (url) {
           this.learningServices.abrirVentanaVerbos()
         } else {
-          this.learningServices.abrirVentanaEmergente();
+          //this.learningServices.abrirVentanaEmergente();
+          this.learningServices.solicitarPermisosYAbrirVentanaEmergente();
         }
       }
     });

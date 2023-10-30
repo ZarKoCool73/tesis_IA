@@ -6,13 +6,31 @@ import {HttpClient} from "@angular/common/http";
   providedIn: 'root'
 })
 export class LearningServiceService {
-  private apiUrl = 'http://localhost:5000/api/video';
-  private apiVerbos = 'http://localhost:5000/api/videoVerbos';
+  private apiUrl = 'https://services-ia.onrender.com/alpha';
+  private apiVerbos = 'https://services-ia.onrender.com/betta';
   private ventanaEmergenteAbiertaSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(private http: HttpClient) {
   }
 
+  solicitarPermisosYAbrirVentanaEmergente(): void {
+    // Verificar si el navegador es compatible con getUserMedia
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+      // Solicitar permisos para acceder a la cámara
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(() => {
+          // Los permisos fueron otorgados, ahora abrir la ventana emergente
+          this.abrirVentanaEmergente();
+        })
+        .catch((error) => {
+          // Los permisos fueron denegados o ocurrió un error
+          console.error('Error al acceder a la cámara:', error);
+        });
+    } else {
+      // El navegador no es compatible con getUserMedia
+      console.error('getUserMedia no es compatible con este navegador.');
+    }
+  }
   abrirVentanaEmergente(): void {
     const width = 635;
     const height = 480;
@@ -92,7 +110,7 @@ export class LearningServiceService {
   }
 
   detenerServicioDeVideo(): void {
-    this.http.get('http://localhost:5000/api/stop_video').subscribe(response => {
+    this.http.get('https://services-ia.onrender.com/api/stop_video').subscribe(response => {
       console.log(response); // Esto imprimirá "Servicio de video detenido."
     });
   }

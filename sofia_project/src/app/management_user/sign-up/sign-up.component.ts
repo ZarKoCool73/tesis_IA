@@ -143,6 +143,7 @@ export class SignUpComponent implements OnInit {
         });
       }, (error: HttpErrorResponse) => {
         Swal.close();
+        console.log('err', error)
         Swal.fire({
           icon: 'error',
           title: 'Error',
