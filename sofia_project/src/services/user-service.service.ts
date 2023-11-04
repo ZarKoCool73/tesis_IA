@@ -30,7 +30,7 @@ export class UserServiceService {
     thirdQuestion: string | null,
     password: string | null
   }) {
-    return this._http.post(`${this.baseUrl}users`, body)
+    return this._http.post(`${this.baseUrl}users/create-user`, body)
   }
 
   login(body: { password: string | null; email: string | null; id_School: string | null }) {
