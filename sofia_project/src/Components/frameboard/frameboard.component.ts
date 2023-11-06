@@ -1,13 +1,11 @@
-import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit} from '@angular/core';
-import {HttpClient, HttpErrorResponse} from '@angular/common/http';
-import {LearningServiceService} from "../../services/learning-service.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
+import {HttpErrorResponse} from '@angular/common/http';
+import {Router} from "@angular/router";
 import {UserServiceService} from "../../services/user-service.service";
 import Swal from "sweetalert2";
 import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
 import {EntityService} from "../../services/entity.service";
-import {UtilsService} from "../../services/utils.service";
 
 @Component({
   selector: 'app-frameboard',
@@ -23,15 +21,10 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   idEntity: any
 
   constructor(
-    private http: HttpClient,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute,
-    private elementRef: ElementRef,
     private _entityService: EntityService,
     private _userService: UserServiceService,
-    private _utilService: UtilsService,
-    private encryptionService: EncryptionService,
-    private learningServices: LearningServiceService) {
+    private encryptionService: EncryptionService) {
     this.userProfile = new User('', '', '', '', '', '', '', '', '');
   }
 
@@ -53,9 +46,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
-    /* this._activatedRoute.params.subscribe((link) => {
-
-     })*/
     const userId = localStorage.getItem('userId');
     const idDecrypt = this.decrypt(userId)
     this.loadDetail(idDecrypt)
@@ -77,16 +67,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
 
   private formatNumber(num: number): string {
     return num < 10 ? `0${num}` : `${num}`;
-  }
-
-  obtenerData() {
-    this.learningServices.isVentanaEmergenteAbierta().subscribe((ventanaAbierta) => {
-      if (!ventanaAbierta) {
-        // La ventana emergente se ha cerrado, realiza las acciones que necesites
-        this.learningServices.detenerServicioDeVideo();
-        console.log('La ventana emergente se ha cerrado.');
-      }
-    });
   }
 
   obtenerVideo(event: any): void {
@@ -136,7 +116,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
       const height = window.innerHeight - header.offsetHeight
       contentSon.style.height = height + 'px'
     }
-    this.obtenerData()
   }
 
   getNavBar(module: string) {
