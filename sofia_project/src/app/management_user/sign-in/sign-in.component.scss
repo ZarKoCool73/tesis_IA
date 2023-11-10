@@ -1,9 +1,11 @@
 @import "../../../assets/css/variables";
-.exit-icon{
+
+.exit-icon {
   top: 0;
   right: 0;
   cursor: pointer;
 }
+
 .login-form {
   width: 500px;
 }
@@ -160,20 +162,23 @@
       display: none;
     }
   }
-  .exit-icon{
-    margin: 10px!important;
-    img{
+  .exit-icon {
+    margin: 10px !important;
+
+    img {
       width: 30px;
       height: 30px;
     }
   }
 }
-.title-message{
+
+.title-message {
   font-family: 'Brush Script MT';
   font-weight: bold;
   font-size: 2rem;
   align-content: center
 }
+
 .responsive-error {
   width: 100%; /* Hace que el ancho sea el 100% del contenedor padre */
   text-align: left; /* Alinea el texto a la izquierda */

@@ -6,7 +6,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from 'sweetalert2';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {JsonPipe, NgForOf, NgIf} from "@angular/common";
+import {JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalServiceReference} from "../../../services/modal-reference.service";
 import {MatFormFieldModule} from "@angular/material/form-field";
@@ -20,10 +20,10 @@ import {UtilsService} from "../../../services/utils.service";
   styleUrls: ['./sign-in.component.scss'],
   providers: [NgbModalConfig, NgbModal],
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, RouterLink, ReactiveFormsModule, NgIf, MatFormFieldModule],
+  imports: [MatButtonModule, MatDialogModule, RouterLink, ReactiveFormsModule, NgIf, MatFormFieldModule, NgClass],
 })
 export class SignInComponent implements OnInit {
-
+  hideToggle = true
   titleEntity: any
   stateEnti: any
   Entidad: any
@@ -53,6 +53,10 @@ export class SignInComponent implements OnInit {
     this.updateGreeting();
     this.InitDatos()
     this.getEntityList()
+  }
+
+  togglePasswordVisibility() {
+    this.hideToggle = !this.hideToggle;
   }
 
   InitDatos() {
