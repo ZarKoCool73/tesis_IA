@@ -58,14 +58,6 @@
             <input type="{{ hideToggle ? 'password' : 'text' }}" formControlName="password" class="form-control"
                    id="password"
                    autocomplete="off">
-            <i class="fa-light fa-eye-slash" *ngIf="hideToggle"
-               (click)="togglePasswordVisibility()"
-               style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
-            </i>
-            <i class="fa-solid fa-eye" *ngIf="!hideToggle"
-               (click)="togglePasswordVisibility()"
-               style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
-            </i>
           </div>
           <div *ngIf="statePassword" class="main-color-text font-Inter-ExtraBold">
             Ingrese contraseña
