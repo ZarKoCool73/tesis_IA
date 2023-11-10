@@ -114,6 +114,10 @@ export class SignUpComponent implements OnInit {
     const firstValues = this.firstFormGroup.getRawValue()
     const secondValues = this.secondFormGroup.getRawValue()
     const thirdValues = this.thirdFormGroup.getRawValue()
+
+    this.convert(firstValues);
+    this.convert(secondValues);
+    this.convert(thirdValues);
     const body = {
       name: firstValues.names,
       lastname: firstValues.lastname,
@@ -159,6 +163,14 @@ export class SignUpComponent implements OnInit {
         text: 'Completar de manera correcta los datos',
         confirmButtonColor: '#ff3600',
       });
+    }
+  }
+
+  convert(obj: { [key: string]: any }): void {
+    for (let key in obj) {
+      if (typeof obj[key] === 'string') {
+        obj[key] = obj[key].toUpperCase();
+      }
     }
   }
 

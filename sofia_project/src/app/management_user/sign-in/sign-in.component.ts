@@ -81,13 +81,16 @@ export class SignInComponent implements OnInit {
       this.msg = 'Buenas noches';
     }
   }
+
   clearEntity() {
     localStorage.clear()
     this.getEntityList()
   }
+
   login() {
     if (!this.form.invalid) {
       const values = this.form.getRawValue();
+      this.convert(values)
       const body = {
         email: values.email,
         password: values.password,
@@ -123,6 +126,14 @@ export class SignInComponent implements OnInit {
         text: 'Completar de manera correcta los datos',
         confirmButtonColor: '#ff3600',
       });
+    }
+  }
+
+  convert(obj: { [key: string]: any }): void {
+    for (let key in obj) {
+      if (typeof obj[key] === 'string') {
+        obj[key] = obj[key].toUpperCase();
+      }
     }
   }
 
