@@ -17,6 +17,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {NgbModalModule, NgbPopover} from "@ng-bootstrap/ng-bootstrap";
 import {MatProgressSpinnerModule} from "@angular/material/progress-spinner";
 import {MatSelectModule} from "@angular/material/select";
+import {MatIconModule} from "@angular/material/icon";
 
 @NgModule({
   declarations: [
@@ -24,21 +25,22 @@ import {MatSelectModule} from "@angular/material/select";
     ProfileComponent,
     SignUpComponent,
   ],
-  imports: [
-    CommonModule,
-    ManagementUserRoutingModule,
-    FrameboardModule,
-    HttpClientModule,
-    MatButtonModule,
-    MatInputModule,
-    NgbModalModule,
-    ReactiveFormsModule,
-    MatStepperModule,
-    MatAutocompleteModule,
-    NgbPopover,
-    MatProgressSpinnerModule,
-    MatSelectModule,
-  ],
+    imports: [
+        CommonModule,
+        ManagementUserRoutingModule,
+        FrameboardModule,
+        HttpClientModule,
+        MatButtonModule,
+        MatInputModule,
+        NgbModalModule,
+        ReactiveFormsModule,
+        MatStepperModule,
+        MatAutocompleteModule,
+        NgbPopover,
+        MatProgressSpinnerModule,
+        MatSelectModule,
+        MatIconModule,
+    ],
   exports: [
     PasswordRecoveryComponent,
     ProfileComponent,

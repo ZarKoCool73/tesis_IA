@@ -174,3 +174,30 @@
   text-align: left; /* Alinea el texto a la izquierda */
   margin-top: -20px;
 }
+
+.custom-mat-form-field {
+  width: 84%;
+}
+
+.password-container {
+  display: flex;
+  align-items: center;
+}
+
+input {
+  flex: 1;
+}
+
+.small-button {
+  font-size: 14px; /* Ajusta el tamaño de fuente del botón según tus preferencias */
+  min-width: auto; /* Permite que el botón tenga un ancho más pequeño si es necesario */
+}
+
+/* Ajustes adicionales según tus preferencias para tamaños de fuente, márgenes, etc. */
+@media screen and (max-width: 600px) {
+  .custom-mat-form-field {
+    width: 84%;
+  }
+}
+
+

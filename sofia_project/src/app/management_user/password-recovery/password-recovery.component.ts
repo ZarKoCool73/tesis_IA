@@ -38,6 +38,8 @@ export class PasswordRecoveryComponent implements OnInit {
   Entidad: any
   titleEntity: any
   stateEnti: any
+  hide = true;
+  hideRepeat = true;
 
   constructor(
     private _utils: UtilsService,
@@ -223,5 +225,13 @@ export class PasswordRecoveryComponent implements OnInit {
   validateEmail() {
     const resultado = this.verifyEmail(this.secondFormGroup.value.email);
     this.stateEmail = resultado;
+  }
+
+  togglePasswordVisibility() {
+    this.hide = !this.hide;
+  }
+
+  togglePasswordRepeatVisibility() {
+    this.hideRepeat = !this.hideRepeat;
   }
 }

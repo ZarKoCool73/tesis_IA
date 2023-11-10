@@ -35,7 +35,6 @@ export class SignUpComponent implements OnInit {
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
   filteredOptions: Observable<string[]> | undefined;
-  esCorreoValido = false;
 
   constructor(private _utils: UtilsService,
               private _router: Router,
@@ -48,8 +47,9 @@ export class SignUpComponent implements OnInit {
   banderaEmail = false
   banderaCode = false
   message = '';
-  listSchool: any
   id_school: any
+  hide = true;
+  hideRepeat = true;
 
   Entidad: any[] = []
   titleEntity: any
@@ -70,6 +70,13 @@ export class SignUpComponent implements OnInit {
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
+  togglePasswordVisibility() {
+    this.hide = !this.hide;
+  }
+  togglePasswordRepeatVisibility() {
+    this.hideRepeat = !this.hideRepeat;
+  }
+
   InitDatos() {
     this._utilsService.getData.subscribe(data => {
       if (data) {
@@ -86,12 +93,6 @@ export class SignUpComponent implements OnInit {
     });
   }
 
-  /*getEntityList() {
-    this._entityService.getListEntity().subscribe((res: any) => {
-      console.log('res', res.entities)
-      this.listSchool = res.entities
-    })
-  }*/
   getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
       //this.listSchool = res.entities
