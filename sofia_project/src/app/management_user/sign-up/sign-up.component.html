@@ -76,7 +76,7 @@
               <input matInput formControlName="email" required (input)="validateEmail()">
             </mat-form-field>
             <mat-error *ngIf="!banderaEmail && !secondFormGroup.get('email')?.pristine"
-                       style="margin-top: -20px;width: 180px;">
+                       class="responsive-error">
               <span class="font-Inter-ExtraBold small-font-size">Correo no válido</span>
             </mat-error>
             <mat-form-field>

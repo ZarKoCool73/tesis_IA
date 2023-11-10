@@ -38,6 +38,7 @@ export class PasswordRecoveryComponent implements OnInit {
   Entidad: any
   titleEntity: any
   stateEnti: any
+
   constructor(
     private _utils: UtilsService,
     private _utilsService: UtilsService,
@@ -74,6 +75,7 @@ export class PasswordRecoveryComponent implements OnInit {
       }
     });
   }
+
   getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
       this.Entidad = res.entities
@@ -87,6 +89,8 @@ export class PasswordRecoveryComponent implements OnInit {
 
   obtenerData(event: any) {
     const values = this.secondFormGroup.getRawValue()
+    console.log(values)
+    this.convert(values)
     const body = values.email
     if (body != null) {
       this._userService.searchEmail(body).subscribe((res: any) => {
@@ -109,12 +113,17 @@ export class PasswordRecoveryComponent implements OnInit {
 
   dataCompleta() {
     const values = this.secondFormGroup.getRawValue()
-    const email = values.email;
     const values1 = this.thirdFormGroup.getRawValue()
+    this.convert(values)
+    this.convert(values1)
+    const email = values.email;
     const firstQuestion = values1.fquestion;
     const secondQuestion = values1.squestion;
     const thirdQuestion = values1.tquestion;
-
+    console.log('email', email)
+    console.log('firstQuestion', firstQuestion)
+    console.log('secondQuestion', secondQuestion)
+    console.log('thirdQuestion', thirdQuestion)
     this._userService.verifyAnswers(email, firstQuestion, secondQuestion, thirdQuestion)
       .subscribe(
         (res: any) => {
@@ -132,8 +141,17 @@ export class PasswordRecoveryComponent implements OnInit {
       );
   }
 
+  convert(obj: { [key: string]: any }): void {
+    for (let key in obj) {
+      if (typeof obj[key] === 'string') {
+        obj[key] = obj[key].toUpperCase();
+      }
+    }
+  }
+
   reestablecerContraseña() {
     const values = this.secondFormGroup.getRawValue()
+    this.convert(values)
     const email = values.email;
     const password = values.password;
     if (this.bandera) {
