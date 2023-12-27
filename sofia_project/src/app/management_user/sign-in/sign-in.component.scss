@@ -184,3 +184,9 @@
   text-align: left; /* Alinea el texto a la izquierda */
   margin-top: 5px; /* Ajusta el margen superior según sea necesario */
 }
+.position-button-pass{
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+}

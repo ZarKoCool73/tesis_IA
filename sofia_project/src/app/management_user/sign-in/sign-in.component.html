@@ -55,9 +55,11 @@
         <div class="form-group">
           <label for="password" class="font-Inter-SemiBold text-black">Contraseña</label>
           <div style="position: relative;">
-            <input type="{{ hideToggle ? 'password' : 'text' }}" formControlName="password" class="form-control"
-                   id="password"
+            <input type="{{ hide ? 'password' : 'text' }}" formControlName="password" class="form-control" id="password"
                    autocomplete="off">
+            <button mat-icon-button matSuffix (click)="togglePassword()" class="position-button-pass">
+              <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+            </button>
           </div>
           <div *ngIf="statePassword" class="main-color-text font-Inter-ExtraBold">
             Ingrese contraseña

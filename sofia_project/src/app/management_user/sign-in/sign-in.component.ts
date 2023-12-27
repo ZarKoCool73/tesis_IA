@@ -13,6 +13,7 @@ import {MatFormFieldModule} from "@angular/material/form-field";
 import {EncryptionService} from "../../../services/encryption-service.service";
 import {EntityService} from "../../../services/entity.service";
 import {UtilsService} from "../../../services/utils.service";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-sign-in',
@@ -20,10 +21,11 @@ import {UtilsService} from "../../../services/utils.service";
   styleUrls: ['./sign-in.component.scss'],
   providers: [NgbModalConfig, NgbModal],
   standalone: true,
-  imports: [MatButtonModule, MatDialogModule, RouterLink, ReactiveFormsModule, NgIf, MatFormFieldModule, NgClass],
+  imports: [MatButtonModule, MatDialogModule, RouterLink, ReactiveFormsModule, NgIf, MatFormFieldModule, NgClass, MatIconModule],
 })
 export class SignInComponent implements OnInit {
   hideToggle = true
+  hide = true
   titleEntity: any
   stateEnti: any
   Entidad: any
@@ -55,8 +57,8 @@ export class SignInComponent implements OnInit {
     this.getEntityList()
   }
 
-  togglePasswordVisibility() {
-    this.hideToggle = !this.hideToggle;
+  togglePassword() {
+    this.hide = !this.hide;
   }
 
   InitDatos() {

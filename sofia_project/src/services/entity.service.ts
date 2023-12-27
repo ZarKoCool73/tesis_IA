@@ -17,9 +17,4 @@ export class EntityService {
     const headers = {params: {}}
     return this._http.get(`${this.baseUrl}entity-list`, headers)
   }
-
-  EntityState(id: string, stateEntity: string) {
-    const body = {stateEntity};
-    return this._http.put<any>(`${this.baseUrl}entity-state/${id}`, body);
-  }
 }
