@@ -5,6 +5,9 @@ import Swal from "sweetalert2";
 import {User} from "../../models/user";
 import {ResourceServiceService} from "../../../services/resource-service.service";
 import {EncryptionService} from "../../../services/encryption-service.service";
+import {ExpressionService} from "../../../services/expression.service";
+import {ComprehensionService} from "../../../services/comprehension.service";
+import {CommunicationService} from "../../../services/communication.service";
 
 @Component({
   selector: 'app-profile',
@@ -18,7 +21,11 @@ export class ProfileComponent implements OnInit {
     private _userService: UserServiceService,
     private el: ElementRef,
     private encryptionService: EncryptionService,
-    private _resourceService: ResourceServiceService) {
+    private _resourceService: ResourceServiceService,
+    private _expressionService: ExpressionService,
+    private _comprehensionService: ComprehensionService,
+    private _communicationService: CommunicationService,
+  ) {
     this.userProfile = new User('', '', '', '', '', '', '', '', '');
 
   }
@@ -53,7 +60,7 @@ export class ProfileComponent implements OnInit {
     Swal.showLoading()
     this._userService.getUser(id).subscribe((res: any) => {
       if (res.state == 1) {
-        this.userProfile = res.user
+        this.userProfile = res.response
         Swal.close()
       }
     }, (error: HttpErrorResponse) => {
@@ -70,16 +77,17 @@ export class ProfileComponent implements OnInit {
   }
 
   loadDetailComprehension(id: any) {
-    this._resourceService.getListComprehension().subscribe((res: any) => {
+    this._comprehensionService.getListComprehension().subscribe((res: any) => {
       if (res.state == 1) {
         console.log('loadDetailComprehension', res)
-        this.dataComprehensionEnd = res.resources.length
-        this._resourceService.getComprehensionsByIdUser(id).subscribe((res: any) => {
+        this.dataComprehensionEnd = res.response.length
+        this._comprehensionService.getComprehensionsByIdUser(id).subscribe((res: any) => {
+          console.log('res2', res)
           if (res.state == 1) {
-            this.dataComprehensionInit = (res.comprehensions || []).length
+            this.dataComprehensionInit = (res.response || []).length
           }
         })
-        const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
+        const filteredResources = res.response.filter((resource: any) => resource.state === '1');
         this.dataComprehensionInit = filteredResources.length
       }
     }, (error: HttpErrorResponse) => {
@@ -96,16 +104,16 @@ export class ProfileComponent implements OnInit {
   }
 
   loadDetailExpression(id: any) {
-    this._resourceService.getListExpression().subscribe((res: any) => {
+    this._expressionService.getListExpression().subscribe((res: any) => {
       if (res.state == 1) {
-        console.log('loadDetailExpression', res)
-        this.dataExpressionEnd = res.resources.length
-        this._resourceService.getExpressionsByIdUser(id).subscribe((res: any) => {
+        this.dataExpressionEnd = res.response.length
+        this._expressionService.getExpressionsByIdUser(id).subscribe((res: any) => {
+          console.log('data', res)
           if (res.state == 1) {
-            this.dataExpressionInit = (res.expressions || []).length
+            this.dataExpressionInit = (res?.response || []).length
           }
         })
-        const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
+        const filteredResources = res.response.filter((resource: any) => resource.state === '1');
         this.dataExpressionInit = filteredResources.length
       }
     }, (error: HttpErrorResponse) => {
@@ -122,15 +130,15 @@ export class ProfileComponent implements OnInit {
   }
 
   loadDetailComunication(id: any) {
-    this._resourceService.getListComunication().subscribe((res: any) => {
+    this._communicationService.getListComunication().subscribe((res: any) => {
       if (res.state == 1) {
-        this.dataComunicationEnd = res.resources.length
-        this._resourceService.getCommunicationsByIdUser(id).subscribe((res: any) => {
+        this.dataComunicationEnd = res.response.length
+        this._communicationService.getCommunicationsByIdUser(id).subscribe((res: any) => {
           if (res.state == 1) {
-            this.dataComunicationInit = (res.communications || []).length
+            this.dataComunicationInit = (res?.response || []).length
           }
         })
-        const filteredResources = res.resources.filter((resource: any) => resource.state === '1');
+        const filteredResources = res.response.filter((resource: any) => resource.state === '1');
         this.dataComunicationInit = filteredResources.length
       }
     }, (error: HttpErrorResponse) => {

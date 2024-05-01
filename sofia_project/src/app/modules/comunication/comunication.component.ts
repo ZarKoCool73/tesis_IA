@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {ResourceServiceService} from "../../../services/resource-service.service";
 import {EncryptionService} from "../../../services/encryption-service.service";
+import {CommunicationService} from "../../../services/communication.service";
 
 @Component({
   selector: 'app-comunication',
@@ -20,7 +21,9 @@ export class ComunicationComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private encryptionService: EncryptionService,
-    private _servicesResource: ResourceServiceService) {
+    private _servicesResource: ResourceServiceService,
+    private _communicationService: CommunicationService,
+  ) {
 
   }
 
@@ -85,7 +88,7 @@ export class ComunicationComponent implements OnInit {
       allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this._servicesResource.addCommunication(this.IdUser, idResource, state).subscribe(
+        this._communicationService.addCommunication(this.IdUser, idResource, state).subscribe(
           response => {
             console.log('Respuesta del servidor:', response);
             Swal.fire({
@@ -112,7 +115,7 @@ export class ComunicationComponent implements OnInit {
   }
 
   loadCommunicationProgress() {
-    this._servicesResource.getCommunicationsByIdUser(this.IdUser).subscribe((res: any) => {
+    this._communicationService.getCommunicationsByIdUser(this.IdUser).subscribe((res: any) => {
       if (res.state == 1) {
         const ids = (res?.communications || []).map((c: any) => c.id_Resource)
         console.log(ids)

@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {ResourceServiceService} from "../../../services/resource-service.service";
 import {EncryptionService} from "../../../services/encryption-service.service";
+import {ComprehensionService} from "../../../services/comprehension.service";
 
 @Component({
   selector: 'app-comprehension',
@@ -27,7 +28,8 @@ export class ComprehensionComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private encryptionService: EncryptionService,
-    private _servicesResource: ResourceServiceService) {
+    private _servicesResource: ResourceServiceService,
+    private _comprehensionService: ComprehensionService) {
 
   }
 
@@ -97,7 +99,7 @@ export class ComprehensionComponent implements OnInit {
       allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this._servicesResource.addComprehension(this.IdUser, idResource, state).subscribe(
+        this._comprehensionService.addComprehension(this.IdUser, idResource, state).subscribe(
           response => {
             Swal.fire({
               icon: 'success',
@@ -123,7 +125,8 @@ export class ComprehensionComponent implements OnInit {
   }
 
   loadComprehensionProgress() {
-    this._servicesResource.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
+    this._comprehensionService.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
+      console.log('log', res)
       if (res.state == 1) {
         const ids = (res?.comprehensions || []).map((c: any) => c.id_Resource)
         console.log(ids)

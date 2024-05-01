@@ -4,6 +4,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {ResourceServiceService} from "../../../services/resource-service.service";
 import {EncryptionService} from "../../../services/encryption-service.service";
+import {ExpressionService} from "../../../services/expression.service";
 
 @Component({
   selector: 'app-expression',
@@ -22,7 +23,9 @@ export class ExpressionComponent implements OnInit {
   constructor(
     private _activatedRoute: ActivatedRoute,
     private encryptionService: EncryptionService,
-    private _servicesResource: ResourceServiceService) {
+    private _servicesResource: ResourceServiceService,
+    private _expressionService: ExpressionService
+  ) {
 
   }
 
@@ -92,7 +95,7 @@ export class ExpressionComponent implements OnInit {
       allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
     }).then((result: any) => {
       if (result.isConfirmed) {
-        this._servicesResource.addExpression(this.IdUser, idResource, state).subscribe(
+        this._expressionService.addExpression(this.IdUser, idResource, state).subscribe(
           response => {
             console.log('Respuesta del servidor:', response);
             Swal.fire({
@@ -119,9 +122,9 @@ export class ExpressionComponent implements OnInit {
   }
 
   loadExpressionProgress() {
-    this._servicesResource.getExpressionsByIdUser(this.IdUser).subscribe((res: any) => {
+    this._expressionService.getExpressionsByIdUser(this.IdUser).subscribe((res: any) => {
+      console.log('ress', res)
       if (res.state == 1) {
-        console.log('ress', res)
         const ids = (res?.expressions || []).map((c: any) => c.id_Resource)
         console.log(ids)
         this.categoryExpression = this.categoryExpression.map((c: any) => ({
