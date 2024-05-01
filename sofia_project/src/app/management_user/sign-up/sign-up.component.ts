@@ -73,6 +73,7 @@ export class SignUpComponent implements OnInit {
   togglePasswordVisibility() {
     this.hide = !this.hide;
   }
+
   togglePasswordRepeatVisibility() {
     this.hideRepeat = !this.hideRepeat;
   }
@@ -96,7 +97,7 @@ export class SignUpComponent implements OnInit {
   getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
       //this.listSchool = res.entities
-      this.Entidad = res.entities
+      this.Entidad = res.response
       const entity = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
       const index = this.Entidad.findIndex((f: any) => f.id_Entity == entity.id)
       if (index !== -1) {

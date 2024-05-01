@@ -133,8 +133,9 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
 
   loadDetail(id: any) {
     this._userService.getUser(id).subscribe((res: any) => {
+      console.log('res', res)
       if (res.state == 1) {
-        this.userProfile = res.user
+        this.userProfile = res.response
       }
     }, (error: HttpErrorResponse) => {
       Swal.close();
@@ -171,7 +172,7 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   InitDatos() {
     this._entityService.getListEntity().subscribe((res: any) => {
       if (res) {
-        const datafilter = res.entities
+        const datafilter = res.response
           .filter((entity: any) => {
             const entidad = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
             return entity.id_Entity === entidad.id

@@ -196,7 +196,7 @@ export class SignInComponent implements OnInit {
       this.openEntitys()
     }
     this.stateEnti = '1'
-    this.titleEntity = entity.name
+    this.titleEntity = entity?.name
     this.Entidad = entity
   }
 }
@@ -247,7 +247,7 @@ export class DialogDataModulosEntidad {
 
   getEntityList() {
     this._entityService.getListEntity().subscribe((res: any) => {
-      this.listEntity = res.entities
+      this.listEntity = res.response
     })
   }
 

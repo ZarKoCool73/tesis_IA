@@ -10,12 +10,12 @@ export class ResourceServiceService {
   private baseUrl = ''
 
   constructor(private _http: HttpClient, private _common: CommonServices) {
-    this.baseUrl = this._common.BASE_URL + ''
+    this.baseUrl = this._common.BASE_URL + 'resources/'
   }
 
   getCategory(category: string) {
     const headers = {params: {}}
-    return this._http.get(`${this.baseUrl}resources/${category}`, headers)
+    return this._http.get(`${this.baseUrl}list-category/${category}`, headers)
   }
 
   getListComprehension() {

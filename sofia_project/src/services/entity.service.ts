@@ -10,11 +10,11 @@ export class EntityService {
   private baseUrl = ''
 
   constructor(private _http: HttpClient, private _common: CommonServices) {
-    this.baseUrl = this._common.BASE_URL + ''
+    this.baseUrl = this._common.BASE_URL + '/entity/'
   }
 
   getListEntity() {
     const headers = {params: {}}
-    return this._http.get(`${this.baseUrl}entity-list`, headers)
+    return this._http.get(`${this.baseUrl}list-entity`, headers)
   }
 }
