@@ -163,10 +163,24 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   }
 
   deleteID() {
-    Swal.showLoading()
-    localStorage.removeItem('userId')
-    this._router.navigate(['/account'])
-    Swal.close()
+    Swal.fire({
+      title: '<strong>Cerrar sesión</strong>',
+      html: '¿Estás seguro de cerrar la sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#11e38a',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
+    }).then((result: any) => {
+      if (result.isConfirmed) {
+        Swal.showLoading()
+        localStorage.removeItem('userId')
+        this._router.navigate(['/account'])
+        Swal.close()
+      }
+    })
   }
 
   InitDatos() {
