@@ -1,6 +1,26 @@
 <main class="d-flex justify-content-between">
   <div class="camera-component"></div>
   <video #videoElement width="600" autoplay></video>
+  <div class="container_video">
+    <h1 id="title">{{ title }}</h1>
+    <div style="display: flex; flex-wrap: wrap; width: 100%; justify-content: center">
+      <div class="camera_content">
+        <div class="camera">
+          <video #localVideo id="localVideo" autoplay></video>
+          <video id="remoteVideo" style="display: none" autoplay></video>
+        </div>
+        <canvas #canvas id="canvas" style="display:none;"></canvas>
+        <div id="detectedSign" style="display: none"></div>
+      </div>
+      <div class="results">
+        <h3 id="title_result">{{ resultTitle }}</h3>
+        <p id="content_result">{{ resultContent }}</p>
+        <br>
+        <p id="accuracy_result">{{ resultAccuracy }}</p>
+      </div>
+    </div>
+    <button id="captureButton" class="button" (click)="captureAndProcessImage()">Capturar Imagen</button>
+  </div>
   <div class="d-flex flex-column photo-items">
     <div *ngFor="let data of dataCollection"
          [style]="data.icon=='gif' ? 'width: 550px; height:max-content' : 'width: 310px; height:max-content'"
