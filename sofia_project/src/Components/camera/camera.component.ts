@@ -21,6 +21,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
   }
+
   constructor() {
   }
 }

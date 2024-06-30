@@ -20,6 +20,9 @@ export class ExpressionComponent implements OnInit {
   nameList: any
   IdUser: any
 
+  /*banderas*/
+  isOpenCamera = false
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private encryptionService: EncryptionService,
@@ -119,6 +122,11 @@ export class ExpressionComponent implements OnInit {
         );
       }
     })
+  }
+
+  /*Varibales para la camara*/
+  openViewCamera() {
+    this.isOpenCamera = !this.isOpenCamera
   }
 
   loadExpressionProgress() {
