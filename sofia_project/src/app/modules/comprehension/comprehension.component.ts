@@ -17,6 +17,7 @@ export class ComprehensionComponent implements OnInit {
   category = 'comprehension'
   nameList: any
   IdUser: any
+  showCamera = false
   url = {
     verbs: 'Verbos',
     question: 'Preguntas',
@@ -185,5 +186,9 @@ export class ComprehensionComponent implements OnInit {
 
   decrypt(id: any) {
     return this.encryptionService.decryptData(id);
+  }
+
+  showCameraAction() {
+    this.showCamera = true
   }
 }
