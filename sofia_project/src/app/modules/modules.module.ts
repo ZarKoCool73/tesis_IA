@@ -7,6 +7,7 @@ import {ComunicationComponent} from "./comunication/comunication.component";
 import {ComprehensionComponent} from "./comprehension/comprehension.component";
 import {CommonModule} from "@angular/common";
 import {FrameboardModule} from "../../Components/frameboard/frameboard.module";
+import {CameraModule} from "../../Components/camera/camera.module";
 
 @NgModule({
   declarations: [
@@ -14,11 +15,12 @@ import {FrameboardModule} from "../../Components/frameboard/frameboard.module";
     ComunicationComponent,
     ComprehensionComponent
   ],
-  imports: [
-    CommonModule,
-    ModulesRoutingModule,
-    FrameboardModule
-  ],
+    imports: [
+        CommonModule,
+        ModulesRoutingModule,
+        FrameboardModule,
+        CameraModule
+    ],
   exports: [
     ExpressionComponent,
     ComunicationComponent,

@@ -1,0 +1,19 @@
+<main class="d-flex justify-content-between">
+  <div class="camera-component"></div>
+  <div class="d-flex flex-column photo-items">
+    <div *ngFor="let data of dataCollection"
+         [style]="data.icon=='gif' ? 'width: 550px; height:320px' : 'width: 310px; height:320px'"
+         class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4">
+      <div class="big-font-size font-Inter-Semibold text-break fw-900 mt-1 pt-2 px-2">{{ data.name }}</div>
+      <div class="align-items-start" style="margin-top: 12px;"
+           *ngIf="data.state == '0'">
+        <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
+      </div>
+      <div class="align-items-start " style="margin-top: 12px;" *ngIf="data.state == '1'">
+        <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
+      </div>
+      <img [src]=data.path width="260" *ngIf="data.icon=='png'">
+      <img [src]=data.path width="450" *ngIf="data.icon=='gif'">
+    </div>
+  </div>
+</main>
