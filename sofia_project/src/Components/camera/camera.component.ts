@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, HostListener, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 import {HttpErrorResponse} from '@angular/common/http';
 import {Router} from "@angular/router";
 import {UserServiceService} from "../../services/user-service.service";
@@ -15,6 +15,7 @@ import {EntityService} from "../../services/entity.service";
 export class CameraComponent implements OnInit, AfterViewInit {
 
   @Input() dataCollection: any[] = []
+  @Output() close = new EventEmitter();
 
   ngAfterViewInit(): void {
   }
@@ -23,5 +24,9 @@ export class CameraComponent implements OnInit, AfterViewInit {
   }
 
   constructor() {
+  }
+
+  closeComponent() {
+    this.close.emit();
   }
 }
