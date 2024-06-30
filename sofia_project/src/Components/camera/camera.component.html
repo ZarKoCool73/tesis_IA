@@ -1,5 +1,6 @@
 <main class="d-flex justify-content-between">
   <div class="camera-component"></div>
+  <video #videoElement width="600" autoplay></video>
   <div class="d-flex flex-column photo-items">
     <div *ngFor="let data of dataCollection"
          [style]="data.icon=='gif' ? 'width: 550px; height:320px' : 'width: 310px; height:320px'"

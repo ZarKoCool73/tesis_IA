@@ -80,7 +80,6 @@ export class ExpressionComponent implements OnInit {
       }
     })
   }
-
   activeProgress(data: any): void {
     this.nameList = data.name;
     const idResource = data._id;
