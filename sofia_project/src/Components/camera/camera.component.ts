@@ -6,6 +6,7 @@ import Swal from "sweetalert2";
 import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
 import {EntityService} from "../../services/entity.service";
+import {IaService} from "../../services/ia.service";
 
 @Component({
   selector: 'app-camera',
@@ -20,6 +21,8 @@ export class CameraComponent implements OnInit, AfterViewInit {
   @ViewChild('localVideo') localVideo!: ElementRef<HTMLVideoElement>;
   @ViewChild('canvas') canvas!: ElementRef<HTMLCanvasElement>;
 
+  context!: CanvasRenderingContext2D;
+
   title = '';
   resultTitle = '';
   resultContent = '';
@@ -32,9 +35,12 @@ export class CameraComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     //this.startCamera()
+    this.setupWebRTC();
   }
 
-  constructor() {
+  constructor(
+    private readonly iaService: IaService
+  ) {
   }
 
   /*startCamera() {
@@ -71,53 +77,43 @@ export class CameraComponent implements OnInit, AfterViewInit {
     }
   }
 
-  async setupWebRTC() {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({video: true, audio: false});
-      this.localVideo.nativeElement.srcObject = stream;
-    } catch (error) {
-      console.error('Error en la configuración de WebRTC:', error);
-      Swal.fire('Error', 'No se pudo acceder a la cámara', 'error');
-    }
+  setupWebRTC() {
+    navigator.mediaDevices.getUserMedia({video: true, audio: false})
+      .then(stream => {
+        this.localVideo.nativeElement.srcObject = stream;
+      })
+      .catch(error => {
+        console.error('Error en la configuración de WebRTC:', error);
+      });
   }
 
   captureAndProcessImage() {
+    const video = this.localVideo.nativeElement;
     const canvas = this.canvas.nativeElement;
-    const context = canvas.getContext('2d');
-    canvas.width = this.localVideo.nativeElement.videoWidth;
-    canvas.height = this.localVideo.nativeElement.videoHeight;
-    // @ts-ignore
-    context.drawImage(this.localVideo.nativeElement, 0, 0, canvas.width, canvas.height);
+    const context = canvas.getContext('2d')!;
+
+    canvas.width = video.videoWidth;
+    canvas.height = video.videoHeight;
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     const imgData = canvas.toDataURL('image/jpeg');
-    const expressions = window.location.href.includes('expressions');
+    const expressions = '0';
 
-    fetch('http://services-ia.onrender.com/expressions?camera_id=8', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
+    this.iaService.processImage(imgData, expressions).subscribe(
+      (data: any) => {
+        const accuracyPercentage = data.accuracy ? `Precisión: ${data.accuracy.toFixed(2)}%` : '';
+        if (data.accuracy > 60) {
+          document.getElementById("title_result")!.innerText = "Interpretación del signo";
+          document.getElementById("content_result")!.innerText = `${data.sign}`;
+          document.getElementById("accuracy_result")!.innerText = accuracyPercentage;
+        }
       },
-      body: JSON.stringify({
-        imageData: imgData,
-        Expressions: expressions
-      })
-    }).then(res => res.json().then(data => {
-      if (!res.ok) {
-        throw new Error(data.error || 'Network response was not ok');
+      error => {
+        console.log('error', error);
+        document.getElementById("title_result")!.innerText = "Interpretación del signo";
+        document.getElementById("content_result")!.innerText = '-';
+        document.getElementById("accuracy_result")!.innerText = `${error.message}`;
       }
-      return data;
-    })).then(data => {
-      const accuracyPercentage = data.accuracy ? `Precisión: ${data.accuracy.toFixed(2)}%` : '';
-      if (data.accuracy > 60) {
-        this.resultTitle = 'Interpretación del signo';
-        this.resultContent = `${data.sign}`;
-        this.resultAccuracy = accuracyPercentage;
-      }
-    }).catch(error => {
-      console.log('error', error);
-      this.resultTitle = 'Interpretación del signo';
-      this.resultContent = '-';
-      this.resultAccuracy = `${error.message}`;
-    });
+    );
   }
 }
