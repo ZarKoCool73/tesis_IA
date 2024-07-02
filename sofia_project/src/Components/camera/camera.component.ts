@@ -5,7 +5,6 @@ import {UserServiceService} from "../../services/user-service.service";
 import Swal from "sweetalert2";
 import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
-import {EntityService} from "../../services/entity.service";
 import {IaService} from "../../services/ia.service";
 
 @Component({

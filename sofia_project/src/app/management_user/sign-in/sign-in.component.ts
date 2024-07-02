@@ -6,12 +6,11 @@ import {HttpErrorResponse} from "@angular/common/http";
 import Swal from 'sweetalert2';
 import {NgbModal, NgbModalConfig} from '@ng-bootstrap/ng-bootstrap';
 import {MAT_DIALOG_DATA, MatDialog, MatDialogModule, MatDialogRef} from "@angular/material/dialog";
-import {JsonPipe, NgClass, NgForOf, NgIf} from "@angular/common";
+import {NgClass, NgIf} from "@angular/common";
 import {MatButtonModule} from "@angular/material/button";
 import {ModalServiceReference} from "../../../services/modal-reference.service";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {EncryptionService} from "../../../services/encryption-service.service";
-import {EntityService} from "../../../services/entity.service";
 import {UtilsService} from "../../../services/utils.service";
 import {MatIconModule} from "@angular/material/icon";
 
@@ -26,9 +25,6 @@ import {MatIconModule} from "@angular/material/icon";
 export class SignInComponent implements OnInit {
   hideToggle = true
   hide = true
-  titleEntity: any
-  stateEnti: any
-  Entidad: any
 
   /*BANDERAS*/
   stateEmail = false
@@ -53,26 +49,10 @@ export class SignInComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateGreeting();
-    this.InitDatos()
-    this.getEntityList()
   }
 
   togglePassword() {
     this.hide = !this.hide;
-  }
-
-  InitDatos() {
-    this._utilsService.getData.subscribe(data => {
-      if (data) {
-        this.Entidad = data
-        this.stateEnti = data?.state || '0'
-        if (this.stateEnti != '0') {
-          this.titleEntity = data?.name
-        } else {
-          this.titleEntity = ''
-        }
-      }
-    });
   }
 
   updateGreeting() {
@@ -88,11 +68,6 @@ export class SignInComponent implements OnInit {
     }
   }
 
-  clearEntity() {
-    localStorage.clear()
-    this.getEntityList()
-  }
-
   login() {
     if (!this.form.invalid) {
       const values = this.form.getRawValue();
@@ -100,7 +75,6 @@ export class SignInComponent implements OnInit {
       const body = {
         email: values.email,
         password: values.password,
-        id_School: this.Entidad.id
       };
       Swal.showLoading();
       this._userService.login(body).subscribe(
@@ -155,18 +129,6 @@ export class SignInComponent implements OnInit {
     this.modalReference.setDialogRef(this.referenceModal);
   }
 
-  openEntitys() {
-    this.referenceModal = this.dialog.open(DialogDataModulosEntidad, {
-      data: {
-        animal: 'panda',
-      },
-      height: '530px',
-      width: '650px',
-      disableClose: true,
-    })
-    this.modalReference.setDialogRef(this.referenceModal);
-  }
-
   verifyEmail(event: any): boolean {
     const regexCorreo = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const data = event
@@ -190,15 +152,7 @@ export class SignInComponent implements OnInit {
     localStorage.setItem('userId', encryptID);
   }
 
-  getEntityList() {
-    const entity = JSON.parse(localStorage.getItem('selectedEntity') || 'null')
-    if (!entity) {
-      this.openEntitys()
-    }
-    this.stateEnti = '1'
-    this.titleEntity = entity?.name
-    this.Entidad = entity
-  }
+
 }
 
 @Component({
@@ -220,66 +174,4 @@ export class DialogDataExampleDialog {
       dialogRef.close();
     }
   }
-}
-
-@Component({
-  selector: 'mat-dialog-content',
-  templateUrl: 'modulosEntidad.html',
-  standalone: true,
-  imports: [MatDialogModule, NgIf, RouterLink, NgForOf, JsonPipe],
-})
-export class DialogDataModulosEntidad {
-  listEntity: any
-
-  constructor(
-    @Inject(MAT_DIALOG_DATA)
-    public data: DialogDataModulosEntidad,
-    private modalReference: ModalServiceReference,
-    private _entityService: EntityService,
-    private _utilsService: UtilsService
-  ) {
-  }
-
-
-  ngOnInit() {
-    this.getEntityList()
-  }
-
-  getEntityList() {
-    this._entityService.getListEntity().subscribe((res: any) => {
-      this.listEntity = res.response
-    })
-  }
-
-  obtenerData(data: any) {
-    const idEntity = data
-    Swal.fire({
-      title: '<strong>¡Confirmación de Institución!</strong>',
-      html: 'Antes de confirmar, asegúrate de que estás seleccionando' +
-        ' de manera correcta la institución a la que perteneces. ¿Estás seguro de escoger la institución: <strong>' + idEntity.nameEntity + '</strong>  ?',
-      icon: 'question',
-      showCancelButton: true,
-      confirmButtonColor: '#11e38a',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, estoy seguro',
-      cancelButtonText: 'No, fue un error',
-      allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
-    }).then((result: any) => {
-      if (result.isConfirmed) {
-        const body = {name: data.nameEntity, state: 1, id: data.id_Entity};
-        localStorage.setItem('selectedEntity', JSON.stringify(body))
-        this._utilsService.sendData(body);
-        this.close()
-      }
-    })
-  }
-
-  close() {
-    const dialogRef = this.modalReference.getDialogRef();
-    if (dialogRef) {
-      dialogRef.close();
-    }
-  }
-
-
 }

@@ -29,18 +29,3 @@ export class User {
     this.password = password
   }
 }
-
-export class Entity {
-  nameEntity: string
-  imgEntity: string
-  stateEntity: string
-  entities: any;
-
-  constructor(nameEntity: string,
-              imgEntity: string,
-              stateEntity: string) {
-    this.nameEntity = nameEntity
-    this.imgEntity = imgEntity
-    this.stateEntity = stateEntity
-  }
-}

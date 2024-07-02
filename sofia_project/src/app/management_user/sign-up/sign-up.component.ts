@@ -6,7 +6,6 @@ import {UserServiceService} from "../../../services/user-service.service";
 import {Router} from '@angular/router';
 import Swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";
-import {EntityService} from "../../../services/entity.service";
 
 @Component({
   selector: 'app-sign-up',
@@ -19,7 +18,6 @@ export class SignUpComponent implements OnInit {
     names: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
-    id_School: new FormControl('', Validators.required),
   })
   secondFormGroup = new FormGroup({
     email: new FormControl('', Validators.required),
@@ -39,7 +37,6 @@ export class SignUpComponent implements OnInit {
   constructor(private _utils: UtilsService,
               private _router: Router,
               private _utilsService: UtilsService,
-              private _entityService: EntityService,
               private _userService: UserServiceService) {
   }
 
@@ -47,7 +44,6 @@ export class SignUpComponent implements OnInit {
   banderaEmail = false
   banderaCode = false
   message = '';
-  id_school: any
   hide = true;
   hideRepeat = true;
 
@@ -60,8 +56,6 @@ export class SignUpComponent implements OnInit {
       startWith(''),
       map((value: any) => this._filter(value))
     );
-    this.getEntityList()
-    this.InitDatos()
   }
 
   private _filter(value: string): string[] {
@@ -78,40 +72,6 @@ export class SignUpComponent implements OnInit {
     this.hideRepeat = !this.hideRepeat;
   }
 
-  InitDatos() {
-    this._utilsService.getData.subscribe(data => {
-      if (data) {
-        //this.Entidad = data
-        this.firstFormGroup.get('id_School')?.setValue(data.id)
-        this.firstFormGroup.get('id_School')?.disable()
-        this.stateEnti = data.state || '0'
-        if (this.stateEnti != '0') {
-          this.titleEntity = data?.name
-        } else {
-          this.titleEntity = ''
-        }
-      }
-    });
-  }
-
-  getEntityList() {
-    this._entityService.getListEntity().subscribe((res: any) => {
-      //this.listSchool = res.entities
-      this.Entidad = res.response
-      const entity = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
-      const index = this.Entidad.findIndex((f: any) => f.id_Entity == entity.id)
-      if (index !== -1) {
-        this._utilsService.sendData(entity)
-      }
-
-    })
-  }
-
-  onSchoolSelectionChange(event: any) {
-    this.id_school = event.value; // Obtener el ID seleccionado
-    console.log('ID del colegio seleccionado:', this.id_school);
-  }
-
   createAccount() {
     const firstValues = this.firstFormGroup.getRawValue()
     const secondValues = this.secondFormGroup.getRawValue()
@@ -124,7 +84,6 @@ export class SignUpComponent implements OnInit {
       name: firstValues.names,
       lastname: firstValues.lastname,
       age: firstValues.age,
-      id_School: firstValues.id_School,
       email: secondValues.email,
       studentCode: firstValues.code,
       firstQuestion: thirdValues.fquestion,

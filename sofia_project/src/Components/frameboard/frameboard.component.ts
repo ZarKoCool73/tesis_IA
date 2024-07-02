@@ -5,7 +5,6 @@ import {UserServiceService} from "../../services/user-service.service";
 import Swal from "sweetalert2";
 import {User} from 'src/app/models/user';
 import {EncryptionService} from "../../services/encryption-service.service";
-import {EntityService} from "../../services/entity.service";
 
 @Component({
   selector: 'app-frameboard',
@@ -13,16 +12,12 @@ import {EntityService} from "../../services/entity.service";
   styleUrls: ['./frameboard.component.scss']
 })
 export class FrameboardComponent implements OnInit, AfterViewInit {
-  name = 'World';
   @Input() hasSon: boolean = false
   userProfile: User;
   currentHour = '';
-  dataEntity: any
-  idEntity: any
 
   constructor(
     private _router: Router,
-    private _entityService: EntityService,
     private _userService: UserServiceService,
     private encryptionService: EncryptionService) {
     this.userProfile = new User('', '', '', '', '', '', '', '', '');
@@ -53,7 +48,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     setInterval(() => {
       this.updateCurrentHour();
     }, 1000);
-    this.InitDatos()
   }
 
   private updateCurrentHour(): void {
@@ -68,36 +62,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
   private formatNumber(num: number): string {
     return num < 10 ? `0${num}` : `${num}`;
   }
-
-  obtenerVideo(event: any): void {
-    const url = this.getUrl('verbs')
-    console.log('urñl', url)
-    Swal.fire({
-      title: '<strong>¡Aviso importante!</strong>',
-      html: 'Antes de utilizar la cámara, asegúrate de estar en un lugar <strong>cómodo y bien iluminado</strong>.<br><br>' +
-        'Recuerda que un entorno adecuado te ayudará a tener una mejor calidad de video y experiencia. ' +
-        'Si necesitas más información sobre cómo configurar tu entorno para una óptima calidad de video, ' +
-        'por favor, ponerse en contacto con el personal de<strong style="color: #3498db"> Soporte de TI</strong>.<br><br>' +
-        '¿Estás listo para proceder?',
-      icon: 'info',
-      showCloseButton: true,
-      confirmButtonColor: '#11e38a',
-      cancelButtonColor: '#d33',
-      confirmButtonText: 'Sí, estoy listo',
-      cancelButtonText: 'Cancelar',
-      allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
-    }).then((result) => {
-      if (result.isConfirmed) {
-        if (url) {
-          window.open('https://services-ia.onrender.com/comprehension')
-        } else {
-          window.open('https://services-ia.onrender.com/expressions')
-        }
-      }
-    });
-  }
-
-//cerrar el mmwbo ventana
 
 
   ngAfterViewInit(): void {
@@ -183,24 +147,4 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
     })
   }
 
-  InitDatos() {
-    this._entityService.getListEntity().subscribe((res: any) => {
-      if (res) {
-        const datafilter = res.response
-          .filter((entity: any) => {
-            const entidad = JSON.parse(localStorage.getItem('selectedEntity') || '{}')
-            return entity.id_Entity === entidad.id
-          })
-          .map((entity: any) => {
-            return entity
-          });
-        this.dataEntity = datafilter[0]
-        this.idEntity = datafilter[0]._id
-      }
-    });
-  }
-
-  getUrl(url: string) {
-    return document.location.href.includes(url)
-  }
 }

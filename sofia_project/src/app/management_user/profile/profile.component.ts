@@ -1,9 +1,8 @@
-import {Component, ElementRef, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserServiceService} from "../../../services/user-service.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import Swal from "sweetalert2";
 import {User} from "../../models/user";
-import {ResourceServiceService} from "../../../services/resource-service.service";
 import {EncryptionService} from "../../../services/encryption-service.service";
 import {ExpressionService} from "../../../services/expression.service";
 import {ComprehensionService} from "../../../services/comprehension.service";
@@ -19,9 +18,7 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private _userService: UserServiceService,
-    private el: ElementRef,
     private encryptionService: EncryptionService,
-    private _resourceService: ResourceServiceService,
     private _expressionService: ExpressionService,
     private _comprehensionService: ComprehensionService,
     private _communicationService: CommunicationService,

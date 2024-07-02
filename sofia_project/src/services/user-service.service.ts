@@ -23,7 +23,6 @@ export class UserServiceService {
     lastname: string | null,
     age: string | null,
     email: string | null,
-    id_School: string | null,
     studentCode: string | null,
     firstQuestion: string | null,
     secondQuestion: string | null,
@@ -33,7 +32,7 @@ export class UserServiceService {
     return this._http.post(`${this.baseUrl}create-user`, body)
   }
 
-  login(body: { password: string | null; email: string | null; id_School: string | null }) {
+  login(body: { password: string | null; email: string | null; }) {
     return this._http.post(`${this.baseUrl}login`, body)
   }
 
