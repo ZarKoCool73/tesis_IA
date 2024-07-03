@@ -1,10 +1,4 @@
 import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
-import {HttpErrorResponse} from '@angular/common/http';
-import {Router} from "@angular/router";
-import {UserServiceService} from "../../services/user-service.service";
-import Swal from "sweetalert2";
-import {User} from 'src/app/models/user';
-import {EncryptionService} from "../../services/encryption-service.service";
 import {IaService} from "../../services/ia.service";
 
 @Component({
@@ -15,6 +9,7 @@ import {IaService} from "../../services/ia.service";
 export class CameraComponent implements OnInit, AfterViewInit {
 
   @Input() dataCollection: any[] = []
+  @Input() typeLetter: any[] = []
   //@ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
 
   @ViewChild('localVideo') localVideo!: ElementRef<HTMLVideoElement>;
@@ -33,6 +28,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    console.log('this.da', this.dataCollection);
     //this.startCamera()
     this.setupWebRTC();
   }

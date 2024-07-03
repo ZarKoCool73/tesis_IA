@@ -20,6 +20,7 @@ export class ExpressionComponent implements OnInit {
   nameList: any
   IdUser: any
 
+  letterSend!: any
   /*banderas*/
   isOpenCamera = false
 
@@ -80,6 +81,7 @@ export class ExpressionComponent implements OnInit {
       }
     })
   }
+
   activeProgress(data: any): void {
     this.nameList = data.name;
     const idResource = data._id;
@@ -124,7 +126,9 @@ export class ExpressionComponent implements OnInit {
   }
 
   /*Varibales para la camara*/
-  openViewCamera() {
+  openViewCamera(data:any) {
+    console.log('data', data)
+    this.letterSend = data
     this.isOpenCamera = !this.isOpenCamera
   }
 
