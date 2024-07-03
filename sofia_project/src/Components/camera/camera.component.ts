@@ -69,7 +69,7 @@ export class CameraComponent implements OnInit, AfterViewInit {
   }*/
 
   updateTitle() {
-    if (window.location.href.includes('expressions')) {
+    if (window.location.href.includes('expression')) {
       this.title = 'Módulo de expresión';
     } else {
       this.title = 'Módulo de comprensión';

@@ -11,20 +11,22 @@
            [style]="data.icon=='gif' ? 'width: 310px; height:320px' : 'width: 210px; height:290px'"
            class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4">
         <div class="big-font-size font-Inter-Semibold text-break fw-900 ">{{ data.name }}</div>
-        <div class="align-items-start mx-3"  (click)="activeProgress(data)"
+        <div class="align-items-start mx-3" (click)="activeProgress(data)"
              *ngIf="data.state=='0'">
           <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
         </div>
-        <div class="align-items-start mx-3 "  *ngIf="data.state=='1'">
+        <div class="align-items-start mx-3 " *ngIf="data.state=='1'">
           <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
         </div>
-        <div class="align-items-start"  (click)="openViewCamera()">
+        <div class="align-items-start" (click)="openViewCamera()">
           <i class="fa-solid fa-camera fa-xl gray-icon "></i>
         </div>
         <img [src]=data.path width="170" *ngIf="data.icon=='png'">
         <img [src]=data.path width="230" *ngIf="data.icon=='gif'">
       </div>
     </main>
-    <app-camera [dataCollection]="categoryExpression" *ngIf="isOpenCamera"></app-camera>
+    <div class="">
+      <app-camera [dataCollection]="categoryExpression" *ngIf="isOpenCamera"></app-camera>
+    </div>
   </div>
 </div>
