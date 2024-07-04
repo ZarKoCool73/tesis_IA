@@ -1,32 +1,36 @@
-<div class="light-gray-background p-4 h-auto">
-  <div class="card card-body border-radius-15 p-4 h-auto">
-    <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
-      <span class="mr-auto">Módulo de expresión: <span class="link ml-2">{{ link }}</span></span>
-      <span (click)="openInfo()">
+<div class="container-main">
+  <div class="light-gray-background p-4 h-auto">
+    <div class="card card-body border-radius-15 p-4 h-auto">
+      <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
+        <span class="mr-auto">Módulo de expresión: <span class="link ml-2">{{ link }}</span></span>
+        <span (click)="openInfo()">
         <i class="fa-solid fa-circle-exclamation fa-bounce fa-lg" style="color: #02f647"></i>
     </span>
-    </header>
-    <main class="d-flex flex-wrap justify-content-between" *ngIf="!isOpenCamera">
-      <div *ngFor="let data of categoryExpression; let i = index"
-           [style]="data.icon=='gif' ? 'width: 310px; height:320px' : 'width: 210px; height:290px'"
-           class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4">
-        <div class="big-font-size font-Inter-Semibold text-break fw-900 ">{{ data.name }}</div>
-        <div class="align-items-start mx-3" (click)="activeProgress(data)"
-             *ngIf="data.state=='0'">
-          <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
+      </header>
+      <main class="d-flex flex-wrap justify-content-between" *ngIf="!isOpenCamera">
+        <div *ngFor="let data of categoryExpression; let i = index"
+             [style]="data.icon=='gif' ? 'width: 310px; height:320px' : 'width: 210px; height:290px'"
+             class="book-content light-gray-background d-flex justify-content-center align-items-center flex-wrap border-radius-15 mb-3 mx-4">
+          <div class="big-font-size font-Inter-Semibold text-break fw-900 ">{{ data.name }}</div>
+          <div class="align-items-start mx-3" (click)="activeProgress(data)"
+               *ngIf="data.state=='0'">
+            <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
+          </div>
+          <div class="align-items-start mx-3 " *ngIf="data.state=='1'">
+            <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
+          </div>
+          <div class="align-items-start" (click)="openViewCamera(data)">
+            <i class="fa-solid fa-camera fa-xl gray-icon "></i>
+          </div>
+          <img [src]=data.path width="170" *ngIf="data.icon=='png'">
+          <img [src]=data.path width="230" *ngIf="data.icon=='gif'">
         </div>
-        <div class="align-items-start mx-3 " *ngIf="data.state=='1'">
-          <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
-        </div>
-        <div class="align-items-start" (click)="openViewCamera(data)">
-          <i class="fa-solid fa-camera fa-xl gray-icon "></i>
-        </div>
-        <img [src]=data.path width="170" *ngIf="data.icon=='png'">
-        <img [src]=data.path width="230" *ngIf="data.icon=='gif'">
+      </main>
+      <div class="">
+        <app-camera [dataCollection]="categoryExpression" *ngIf="isOpenCamera" [typeLetter]="[letterSend]"
+                    (isView)="getValue($event)"></app-camera>
       </div>
-    </main>
-    <div class="">
-      <app-camera [dataCollection]="categoryExpression" *ngIf="isOpenCamera" [typeLetter]="[letterSend]"></app-camera>
     </div>
   </div>
+
 </div>

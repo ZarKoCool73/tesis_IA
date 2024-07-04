@@ -1,25 +1,39 @@
-.card-title{
-  border-bottom: 3px solid ;
+.card-title {
+  border-bottom: 3px solid;
   font-weight: 900;
 }
-.book-content{
+
+.book-content {
   width: 170px;
-  span{
+
+  span {
     word-break: break-all;
   }
 }
-main{
+
+main {
   height: max-content;
 }
-.h-auto{
+
+.h-auto {
   min-height: 100%;
 }
-.link{
+
+.link {
   color: dimgray;
 }
+
 .gray-icon {
   color: gray;
 }
+
 .green-icon {
   color: #0cb670;
+}
+
+.container-main {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: flex-start;
 }

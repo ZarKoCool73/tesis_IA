@@ -126,7 +126,7 @@ export class ExpressionComponent implements OnInit {
   }
 
   /*Varibales para la camara*/
-  openViewCamera(data:any) {
+  openViewCamera(data: any) {
     console.log('data', data)
     this.letterSend = data
     this.isOpenCamera = !this.isOpenCamera
@@ -193,5 +193,9 @@ export class ExpressionComponent implements OnInit {
 
   decrypt(id: any) {
     return this.encryptionService.decryptData(id);
+  }
+
+  getValue(ev: boolean) {
+    this.isOpenCamera = ev
   }
 }

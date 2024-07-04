@@ -1,5 +1,17 @@
-import {AfterViewInit, Component, ElementRef, HostListener, Input, OnInit, ViewChild} from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Input,
+  OnInit,
+  Output,
+  ViewChild
+} from '@angular/core';
 import {IaService} from "../../services/ia.service";
+import Swal from "sweetalert2";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Component({
   selector: 'app-camera',
@@ -10,17 +22,10 @@ export class CameraComponent implements OnInit, AfterViewInit {
 
   @Input() dataCollection: any[] = []
   @Input() typeLetter: any[] = []
-  //@ViewChild('videoElement') videoElement!: ElementRef<HTMLVideoElement>;
-
+  @Output() isView = new EventEmitter<boolean>()
   @ViewChild('localVideo') localVideo!: ElementRef<HTMLVideoElement>;
   @ViewChild('canvas') canvas!: ElementRef<HTMLCanvasElement>;
-
-  context!: CanvasRenderingContext2D;
-
   title = '';
-  resultTitle = '';
-  resultContent = '';
-  resultAccuracy = '';
 
   ngAfterViewInit(): void {
     this.setupWebRTC();
@@ -92,23 +97,49 @@ export class CameraComponent implements OnInit, AfterViewInit {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     const imgData = canvas.toDataURL('image/jpeg');
-    const expressions = '0';
-
-    this.iaService.processImage(imgData, expressions).subscribe(
-      (data: any) => {
-        const accuracyPercentage = data.accuracy ? `Precisión: ${data.accuracy.toFixed(2)}%` : '';
-        if (data.accuracy > 60) {
-          document.getElementById("title_result")!.innerText = "Interpretación del signo";
-          document.getElementById("content_result")!.innerText = `${data.sign}`;
-          document.getElementById("accuracy_result")!.innerText = accuracyPercentage;
+    const expressions = this.typeLetter[0].name;
+    Swal.showLoading()
+    this.iaService.processImage(imgData, expressions)
+      .subscribe({
+        next: (data: any) => {
+          Swal.close()
+          const accuracyPercentage = data.accuracy ? `${data.accuracy.toFixed(2)}%` : '';
+          Swal.fire({
+            title: '<strong>¡Resultado de seña!</strong>',
+            html: 'Precisión: <strong>' + accuracyPercentage + '</strong> ' +
+              'Seña: <strong>' + expressions + '</strong>',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#11e38a',
+            confirmButtonText: 'Cerrar',
+            allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
+          })
+        },
+        error: (error: HttpErrorResponse) => {
+          Swal.close()
+          if (error.status === 400) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>' + error.error['error'] + '</strong><br>' +
+                'Precisión: <strong>' + error.error['accuracy'] + '</strong><br>' +
+                'Seña: <strong>' + error.error['sign'] + '</strong>',
+              confirmButtonColor: '#ff3600',
+            });
+          }
+          if (error.status === 500) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.error.message,
+              confirmButtonColor: '#ff3600',
+            });
+          }
         }
-      },
-      error => {
-        console.log('error', error);
-        document.getElementById("title_result")!.innerText = "Interpretación del signo";
-        document.getElementById("content_result")!.innerText = '-';
-        document.getElementById("accuracy_result")!.innerText = `${error.message}`;
-      }
-    );
+      })
+  }
+
+  return() {
+    this.isView.emit(false)
   }
 }
