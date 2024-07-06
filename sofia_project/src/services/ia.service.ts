@@ -25,6 +25,6 @@ export class IaService {
       Expressions: expressions
     };
     const url = `${this.apiUrl}/process_image`;
-    return this._http.post<any>(this.apiUrl, body, {headers: headers});
+    return this._http.post<any>(url, body, {headers: headers});
   }
 }
