@@ -1,5 +1,5 @@
 <main class="d-flex justify-content-between">
-  <mat-card class="mat-elevation-z8 shadow-lg">
+  <!--<mat-card class="mat-elevation-z8 shadow-lg">
     <mat-card-content>
       <div class="camera">
         <video #localVideo id="localVideo" autoplay></video>
@@ -13,6 +13,25 @@
               (click)="return()">
         Volver
       </button>
+    </mat-card-content>
+  </mat-card>-->
+  <mat-card class="mat-elevation-z8 shadow-lg">
+    <mat-card-content>
+      <div class="camera" style="position: relative;">
+        <video #localVideo id="localVideo" autoplay class="video-frame"></video>
+        <canvas #canvas id="canvas" style="display:none;"></canvas>
+        <div #counter class="counter" style="display:none;"></div>
+        <div id="detectedSign" style="display: none"></div>
+        <div class="button-container">
+          <button id="captureButton" class="btn btn-primary text-uppercase main-background font-Inter-Black text-white"
+                  (click)="startCountdown()">Capturar Imagen
+          </button>
+          <button class="btn btn-primary text-uppercase main-background font-Inter-Black text-white ml-3"
+                  (click)="return()">
+            Volver
+          </button>
+        </div>
+      </div>
     </mat-card-content>
   </mat-card>
   <div class="d-flex flex-column photo-items">

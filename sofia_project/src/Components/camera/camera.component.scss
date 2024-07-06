@@ -45,12 +45,6 @@ nav {
   border-bottom-left-radius: 30px;
 }
 
-.camera {
-  img {
-    width: 80px;
-  }
-}
-
 .login-module {
   li:hover {
     color: $primary-color;
@@ -81,4 +75,44 @@ mat-card {
 video {
   width: 100%;
   height: auto;
+}
+
+.camera {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.instruction {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.video-frame {
+  border: 5px solid #11e38a;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 100%;
+  height: auto;
+}
+
+.counter {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 5rem;
+  color: white;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.button-container {
+  margin-top: 1rem;
+}
+
+.btn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
 }

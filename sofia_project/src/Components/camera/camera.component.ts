@@ -4,7 +4,7 @@ import {
   EventEmitter,
   Input,
   OnInit,
-  Output,
+  Output, Renderer2,
   ViewChild
 } from '@angular/core';
 import {IaService} from "../../services/ia.service";
@@ -21,8 +21,10 @@ export class CameraComponent implements OnInit {
   @Input() dataCollection: any[] = []
   @Input() typeLetter: any[] = []
   @Output() isView = new EventEmitter<boolean>()
-  @ViewChild('localVideo') localVideo!: ElementRef<HTMLVideoElement>;
-  @ViewChild('canvas') canvas!: ElementRef<HTMLCanvasElement>;
+
+  @ViewChild('localVideo', {static: false}) localVideo!: ElementRef<HTMLVideoElement>;
+  @ViewChild('canvas', {static: false}) canvas!: ElementRef<HTMLCanvasElement>;
+  @ViewChild('counter', {static: false}) counter!: ElementRef<HTMLDivElement>;
 
   title = '';
 
@@ -32,7 +34,8 @@ export class CameraComponent implements OnInit {
   }
 
   constructor(
-    private readonly iaService: IaService
+    private readonly iaService: IaService,
+    private readonly renderer: Renderer2
   ) {
   }
 
@@ -60,6 +63,22 @@ export class CameraComponent implements OnInit {
         }
       });
   }
+
+  startCountdown() {
+    let countdown = 3;
+    this.renderer.setStyle(this.counter.nativeElement, 'display', 'block');
+    this.counter.nativeElement.innerText = countdown.toString();
+    const interval = setInterval(() => {
+      countdown--;
+      this.counter.nativeElement.innerText = countdown.toString();
+      if (countdown === 0) {
+        clearInterval(interval);
+        this.renderer.setStyle(this.counter.nativeElement, 'display', 'none');
+        this.captureAndProcessImage();
+      }
+    }, 1000);
+  }
+
 
   captureAndProcessImage() {
     const video = this.localVideo.nativeElement;
@@ -121,7 +140,7 @@ export class CameraComponent implements OnInit {
   modalInit() {
     Swal.fire({
       title: '<strong>Instrucciones para Capturar Seña</strong>',
-      width:'40rem',
+      width: '40rem',
       html: `
       <style>
         ul {
