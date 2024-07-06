@@ -41,9 +41,7 @@ export class ResourcesComponent implements OnInit {
 
   loadDetail(id: any) {
     this._servicesResource.getCategory(id).subscribe((res: any) => {
-      console.log('res', res)
       if (res.state == 1) {
-        console.log('res', res)
         this.category = res.resources
       }
     }, (error: HttpErrorResponse) => {

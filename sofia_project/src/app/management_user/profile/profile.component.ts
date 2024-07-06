@@ -76,10 +76,8 @@ export class ProfileComponent implements OnInit {
   loadDetailComprehension(id: any) {
     this._comprehensionService.getListComprehension().subscribe((res: any) => {
       if (res.state == 1) {
-        console.log('loadDetailComprehension', res)
         this.dataComprehensionEnd = res.response.length
         this._comprehensionService.getComprehensionsByIdUser(id).subscribe((res: any) => {
-          console.log('res2', res)
           if (res.state == 1) {
             this.dataComprehensionInit = (res.response || []).length
           }
@@ -105,7 +103,6 @@ export class ProfileComponent implements OnInit {
       if (res.state == 1) {
         this.dataExpressionEnd = res.response.length
         this._expressionService.getExpressionsByIdUser(id).subscribe((res: any) => {
-          console.log('data', res)
           if (res.state == 1) {
             this.dataExpressionInit = (res?.response || []).length
           }

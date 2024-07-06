@@ -64,7 +64,6 @@ export class ExpressionComponent implements OnInit {
   loadDetail(id: any) {
     this._servicesResource.getCategory(id).subscribe((res: any) => {
       if (res.state == 1) {
-        console.log('res', res)
         this.categoryExpression = res.resources
         this.categoryExpression = this.categoryExpression.map((c: any) => ({...c, state: '0'}))
         this.loadExpressionProgress()
@@ -101,7 +100,6 @@ export class ExpressionComponent implements OnInit {
       if (result.isConfirmed) {
         this._expressionService.addExpression(this.IdUser, idResource, state).subscribe(
           response => {
-            console.log('Respuesta del servidor:', response);
             Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',
@@ -127,22 +125,18 @@ export class ExpressionComponent implements OnInit {
 
   /*Varibales para la camara*/
   openViewCamera(data: any) {
-    console.log('data', data)
     this.letterSend = data
     this.isOpenCamera = !this.isOpenCamera
   }
 
   loadExpressionProgress() {
     this._expressionService.getExpressionsByIdUser(this.IdUser).subscribe((res: any) => {
-      console.log('ress', res)
       if (res.state == 1) {
         const ids = (res?.expressions || []).map((c: any) => c.id_Resource)
-        console.log(ids)
         this.categoryExpression = this.categoryExpression.map((c: any) => ({
           ...c,
           state: ids.includes(c._id) ? '1' : '0'
         }))
-        console.log(this.categoryExpression)
       }
     })
   }

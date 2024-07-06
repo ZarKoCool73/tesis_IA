@@ -62,7 +62,6 @@ export class PasswordRecoveryComponent implements OnInit {
 
   obtenerData(event: any) {
     const values = this.secondFormGroup.getRawValue()
-    console.log(values)
     this.convert(values)
     const body = values.email
     if (body != null) {
@@ -93,10 +92,6 @@ export class PasswordRecoveryComponent implements OnInit {
     const firstQuestion = values1.fquestion;
     const secondQuestion = values1.squestion;
     const thirdQuestion = values1.tquestion;
-    console.log('email', email)
-    console.log('firstQuestion', firstQuestion)
-    console.log('secondQuestion', secondQuestion)
-    console.log('thirdQuestion', thirdQuestion)
     this._userService.verifyAnswers(email, firstQuestion, secondQuestion, thirdQuestion)
       .subscribe(
         (res: any) => {

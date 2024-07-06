@@ -91,7 +91,6 @@ export class SignUpComponent implements OnInit {
       thirdQuestion: thirdValues.tquestion,
       password: secondValues.password
     }
-    console.log('body', body)
     Swal.showLoading();
     if (this.banderaCode && this.bandera && this.banderaEmail) {
       this._userService.saveUser(body).subscribe((res: any) => {
@@ -108,7 +107,6 @@ export class SignUpComponent implements OnInit {
         });
       }, (error: HttpErrorResponse) => {
         Swal.close();
-        console.log('err', error)
         Swal.fire({
           icon: 'error',
           title: 'Error',

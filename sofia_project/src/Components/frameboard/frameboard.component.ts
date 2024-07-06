@@ -97,7 +97,6 @@ export class FrameboardComponent implements OnInit, AfterViewInit {
 
   loadDetail(id: any) {
     this._userService.getUser(id).subscribe((res: any) => {
-      console.log('res', res)
       if (res.state == 1) {
         this.userProfile = res.response
       }

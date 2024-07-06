@@ -148,7 +148,6 @@ export class SignInComponent implements OnInit {
 
   encrypt(id: any) {
     const encryptID = this.encryptionService.encryptData(id);
-    console.log('USERID2', encryptID)
     localStorage.setItem('userId', encryptID);
   }
 

@@ -90,7 +90,6 @@ export class ComunicationComponent implements OnInit {
       if (result.isConfirmed) {
         this._communicationService.addCommunication(this.IdUser, idResource, state).subscribe(
           response => {
-            console.log('Respuesta del servidor:', response);
             Swal.fire({
               icon: 'success',
               title: '¡Felicidades!',
@@ -118,12 +117,10 @@ export class ComunicationComponent implements OnInit {
     this._communicationService.getCommunicationsByIdUser(this.IdUser).subscribe((res: any) => {
       if (res.state == 1) {
         const ids = (res?.communications || []).map((c: any) => c.id_Resource)
-        console.log(ids)
         this.categoryComunication = this.categoryComunication.map((c: any) => ({
           ...c,
           state: ids.includes(c._id) ? '1' : '0'
         }))
-        console.log(this.categoryComunication)
       }
     })
   }
