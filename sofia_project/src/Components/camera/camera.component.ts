@@ -27,20 +27,13 @@ export class CameraComponent implements OnInit {
   title = '';
 
   ngOnInit(): void {
+    this.loadModel(this.typeLetter[0].name)
     this.setupWebRTC();
   }
 
   constructor(
     private readonly iaService: IaService
   ) {
-  }
-
-  updateTitle() {
-    if (window.location.href.includes('expression')) {
-      this.title = 'Módulo de expresión';
-    } else {
-      this.title = 'Módulo de comprensión';
-    }
   }
 
   setupWebRTC() {
@@ -50,6 +43,18 @@ export class CameraComponent implements OnInit {
       })
       .catch(error => {
         console.error('Error en la configuración de WebRTC:', error);
+      });
+  }
+
+  loadModel(signType: string) {
+    this.iaService.loadModel(signType).subscribe(
+      {
+        next: (response: any) => {
+          console.log(response);
+        },
+        error: (error: any) => {
+          console.error(error);
+        }
       });
   }
 
