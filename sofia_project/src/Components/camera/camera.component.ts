@@ -28,7 +28,7 @@ export class CameraComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadModel(this.typeLetter[0].name)
-    this.setupWebRTC();
+    this.modalInit()
   }
 
   constructor(
@@ -54,6 +54,9 @@ export class CameraComponent implements OnInit {
         },
         error: (error: any) => {
           console.error(error);
+        },
+        complete: () => {
+          console.log('termino de cargar')
         }
       });
   }
@@ -115,4 +118,44 @@ export class CameraComponent implements OnInit {
     this.isView.emit(false)
   }
 
+  modalInit() {
+    Swal.fire({
+      title: '<strong>Instrucciones para Capturar Seña</strong>',
+      width:'40rem',
+      html: `
+      <style>
+        ul {
+          padding-left: 20px; /* Ajusta el padding del listado para mantener el texto alineado */
+        }
+        li {
+          text-align: left; /* Alinea los elementos de la lista al inicio */
+        }
+      </style>
+      <div style="text-align: left;"> <!-- Alinea el texto general al inicio -->
+        <p>Para capturar la seña correctamente, por favor sigue estos pasos:</p>
+        <ul>
+          <li>Asegúrate de estar en un lugar bien iluminado.</li>
+          <li>Posiciona tu mano frente a la cámara de manera clara y visible.</li>
+          <li>Evita fondos que distraigan.</li>
+          <li>Concede permisos de cámara si es necesario.</li>
+        </ul>
+        <p>Cuando estés listo, haz clic en "Continuar" para activar la cámara.</p>
+      </div>
+    `,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#11e38a',
+      cancelButtonColor: '#ff3600',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.setupWebRTC();
+      }
+      if (result.isDenied || result.isDismissed) {
+        this.return()
+      }
+    });
+  }
 }
