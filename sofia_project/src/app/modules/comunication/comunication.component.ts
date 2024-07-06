@@ -116,7 +116,7 @@ export class ComunicationComponent implements OnInit {
   loadCommunicationProgress() {
     this._communicationService.getCommunicationsByIdUser(this.IdUser).subscribe((res: any) => {
       if (res.state == 1) {
-        const ids = (res?.communications || []).map((c: any) => c.id_Resource)
+        const ids = (res?.response  || []).map((c: any) => c.id_Resource)
         this.categoryComunication = this.categoryComunication.map((c: any) => ({
           ...c,
           state: ids.includes(c._id) ? '1' : '0'

@@ -15,7 +15,6 @@ export class ExpressionComponent implements OnInit {
 
   link = ''
   categoryExpression: any;
-  fullPath: any;
   category = 'expression'
   nameList: any
   IdUser: any
@@ -132,7 +131,7 @@ export class ExpressionComponent implements OnInit {
   loadExpressionProgress() {
     this._expressionService.getExpressionsByIdUser(this.IdUser).subscribe((res: any) => {
       if (res.state == 1) {
-        const ids = (res?.expressions || []).map((c: any) => c.id_Resource)
+        const ids = (res.response || []).map((c: any) => c.id_Resource)
         this.categoryExpression = this.categoryExpression.map((c: any) => ({
           ...c,
           state: ids.includes(c._id) ? '1' : '0'

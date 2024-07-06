@@ -128,7 +128,7 @@ export class ComprehensionComponent implements OnInit {
   loadComprehensionProgress() {
     this._comprehensionService.getComprehensionsByIdUser(this.IdUser).subscribe((res: any) => {
       if (res.state == 1) {
-        const ids = (res?.comprehensions || []).map((c: any) => c.id_Resource)
+        const ids = (res?.response || []).map((c: any) => c.id_Resource)
         this.categoryComprehension = this.categoryComprehension.map((c: any) => ({
           ...c,
           state: ids.includes(c._id) ? '1' : '0'
