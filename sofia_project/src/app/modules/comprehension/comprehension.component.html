@@ -18,9 +18,6 @@
         <div class="align-items-start mx-3"  *ngIf="data.state == '1'">
           <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
         </div>
-        <!--<div class="align-items-start"  (click)="showCamera = true">
-          <i class="fa-solid fa-camera fa-xl gray-icon "></i>
-        </div>-->
         <img [src]=data.path width="260" *ngIf="data.icon=='png'">
         <img [src]=data.path width="450" *ngIf="data.icon=='gif'">
       </div>
