@@ -2,27 +2,17 @@
     <ul class="list-unstyled nav-bar">
         <li ngbTooltip="Abecedario" placement="end"
             [ngClass]="{active: getUrl('abc')}"
+            (click)="reload()"
             class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
             <img src="assets/imgs/modules/icon-abc.svg" [routerLink]="['/modules/expression', 'abc']"
                  class="cursor-pointer" alt="">
         </li>
         <li ngbTooltip="Números" placement="end"
             [ngClass]="{active: getUrl('numbers')}"
+            (click)="reload()"
             class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
             <img src="assets/imgs/modules/icon-numbers.svg" [routerLink]="['/modules/expression', 'numbers']"
                  class="cursor-pointer" alt="">
         </li>
-        <!--<li ngbTooltip="Expresiones comunes" placement="end"
-            [ngClass]="{active: getUrl('common-expressions')}"
-            class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
-            <img src="assets/imgs/modules/icon-common-expressions.svg"
-                 [routerLink]="['/modules/expression', 'common-expressions']" class="cursor-pointer" alt="">
-        </li>
-        <li ngbTooltip="Colores" placement="end"
-            [ngClass]="{active: getUrl('colors')}"
-            class="mt-2 p-2 px-3 d-flex w-100 align-items-center justify-content-between">
-            <img src="assets/imgs/modules/icon-colors.svg" [routerLink]="['/modules/expression', 'colors']"
-                 class="cursor-pointer" alt="">
-        </li>-->
     </ul>
 </div>

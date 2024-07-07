@@ -14,4 +14,7 @@ export class ExpressionComponent implements OnInit {
   getUrl(url: string) {
     return document.location.href.includes(url)
   }
+  reload(){
+    window.location.reload();
+  }
 }
