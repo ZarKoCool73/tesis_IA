@@ -18,6 +18,20 @@
       </div>
     </mat-card-content>
   </mat-card>
+  <!--<mat-card class="mat-elevation-z8 shadow-lg">
+    <mat-card-header>
+      <mat-card-title>Hand Gesture Recognition</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <video id="video" width="640" height="480" autoplay></video>
+      <canvas id="canvas" width="640" height="480" style="display:none;"></canvas>
+      <p>{{ result }}</p>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" (click)="capture()">Capture</button>
+    </mat-card-actions>
+  </mat-card>-->
+
   <div class="d-flex flex-column photo-items">
     <div *ngFor="let data of typeLetter"
          [style]="data.icon=='gif' ? 'width: 550px; height:max-content' : 'width: 310px; height:max-content'"

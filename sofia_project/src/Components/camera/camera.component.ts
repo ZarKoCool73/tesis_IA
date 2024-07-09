@@ -26,10 +26,10 @@ export class CameraComponent implements OnInit {
   @ViewChild('canvas', {static: false}) canvas!: ElementRef<HTMLCanvasElement>;
   @ViewChild('counter', {static: false}) counter!: ElementRef<HTMLDivElement>;
 
+  result: string = '';
   title = '';
 
   ngOnInit(): void {
-    this.loadModel(this.typeLetter[0].name)
     this.modalInit()
   }
 
@@ -46,21 +46,6 @@ export class CameraComponent implements OnInit {
       })
       .catch(error => {
         console.error('Error en la configuración de WebRTC:', error);
-      });
-  }
-
-  loadModel(signType: string) {
-    this.iaService.loadModel(signType).subscribe(
-      {
-        next: (response: any) => {
-          console.log(response);
-        },
-        error: (error: any) => {
-          console.error(error);
-        },
-        complete: () => {
-          console.log('termino de cargar')
-        }
       });
   }
 
@@ -90,9 +75,9 @@ export class CameraComponent implements OnInit {
     context.drawImage(video, 0, 0, canvas.width, canvas.height);
 
     const imgData = canvas.toDataURL('image/jpeg');
-    const expressions = this.typeLetter[0].name;
+    const sign = this.typeLetter[0].name;
     Swal.showLoading()
-    this.iaService.processImage(imgData, expressions)
+    this.iaService.processImage(imgData)
       .subscribe({
         next: (data: any) => {
           Swal.close()
@@ -100,7 +85,7 @@ export class CameraComponent implements OnInit {
           Swal.fire({
             title: '<strong>¡Resultado de seña!</strong>',
             html: 'Precisión: <strong>' + accuracyPercentage + '</strong> ' +
-              'Seña: <strong>' + expressions + '</strong>',
+              'Seña: <strong>' + data.hand_sign + '</strong>',
             icon: 'success',
             showCancelButton: false,
             confirmButtonColor: '#11e38a',
@@ -114,9 +99,9 @@ export class CameraComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Error',
-              html: '<strong>' + error.error['error'] + '</strong><br>' +
-                'Precisión: <strong>' + error.error['accuracy'] + '</strong><br>' +
-                'Seña: <strong>' + error.error['sign'] + '</strong>',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
               confirmButtonColor: '#ff3600',
             });
           }
@@ -124,7 +109,7 @@ export class CameraComponent implements OnInit {
             Swal.fire({
               icon: 'error',
               title: 'Error',
-              text: error.error.message,
+              text: 'Error interno de servidor',
               confirmButtonColor: '#ff3600',
             });
           }

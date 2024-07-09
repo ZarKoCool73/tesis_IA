@@ -161,11 +161,9 @@ export class ComprehensionComponent implements OnInit {
     <div class="creditos-seccion">
         <strong>Derechos de autor y uso:</strong>
         <p>
-            Este sistema web de aprendizaje de lenguaje de señas utiliza el dataset de gestos de lenguaje de señas
-            de Ahmed Khanak, disponible en <a href="https://www.kaggle.com/datasets/ahmedkhanak1995/sign-language-gesture-images-dataset" target="_blank">Kaggle</a>.
-             El dataset está licenciado bajo la licencia Creative Commons Attribution 4.0 International (CC BY 4.0). El autor original del dataset es Ahmed Khanak,
-             y el dataset fue creado en 2023.<br><br>Este sistema web de aprendizaje de lenguaje de señas utiliza el libro "Lenguaje de señas peruana:
-             vocabulario básico" del Ministerio de Educación de Perú, disponible en <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545"
+            Este sistema web de aprendizaje de lenguaje de señas utiliza el dataset de gestos de lenguaje de señas de <strong>Torres Rojas, Javier Je-Hu</strong>.
+            <br>
+            Este sistema web de aprendizaje de lenguaje de señas utiliza el libro "Lenguaje de señas peruana: vocabulario básico" del Ministerio de Educación de Perú, disponible en <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545"
              target="_blank">Repositorio del Ministerio de Educación de Perú</a>. El libro está licenciado bajo la licencia Creative Commons
              Reconocimiento-NoComercial-SinObraDerivada 4.0 Internacional (CC BY-NC-ND 4.0). El autor original del libro es el Ministerio de Educación de Perú,
              y el libro fue publicado en 2023.

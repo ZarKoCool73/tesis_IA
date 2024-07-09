@@ -13,18 +13,12 @@ export class IaService {
   ) {
   }
 
-  loadModel(signType: string): Observable<any> {
-    const url = `${this.apiUrl}/load_model?signType=${signType}`;
-    return this._http.get(url);
-  }
-
-  processImage(imageData: string, expressions: string): Observable<any> {
+  processImage(imageData: string): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const body = {
-      imageData: imageData,
-      Expressions: expressions
+      image: imageData,
     };
-    const url = `${this.apiUrl}/process_image`;
+    const url = `${this.apiUrl}/predict`;
     return this._http.post<any>(url, body, {headers: headers});
   }
 }
