@@ -50,7 +50,7 @@ export class CameraComponent implements OnInit {
   }
 
   startCountdown() {
-    let countdown = 3;
+    let countdown = 5;
     this.renderer.setStyle(this.counter.nativeElement, 'display', 'block');
     this.counter.nativeElement.innerText = countdown.toString();
     const interval = setInterval(() => {
