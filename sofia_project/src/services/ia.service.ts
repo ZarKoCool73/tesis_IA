@@ -13,12 +13,22 @@ export class IaService {
   ) {
   }
 
-  processImage(imageData: string): Observable<any> {
+  processImageNumbers(imageData: string): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const body = {
       image: imageData,
     };
-    const url = `${this.apiUrl}/predict`;
+    const url = `${this.apiUrl}/predictNumbers`;
     return this._http.post<any>(url, body, {headers: headers});
   }
+
+  processImageLetters(imageData: string): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const body = {
+      image: imageData,
+    };
+    const url = `${this.apiUrl}/predictLetters`;
+    return this._http.post<any>(url, body, {headers: headers});
+  }
+
 }
