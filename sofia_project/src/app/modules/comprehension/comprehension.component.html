@@ -1,7 +1,7 @@
 <div class="light-gray-background p-4 h-auto">
   <div class="card card-body border-radius-15 p-4 h-auto">
     <header class="d-flex card-title font-Inter-Medium pb-3 mb-4 main-color-text too-big-font-size">
-      <span class="mr-auto">Módulo de comprensión: <span class="link ml-2">{{link}}</span></span>
+      <span class="mr-auto">Módulo de comprensión: <span class="link ml-2">{{ link }}</span></span>
       <span (click)="openInfo()">
         <i class="fa-solid fa-circle-exclamation fa-bounce fa-lg" style="color: #02f647"></i>
     </span>
@@ -15,14 +15,19 @@
              *ngIf="data.state == '0'">
           <i class="fa-regular fa-circle-check fa-xl gray-icon"></i>
         </div>
-        <div class="align-items-start mx-3"  *ngIf="data.state == '1'">
+        <div class="align-items-start mx-3" *ngIf="data.state == '1'">
           <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
+        </div>
+        <div class="align-items-start" (click)="openViewCamera(data)">
+          <i class="fa-solid fa-camera fa-xl gray-icon "></i>
         </div>
         <img [src]=data.path width="260" *ngIf="data.icon=='png'">
         <img [src]=data.path width="450" *ngIf="data.icon=='gif'">
       </div>
     </main>
-    <app-camera *ngIf="showCamera" [dataCollection]="categoryComprehension" (close)="showCamera = false"></app-camera>
-
+    <div class="">
+      <app-camera [dataCollection]="categoryComprehension" *ngIf="showCamera" [expression]="link"
+                  [typeLetter]="[letterSend]" (isView)="getValue($event)" (close)="showCamera = false"></app-camera>
+    </div>
   </div>
 </div>

@@ -84,6 +84,9 @@ export class CameraComponent implements OnInit {
       case 'Números':
         this.calculateNumbers(imgData, sign)
         break
+      case 'Verbos':
+        this.calculateVerbs(imgData, sign)
+        break
     }
   }
 
@@ -93,7 +96,7 @@ export class CameraComponent implements OnInit {
   }
 
   calculateNumbers(imgData: any, sign: any) {
-    this.iaService.processImageNumbers(imgData)
+    this.iaService.processNumbers(imgData)
       .subscribe({
         next: (data: any) => {
           Swal.close()
@@ -146,11 +149,64 @@ export class CameraComponent implements OnInit {
   }
 
   calculateAbc(imgData: any, sign: any) {
-    this.iaService.processImageLetters(imgData)
+    this.iaService.processLetters(imgData)
       .subscribe({
         next: (data: any) => {
           Swal.close()
           const accuracyPercentage = data.accuracy ? `${data.accuracy.toFixed(2)}%` : '';
+          Swal.fire({
+            title: '<strong>¡Resultado de seña!</strong>',
+            html: 'Precisión: <strong>' + accuracyPercentage + '</strong> ' +
+              'Seña: <strong>' + data.hand_sign + '</strong>',
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#11e38a',
+            confirmButtonText: 'Cerrar',
+            allowOutsideClick: false // Evita que el modal se cierre haciendo clic fuera de él
+          }).then((result) => {
+            if (result.isConfirmed) {
+              this.return()
+            }
+          })
+        },
+        error: (error: HttpErrorResponse) => {
+          Swal.close()
+          if (error.status === 400) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.return()
+              }
+            })
+          }
+          if (error.status === 500) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: 'Error interno de servidor',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+              if (result.isConfirmed) {
+                this.return()
+              }
+            })
+          }
+        }
+      })
+  }
+
+  calculateVerbs(imgData: any, sign: any) {
+    this.iaService.processVerbs(imgData)
+      .subscribe({
+        next: (data: any) => {
+          Swal.close()
+          const accuracyPercentage = data.accuracy
           Swal.fire({
             title: '<strong>¡Resultado de seña!</strong>',
             html: 'Precisión: <strong>' + accuracyPercentage + '</strong> ' +

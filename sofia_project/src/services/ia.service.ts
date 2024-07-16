@@ -13,7 +13,7 @@ export class IaService {
   ) {
   }
 
-  processImageNumbers(imageData: string): Observable<any> {
+  processNumbers(imageData: string): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const body = {
       image: imageData,
@@ -22,12 +22,21 @@ export class IaService {
     return this._http.post<any>(url, body, {headers: headers});
   }
 
-  processImageLetters(imageData: string): Observable<any> {
+  processLetters(imageData: string): Observable<any> {
     const headers = new HttpHeaders({'Content-Type': 'application/json'});
     const body = {
       image: imageData,
     };
     const url = `${this.apiUrl}/predictLetters`;
+    return this._http.post<any>(url, body, {headers: headers});
+  }
+
+  processVerbs(imageData: string): Observable<any> {
+    const headers = new HttpHeaders({'Content-Type': 'application/json'});
+    const body = {
+      image: imageData,
+    };
+    const url = `${this.apiUrl}/predictVerbs`;
     return this._http.post<any>(url, body, {headers: headers});
   }
 

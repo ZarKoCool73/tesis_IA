@@ -25,7 +25,7 @@ export class ComprehensionComponent implements OnInit {
     utensils: 'Artículos del hogar'
   }
   link = ''
-
+  letterSend!: any
   constructor(
     private _activatedRoute: ActivatedRoute,
     private encryptionService: EncryptionService,
@@ -183,7 +183,13 @@ export class ComprehensionComponent implements OnInit {
     return this.encryptionService.decryptData(id);
   }
 
-  showCameraAction() {
-    this.showCamera = true
+  getValue(ev: boolean) {
+    this.showCamera = ev
+  }
+
+  /*Varibales para la camara*/
+  openViewCamera(data: any) {
+    this.letterSend = data
+    this.showCamera = !this.showCamera
   }
 }
