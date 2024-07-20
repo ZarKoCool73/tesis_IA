@@ -19,7 +19,8 @@
         <div class="align-items-start mx-3 " *ngIf="data.state=='1'">
           <i class="fa-regular fa-circle-check fa-xl green-icon"></i>
         </div>
-        <div class="align-items-start" (click)="openViewCamera(data)">
+        <div class="align-items-start" (click)="openViewCamera(data)"
+             *ngIf="data.name!=='J' && data.name!=='N' && data.name!=='Z' && data.name!=='10'">
           <i class="fa-solid fa-camera fa-xl gray-icon "></i>
         </div>
         <img [src]=data.path width="170" *ngIf="data.icon=='png'">

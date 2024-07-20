@@ -255,8 +255,22 @@ export class CameraComponent implements OnInit {
   }
 
   modalInit() {
+    switch (this.expression) {
+      case 'Abecedario':
+        this.modalABC()
+        break;
+      case 'Números':
+        this.modalNumbers()
+        break;
+      case 'Verbos':
+        this.modalVerbs()
+        break
+    }
+  }
+
+  modalABC() {
     Swal.fire({
-      title: '<strong>Instrucciones para Capturar Seña</strong>',
+      title: '<strong>Instrucciones para Capturar Letra</strong>',
       width: '40rem',
       html: `
       <style>
@@ -268,12 +282,94 @@ export class CameraComponent implements OnInit {
         }
       </style>
       <div style="text-align: left;"> <!-- Alinea el texto general al inicio -->
-        <p>Para capturar la seña correctamente, por favor sigue estos pasos:</p>
+        <p>Para capturar la letra correctamente, por favor sigue estos pasos:</p>
+        <ul>
+          <li>Evita fondos que distraigan.</li>
+          <li>Asegúrate de estar en un lugar bien iluminado.</li>
+          <li>Posiciona tu mano frente a la cámara de manera clara y visible.</li>
+          <li>Para mayor precisión utilizar la mano derecha</li>
+          <li>Concede permisos de cámara si es necesario.</li>
+        </ul>
+        <p>Cuando estés listo, haz clic en "Continuar" para activar la cámara.</p>
+      </div>
+    `,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#11e38a',
+      cancelButtonColor: '#ff3600',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.setupWebRTC();
+      }
+      if (result.isDenied || result.isDismissed) {
+        this.return()
+      }
+    });
+  }
+  modalNumbers() {
+    Swal.fire({
+      title: '<strong>Instrucciones para Capturar Número</strong>',
+      width: '40rem',
+      html: `
+      <style>
+        ul {
+          padding-left: 20px; /* Ajusta el padding del listado para mantener el texto alineado */
+        }
+        li {
+          text-align: left; /* Alinea los elementos de la lista al inicio */
+        }
+      </style>
+      <div style="text-align: left;"> <!-- Alinea el texto general al inicio -->
+        <p>Para capturar el número correctamente, por favor sigue estos pasos:</p>
         <ul>
           <li>Asegúrate de estar en un lugar bien iluminado.</li>
           <li>Posiciona tu mano frente a la cámara de manera clara y visible.</li>
           <li>Evita fondos que distraigan.</li>
+          <li>Para mayor precisión utilizar la mano izquierda</li>
           <li>Concede permisos de cámara si es necesario.</li>
+        </ul>
+        <p>Cuando estés listo, haz clic en "Continuar" para activar la cámara.</p>
+      </div>
+    `,
+      icon: 'info',
+      showCancelButton: true,
+      confirmButtonColor: '#11e38a',
+      cancelButtonColor: '#ff3600',
+      confirmButtonText: 'Continuar',
+      cancelButtonText: 'Cancelar',
+      allowOutsideClick: false
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.setupWebRTC();
+      }
+      if (result.isDenied || result.isDismissed) {
+        this.return()
+      }
+    });
+  }
+  modalVerbs() {
+    Swal.fire({
+      title: '<strong>Instrucciones para Capturar Verbo</strong>',
+      width: '40rem',
+      html: `
+      <style>
+        ul {
+          padding-left: 20px; /* Ajusta el padding del listado para mantener el texto alineado */
+        }
+        li {
+          text-align: left; /* Alinea los elementos de la lista al inicio */
+        }
+      </style>
+      <div style="text-align: left;"> <!-- Alinea el texto general al inicio -->
+        <p>Para capturar el verbo correctamente, por favor sigue estos pasos:</p>
+        <ul>
+          <li>Evita fondos que distraigan.</li>
+          <li>Asegúrate de estar en un lugar bien iluminado.</li>
+          <li>Concede permisos de cámara si es necesario.</li>
+          <li>Mantenga una distancia prudente para una mejor experiencia.</li>
         </ul>
         <p>Cuando estés listo, haz clic en "Continuar" para activar la cámara.</p>
       </div>
