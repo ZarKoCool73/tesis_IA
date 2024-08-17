@@ -14,7 +14,6 @@ import {HttpErrorResponse} from "@angular/common/http";
 })
 export class SignUpComponent implements OnInit {
   firstFormGroup = new FormGroup({
-    code: new FormControl('', [Validators.required]),
     names: new FormControl('', Validators.required),
     lastname: new FormControl('', Validators.required),
     age: new FormControl('', Validators.required),
@@ -28,7 +27,6 @@ export class SignUpComponent implements OnInit {
     fquestion: new FormControl('', Validators.required),
     squestion: new FormControl('', Validators.required),
     tquestion: new FormControl('', Validators.required),
-
   })
   myControl = new FormControl();
   options: string[] = ['One', 'Two', 'Three'];
@@ -46,10 +44,6 @@ export class SignUpComponent implements OnInit {
   message = '';
   hide = true;
   hideRepeat = true;
-
-  Entidad: any[] = []
-  titleEntity: any
-  stateEnti: any
 
   ngOnInit() {
     this.filteredOptions = this.myControl.valueChanges.pipe(
@@ -85,7 +79,6 @@ export class SignUpComponent implements OnInit {
       lastname: firstValues.lastname,
       age: firstValues.age,
       email: secondValues.email,
-      studentCode: firstValues.code,
       firstQuestion: thirdValues.fquestion,
       secondQuestion: thirdValues.squestion,
       thirdQuestion: thirdValues.tquestion,
@@ -133,20 +126,6 @@ export class SignUpComponent implements OnInit {
     }
   }
 
-  // @ts-ignore
-  onInputNumbers(event: any): void {
-    const inputValue = event.target.value;
-    const numericValue = inputValue.replace(/\D/g, ''); // Elimina caracteres no numéricos
-    if (inputValue !== numericValue) {
-      event.preventDefault(); // Evita que se ingresen caracteres no numéricos
-      event.target.value = numericValue; // Actualiza el valor del campo solo si ha habido cambios
-    }
-    if (numericValue.length < 8) {
-      this.banderaCode = false
-    } else {
-      this.banderaCode = true
-    }
-  }
 
   onInputNumbersAge(event: any): void {
     const inputValue = event.target.value;

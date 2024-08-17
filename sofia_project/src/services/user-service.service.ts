@@ -23,7 +23,6 @@ export class UserServiceService {
     lastname: string | null,
     age: string | null,
     email: string | null,
-    studentCode: string | null,
     firstQuestion: string | null,
     secondQuestion: string | null,
     thirdQuestion: string | null,

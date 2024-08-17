@@ -20,27 +20,19 @@
                 class="card w-50 card-group d-flex justify-content-center align-items-center flex-column p-4 form">
                 <div class="row mt-2">
                   <div class="col">
-
-                    <div class="form-group">
-                      <h2 class="font-Inter-SemiBold medium-font-size">Código del estudiante</h2>
-                      <p class="font-Inter-Regular">{{userProfile.studentCode}}</p>
-
-                    </div>
                     <div class="form-group">
                       <h2 class="font-Inter-SemiBold medium-font-size">Nombres</h2>
-                      <p class="font-Inter-Regular">{{userProfile.name}}</p>
-
+                      <p class="font-Inter-Regular">{{ userProfile.name }}</p>
                     </div>
-
                   </div>
                   <div class="col">
                     <div class="form-group">
                       <h2 for="email" class="font-Inter-SemiBold medium-font-size">Correo electrónico</h2>
-                      <p class="font-Inter-Regular">{{userProfile.email}}</p>
+                      <p class="font-Inter-Regular">{{ userProfile.email }}</p>
                     </div>
                     <div class="form-group">
                       <h2 class=" font-Inter-SemiBold medium-font-size">Apellidos</h2>
-                      <p class="font-Inter-Regular">{{userProfile.lastname}}</p>
+                      <p class="font-Inter-Regular">{{ userProfile.lastname }}</p>
 
                     </div>
                   </div>
@@ -72,7 +64,7 @@
                     %</p>
                   <div class="d-flex flex-column">
                     <p class="ml-4 text-break ">Módulo de comprensión de lenguaje de señas completado</p>
-                    <p class="ml-4 text-break ">Recursos: {{dataComprehensionInit}}/{{dataComprehensionEnd}}
+                    <p class="ml-4 text-break ">Recursos: {{ dataComprehensionInit }}/{{ dataComprehensionEnd }}
                       completado <i class="fa-solid fa-circle-check fa-beat fa-lg green-icon"></i></p>
                   </div>
                 </div>
@@ -87,7 +79,7 @@
                     %</p>
                   <div class="d-flex flex-column">
                     <p class="ml-4 text-break ">Módulo de expresión de lenguaje de señas completado</p>
-                    <p class="ml-4 text-break ">Recursos: {{dataExpressionInit}}/{{dataExpressionEnd}}
+                    <p class="ml-4 text-break ">Recursos: {{ dataExpressionInit }}/{{ dataExpressionEnd }}
                       completado <i class="fa-solid fa-circle-check fa-beat fa-lg green-icon"></i></p>
                   </div>
                 </div>
@@ -103,7 +95,7 @@
                     %</p>
                   <div class="d-flex flex-column">
                     <p class="ml-4 text-break">Módulo de comunicacion de lenguaje de señas completado</p>
-                    <p class="ml-4 text-break">Recursos: {{dataComunicationInit}}/{{dataComunicationEnd}}
+                    <p class="ml-4 text-break">Recursos: {{ dataComunicationInit }}/{{ dataComunicationEnd }}
                       completado <i class="fa-solid fa-circle-check fa-beat fa-lg green-icon"></i></p>
                   </div>
                 </div>

@@ -19,15 +19,6 @@
           <h1 class="main-color-text ml-4 mb-2 page-title">Crear cuenta</h1>
           <form [formGroup]="firstFormGroup" class="d-flex flex-column align-items-center">
             <mat-form-field>
-              <mat-label>Código o DNI</mat-label>
-              <input matInput formControlName="code" required pattern="[0-9]*" (input)="onInputNumbers($event)"
-                     maxlength="8">
-            </mat-form-field>
-            <mat-error *ngIf="!banderaCode && !firstFormGroup.get('code')?.pristine"
-                       style="margin-top: -20px;width: 180px;">
-              <span class="font-Inter-ExtraBold small-font-size">8 digitos</span>
-            </mat-error>
-            <mat-form-field>
               <mat-label>Nombres</mat-label>
               <input matInput formControlName="names" (input)="onInputLetters($event)" required maxlength="100">
             </mat-form-field>
@@ -76,7 +67,7 @@
 
             <mat-error *ngIf="!bandera && !secondFormGroup.get('password')?.pristine"
                        style="margin-top: -20px;width: 180px;">
-              <span class="font-Inter-ExtraBold small-font-size">{{message}}</span>
+              <span class="font-Inter-ExtraBold small-font-size">{{ message }}</span>
             </mat-error>
             <mat-form-field class="mb-0 custom-mat-form-field">
               <mat-label>Confirmación de contraseña</mat-label>
