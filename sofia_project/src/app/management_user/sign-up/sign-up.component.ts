@@ -40,7 +40,6 @@ export class SignUpComponent implements OnInit {
 
   bandera = false
   banderaEmail = false
-  banderaCode = false
   message = '';
   hide = true;
   hideRepeat = true;
@@ -85,7 +84,7 @@ export class SignUpComponent implements OnInit {
       password: secondValues.password
     }
     Swal.showLoading();
-    if (this.banderaCode && this.bandera && this.banderaEmail) {
+    if (this.bandera && this.banderaEmail) {
       this._userService.saveUser(body).subscribe((res: any) => {
         Swal.close();
         Swal.fire({
