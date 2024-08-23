@@ -10,6 +10,8 @@ import {
 import {IaService} from "../../services/ia.service";
 import Swal from "sweetalert2";
 import {HttpErrorResponse} from "@angular/common/http";
+import {types} from "sass";
+import Error = types.Error;
 
 @Component({
   selector: 'app-camera',
@@ -31,7 +33,6 @@ export class CameraComponent implements OnInit {
   title = '';
 
   ngOnInit(): void {
-    console.log(this.expression)
     this.modalInit()
   }
 
@@ -101,6 +102,19 @@ export class CameraComponent implements OnInit {
         next: (data: any) => {
           Swal.close()
           const accuracyPercentage = data.accuracy ? `${data.accuracy.toFixed(2)}%` : '';
+          if (data.accuracy < 95 || data.hand_sign != sign) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+
+            })
+            return;
+          }
           Swal.fire({
             title: '<strong>¡Resultado de seña!</strong>',
             html: 'Precisión: <strong>' + accuracyPercentage + '</strong> ' +
@@ -118,20 +132,6 @@ export class CameraComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           Swal.close()
-          if (error.status === 400) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              html: '<strong>Seña no detectada</strong><br>' +
-                'Precisión: <strong>0</strong><br>' +
-                'Seña: <strong>' + sign + '</strong>',
-              confirmButtonColor: '#ff3600',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.return()
-              }
-            })
-          }
           if (error.status === 500) {
             Swal.fire({
               icon: 'error',
@@ -143,6 +143,19 @@ export class CameraComponent implements OnInit {
                 this.return()
               }
             })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+              /*if (result.isConfirmed) {
+                this.return()
+              }*/
+            })
           }
         }
       })
@@ -153,6 +166,19 @@ export class CameraComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
           Swal.close()
+          if (data.accuracy < 95 || data.hand_sign != sign) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+
+            })
+            return;
+          }
           const accuracyPercentage = data.accuracy ? `${data.accuracy.toFixed(2)}%` : '';
           Swal.fire({
             title: '<strong>¡Resultado de seña!</strong>',
@@ -171,20 +197,6 @@ export class CameraComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           Swal.close()
-          if (error.status === 400) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              html: '<strong>Seña no detectada</strong><br>' +
-                'Precisión: <strong>0</strong><br>' +
-                'Seña: <strong>' + sign + '</strong>',
-              confirmButtonColor: '#ff3600',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.return()
-              }
-            })
-          }
           if (error.status === 500) {
             Swal.fire({
               icon: 'error',
@@ -196,6 +208,19 @@ export class CameraComponent implements OnInit {
                 this.return()
               }
             })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+              /*if (result.isConfirmed) {
+                this.return()
+              }*/
+            })
           }
         }
       })
@@ -206,6 +231,19 @@ export class CameraComponent implements OnInit {
       .subscribe({
         next: (data: any) => {
           Swal.close()
+          if (data.accuracy < 95 || data.hand_sign != sign) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+
+            })
+            return;
+          }
           const accuracyPercentage = data.accuracy
           Swal.fire({
             title: '<strong>¡Resultado de seña!</strong>',
@@ -224,20 +262,6 @@ export class CameraComponent implements OnInit {
         },
         error: (error: HttpErrorResponse) => {
           Swal.close()
-          if (error.status === 400) {
-            Swal.fire({
-              icon: 'error',
-              title: 'Error',
-              html: '<strong>Seña no detectada</strong><br>' +
-                'Precisión: <strong>0</strong><br>' +
-                'Seña: <strong>' + sign + '</strong>',
-              confirmButtonColor: '#ff3600',
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.return()
-              }
-            })
-          }
           if (error.status === 500) {
             Swal.fire({
               icon: 'error',
@@ -248,6 +272,17 @@ export class CameraComponent implements OnInit {
               if (result.isConfirmed) {
                 this.return()
               }
+            })
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              html: '<strong>Seña no detectada</strong><br>' +
+                'Precisión: <strong>0</strong><br>' +
+                'Seña: <strong>' + sign + '</strong>',
+              confirmButtonColor: '#ff3600',
+            }).then((result) => {
+
             })
           }
         }
