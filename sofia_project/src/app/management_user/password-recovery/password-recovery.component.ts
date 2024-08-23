@@ -161,7 +161,7 @@ export class PasswordRecoveryComponent implements OnInit {
     if (contrasena.length < 8) {
       mensaje = 'La contraseña debe tener al menos 8 caracteres de longitud.';
       valido = false;
-    } else if (!/[A-Z]/.test(contrasena) || !/[a-z]/.test(contrasena) || !/\d/.test(contrasena)) {
+    } else if ( !/\d/.test(contrasena)) {
       mensaje = 'La contraseña debe contener al menos una letra mayúscula, una letra minúscula y un dígito.';
       valido = false;
     } else {
