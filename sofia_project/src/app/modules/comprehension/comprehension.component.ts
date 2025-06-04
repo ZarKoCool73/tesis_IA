@@ -26,6 +26,7 @@ export class ComprehensionComponent implements OnInit {
   }
   link = ''
   letterSend!: any
+
   constructor(
     private _activatedRoute: ActivatedRoute,
     private encryptionService: EncryptionService,

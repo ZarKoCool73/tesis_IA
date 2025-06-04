@@ -80,7 +80,7 @@ export class ResourcesComponent implements OnInit {
     <div class="creditos-seccion">
         <strong>Derechos de autor y uso:</strong>
         <p>
-            Este sistema web de aprendizaje de lenguaje de señas utiliza un dataset de gestos que ha sido creado por nuestro <strong>propio equipo.</strong> 
+            Este sistema web de aprendizaje de lenguaje de señas utiliza un dataset de gestos que ha sido creado por nuestro <strong>propio equipo.</strong>
             <br>
             Este sistema web de aprendizaje de lenguaje de señas utiliza el libro "Lenguaje de señas peruana: vocabulario básico" del Ministerio de Educación de Perú, disponible en <a href="https://repositorio.minedu.gob.pe/handle/20.500.12799/5545"
              target="_blank">Repositorio del Ministerio de Educación de Perú</a>. El libro está licenciado bajo la licencia Creative Commons
